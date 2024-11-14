@@ -134,6 +134,7 @@ const SettingModal = ({
               <img
                 src={`${API_BASE_URL}/${settingItem?.file}`}
                 style={{ width: "100%", objectFit: "cover" }}
+                alt=""
               />
             </div>
           </Row>
@@ -154,6 +155,7 @@ const SettingModal = ({
                     : picturesUri[0]
                 }`}
                 style={{ width: "100%", objectFit: "cover" }}
+                alt=""
               />
             </div>
           </Row>
@@ -165,6 +167,7 @@ const SettingModal = ({
               <img
                 src={picturesUri[0]}
                 style={{ width: "100%", objectFit: "cover" }}
+                alt=""
               />
             </div>
           </Row>
@@ -213,7 +216,6 @@ const SettingModal = ({
 
 const SettingManagement = () => {
   const [tabKey, setTabKey] = useState("location");
-  const [selected, setSelected] = useState({});
   const { setting: settings } = useSelector((state) => state.setting);
   const [count, setCount] = useState(0);
   const [settingData, setSettingData] = useState([]);
@@ -224,13 +226,7 @@ const SettingManagement = () => {
 
   const { t } = useTranslation();
 
-  const {
-    get: getSetting,
-    createSetting,
-    updateSetting,
-    fetchAllSettings,
-    deleteSetting,
-  } = useSettingService();
+  const { fetchAllSettings, deleteSetting } = useSettingService();
 
   const onChangeTab = (k) => {
     setTabKey(k);
@@ -265,7 +261,7 @@ const SettingManagement = () => {
   const [idCheckField, setIdCheckField] = useState({});
   const cleanIdCheckField = () => {
     setIdCheckField((prevState) => {
-      for (let [key, value] of Object.entries(prevState)) {
+      for (let [key] of Object.entries(prevState)) {
         prevState[key] = false;
       }
       return { ...prevState };
@@ -419,6 +415,7 @@ const SettingManagement = () => {
                               <img
                                 src={`${API_BASE_URL}/${item.file}`}
                                 style={{ width: "100%", objectFit: "cover" }}
+                                alt=""
                               />
                             </div>
                           </td>
