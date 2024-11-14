@@ -1,0 +1,149 @@
+{
+  "translation": {
+    "sideMenu":{
+      "dashboard": "Dashboard",
+      "adminManagement": "Admins",
+      "roleManagement": "Roles",
+      "userManagement": "Users",
+      "roundManagement": "Roundings",
+      "clubManagement": "Clubs",
+      "courseManagement":"Courses",
+      "msgManagement": "Messages",
+      "alarmManagement": "Alarms",
+      "noticeManagement": "Notices",
+      "adManagement": "Advertisements",
+      "noteManagement": "Notes",
+      "reviewManagement": "Reviews",
+      "commentManagement": "Comments",
+      "eventManagement": "Events",
+      "newsManagemane": "News",
+      "followManagement": "Follows",
+      "generalSettings": "General Settings",
+      "logManagement":"System Logs",
+      "loginPage": "Login",
+      "generalSetting": "General Settings",
+      "blogManagement": "Blog",
+      "contentManagement": "Content",
+      "serviceManagement": "Service",
+      "mypage": "My Page"
+    },
+    "dashboardPage": {
+      "user": "Users",
+      "round": "Rounds",
+      "course": "Courses"
+    },
+    "adminPage": {
+      "admin": "Admin"
+    },
+    "memberPage":{
+      "user": "Users",
+      "experience": "Years of Experience",
+      "averageScore": "Average Score",
+      "monthAverageScore": "Month Average Score",
+      "userInfo": "User information",
+      "contactInfo": "Contact Information",
+      "occupation": "Occupation",
+      "introduction": "Introduction",
+      "message": "Message"
+    },
+    "common": {
+      "address": "Address",
+      "add": "Add",
+      "cost": "Cost",
+      "delete": "Delete",
+      "date": "Date",
+      "edit": "Edit",
+      "update": "Update",
+      "select": "Select",
+      "fullname": "Fullname",
+      "nickname": "Nickname",
+      "email": "Email",
+      "password": "Password",
+      "status": "Status",
+      "phone": "Phone",
+      "action": "Actions",
+      "view": "View",
+      "search": "Search",
+      "searchPlaceholder": "Search by keyword",
+      "searchPlaceholderCode": "Search by code",
+      "searchPlaceholderAction": "Search by action",
+      "searchPlaceholderType": "Search by type",
+      "title": "Title",
+      "user": "User",
+      "back": "Back",
+      "theme": "Theme",
+      "birthday": "Birthday",
+      "type": "Type",
+      "undefined": "Undefined",
+      "name": "Name",
+      "location": "Location",
+      "introduction": "Introduction",
+      "message": "Message",
+      "follow": "Follows",
+      "from": "From",
+      "to": "To",
+      "cancel": "Cancel",
+      "image": "Image",
+      "preview": "Preview"
+    },
+    "alert": {
+      "success": "Success",
+      "failed": "Failed",
+      "admin203": "Admin already exists",
+      "loginFailed01": "Email or password is not correct!",
+      "networkError": "Network Error"
+    },
+    "roundingPage": {
+      "rounding": "Rounding",
+      "introduction": "Introduction",
+      "location": "Location",
+      "sexOption": "Participant Type",
+      "ageOption": "Participant Age",
+      "maxOption": "Max Number of Participants",
+      "both": "Male or Female",
+      "male": "Male",
+      "female": "Female",
+      "undefined": "Undefined"
+    },
+    "clubPage": {
+      "club": "Club",
+      "qualification": "Qualification",
+      "ageOption": "Participant Age",
+      "moveOption": "Range of movement",
+      "members": "Number of Participants"
+    },
+    "settingPage": {
+      "averageScore": "Average Score",
+      "experience": "Experience",
+      "theme": "Theme",
+      "blogTheme": "Blog Theme",
+      "image": "Image"
+    },
+    "contentPage": {
+      "news": "News",
+      "notification": "Notification",
+      "note": "Notice"
+    },
+    "servicePage": {
+      "service": "Service"
+    },
+    "blogPage": {
+      "numberOfTheme": "Number of Themes",
+      "content": "Content",
+      "review": "Review/Comment",
+      "theme": "Theme"
+    },
+    "navBar": {
+      "mypage": "My Page",
+      "settings": "Settings",
+      "support": "Support",
+      "logout": "Logout"
+    },
+    "errorMsg": {
+      "auth": {
+        "201": "Email or password is not correct.",
+        "202": "Email or password is not correct."
+      }
+    }
+  }
+}

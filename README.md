@@ -1,2 +1,1 @@
-# metaball-frontend
-MetaBall front-end website
+Metaball Admin Dashboard

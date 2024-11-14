@@ -1,0 +1,151 @@
+{
+  "translation": {
+    "sideMenu": {    
+      "dashboard": "ダッシュボード",
+      "adminManagement": "アドミン管理",
+      "roleManagement": "権限管理",
+      "userManagement": "会員管理",
+      "roundManagement": "ラウンディング管理",
+      "clubManagement": "クラブ",
+      "courseManagement":"ゴルフコース管理",
+      "msgManagement": "メッセージ管理",
+      "alarmManagement": "アラーム管理",
+      "noticeManagement": "お知らせ",
+      "adManagement": "広告管理",
+      "noteManagement": "ゴルフ·ノート",
+      "reviewManagement": "レビュー管理",
+      "commentManagement": "コメント管理",
+      "eventManagement": "イベント管理",
+      "newsManagemane": "ニュース",
+      "followManagement": "人脈管理",
+      "generalSettings": "一般設定",
+      "logManagement":"システムモニタリング",
+      "loginPage": "ログイン·ページ",
+      "generalSetting": "一般設定",
+      "blogManagement": "ブログ",
+      "contentManagement": "コンテンツ",
+      "serviceManagement": "サービス",
+      "mypage": "マイページ"
+    },
+    "dashboardPage": {
+      "user": "会員",
+      "round": "ラウンディング",
+      "course": "ゴルフコース"
+    },
+    "adminPage": {
+      "admin": "アドミン"
+    },
+    "memberPage":{
+      "user": "会員",
+      "experience": "経験年数",
+      "averageScore": "平均打数",
+      "monthAverageScore": "月平均打数",
+      "userInfo": "会員情報",
+      "contactInfo": "コンタクト",
+      "occupation": "職業",
+      "introduction": "紹介",
+      "message": "メッセージ",
+      "followInfo": "フォロー情報"
+    },
+    "common": {
+      "add": "追加",
+      "address": "住所",
+      "cost": "費用",
+      "delete": "削除",
+      "date": "日時",
+      "edit": "編集",
+      "update": "更新",
+      "select": "選択",
+      "fullname": "姓名",
+      "nickname": "ニックネーム",
+      "email": "メール",
+      "password": "パスワード",
+      "phone": "電話番号",
+      "status": "状態",
+      "action": "アクション",
+      "view": "詳細",
+      "search": "検索",
+      "searchPlaceholder": "検索語を入力してください。",
+      "searchPlaceholderCode": "コードによる検索",
+      "searchPlaceholderAction": "アクションによる検索",
+      "searchPlaceholderType": "タイプによる検索",
+      "title": "タイトル",
+      "user": "会員",
+      "back": "戻る",
+      "theme": "テーマ",
+      "birthday": "生年月日",
+      "type": "タイプ",
+      "undefined": "不明",
+      "name": "お名前",
+      "location": "場所",
+      "introduction": "紹介",
+      "message": "メッセージ",
+      "follow": "フォロー",
+      "from": "From",
+      "to": "To",
+      "cancel": "キャンセル",
+      "image": "イメージ",
+      "preview": "プレビュー"
+    },
+    "alert": {
+      "success": "成功しました。",
+      "failed": "失敗しました。",
+      "admin203": "アドミンはすでに存在しています。",
+      "loginFailed01": "メールアドレスまたはパスワードが正しくありません。",
+      "networkError": "ネットワーク エラー"
+    },
+    "roundingPage": {
+      "address": "住所",
+      "rounding": "ラウンディング",
+      "introduction": "紹介",
+      "location": "場所",
+      "sexOption": "参加者タイプ",
+      "ageOption": "参加者の年齢",
+      "maxOption": "最大参加者数",
+      "both": "男女",
+      "male": "男",
+      "female": "女",
+      "undefined": "不明"
+    },
+    "clubPage": {
+      "club": "クラブ",
+      "qualification": "資格",
+      "ageOption": "参加者の年齢",
+      "moveOption": "移動範囲",
+      "members": "参加者数"
+    },
+    "settingPage": {
+      "averageScore": "平均打数",
+      "experience": "経歴",
+      "theme": "テーマ",
+      "blogTheme": "ブログテーマ",
+      "image": "イメージ"
+    },
+    "contentPage": {
+      "news": "ニュース",
+      "notification": "通知",
+      "note": "お知らせ"
+    },
+    "servicePage": {
+      "service": "サービス"
+    },
+    "blogPage": {
+      "numberOfTheme": "テーマの数",
+      "content": "コンテンツ",
+      "review": "レビュー/コメント",
+      "theme": "テーマ"
+    },
+    "navBar": {
+      "mypage": "マイページ",
+      "settings": "一般設定",
+      "support": "サービス",
+      "logout": "ログアウト"
+    },
+    "errorMsg": {
+      "auth": {
+        "201": "メールやパスワードが正しくありません。",
+        "202": "メールやパスワードが正しくありません。"
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+#editor-render {
+    width: 100%;
+    margin-top: 50px;
+}
+
+#editor-render p {
+    word-break: break-all;
+}
+
+#editor-render h2 {
+    word-break: break-all;
+}
+
+#editor-render h1 {
+    word-break: break-all;
+}
+
+#editor-render blockquote {
+    word-break: break-all;
+}
+
+#editor-render img {
+    text-align: center;
+}
+
+#editor-preview {
+    max-width: 1080px !important;
+}
