@@ -38,10 +38,7 @@ const BlogManagement = () => {
   const navigate = useNavigate();
   const { fetchAllBlogs, deleteBlog } = useBlogService();
   const { loading, error, blog, count } = useSelector((state) => state.blog);
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const [blogs, setBlogs] = useState([]);
 

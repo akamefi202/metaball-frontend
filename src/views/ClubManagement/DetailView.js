@@ -28,10 +28,7 @@ const ClubDetailView = () => {
   const [selectedLocation, setSelectedLocation] = useState({});
   const { id } = useParams();
   // Language translation
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const onBack = () => {
     navigate("/admin/club_management");

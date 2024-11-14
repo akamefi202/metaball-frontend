@@ -22,10 +22,7 @@ const AdminDetailView = () => {
   const { selected } = useSelector((state) => state.admin);
   const { id } = useParams();
   // Language translation
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const onBack = () => {
     navigate("/admin/admin_management");

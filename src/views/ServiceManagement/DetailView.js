@@ -34,10 +34,7 @@ export const ServiceDetailModal = ({
   title,
 }) => {
   // Language translation
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Modal

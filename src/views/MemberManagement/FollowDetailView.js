@@ -44,10 +44,7 @@ const FollowDetailView = () => {
   const [userFollowing, setUserFollowing] = useState({});
   const { id } = useParams();
   // Language translation
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const onBack = () => {
     navigate("/admin/user_management");

@@ -10,10 +10,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 const TableCardHeader = ({ data }) => {
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const { toggleAddModal } = data;
 
   return (

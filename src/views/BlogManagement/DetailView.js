@@ -38,10 +38,7 @@ const BlogDetailView = () => {
   const [themeData, setThemeData] = useState([]);
   const { id } = useParams();
   // Language translation
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const onBack = () => {
     navigate("/admin/blog_management");

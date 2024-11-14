@@ -26,10 +26,7 @@ import Header from "components/Headers/Header.js";
 const RoundingManagement = () => {
   const { fetchAllRoundings } = useRoundingService();
   const { loading, error, data } = useSelector((state) => state.rounding);
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const [roundings, setRoundings] = useState([]);
 

@@ -25,10 +25,7 @@ const AdminAdd = () => {
   const [password, setPassword] = useState("");
 
   // Language translation
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const onBack = () => {
     navigate("/admin/admin_management");

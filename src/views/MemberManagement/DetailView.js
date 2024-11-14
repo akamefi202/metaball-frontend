@@ -26,10 +26,7 @@ const MemberDetailView = () => {
   const { selected } = useSelector((state) => state.member);
   const { id } = useParams();
   // Language translation
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const onBack = () => {
     navigate("/admin/user_management");

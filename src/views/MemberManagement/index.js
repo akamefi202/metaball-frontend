@@ -38,10 +38,7 @@ const MemberManagement = () => {
   const { loading, error, member, count } = useSelector(
     (state) => state.member
   );
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const [members, setMembers] = useState([]);
 

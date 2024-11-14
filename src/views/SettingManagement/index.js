@@ -23,7 +23,6 @@ import {
   ModalBody,
   ModalFooter,
   Label,
-  Container,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import ImageUploader from "react-images-upload";
@@ -48,10 +47,7 @@ const SettingModal = ({
   );
   const { createSetting, updateSetting } = useSettingService();
 
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const onDrop = (pictureFiles, pictureDataURLs) => {
     setPictures(pictureFiles);
@@ -226,10 +222,7 @@ const SettingManagement = () => {
   const [modalMode, setModalMode] = useState(0);
   const [modalTitle, setModalTitle] = useState("");
 
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const {
     get: getSetting,

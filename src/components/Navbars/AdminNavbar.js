@@ -22,10 +22,7 @@ import {
 import { useSelector } from "react-redux";
 
 const AdminNavbar = (props) => {
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const { logout } = useAuthService();
   const { data } = useSelector((state) => state.auth);

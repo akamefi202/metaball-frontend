@@ -37,10 +37,7 @@ const ClubManagement = () => {
   const navigate = useNavigate();
   const { fetchAllClubs, deleteClub } = useClubService();
   const { loading, error, club, count } = useSelector((state) => state.club);
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const [clubs, setClubs] = useState([]);
 

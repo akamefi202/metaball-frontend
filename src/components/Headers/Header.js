@@ -3,10 +3,7 @@ import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
 const Header = () => {
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <>

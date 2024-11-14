@@ -31,10 +31,7 @@ const CommonTables = ({ data }) => {
     formValue: {},
     formFields: [],
   });
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const { thData, tbData } = data;
 
   // Modal data

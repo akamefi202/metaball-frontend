@@ -38,10 +38,7 @@ const AdminManagement = () => {
   const { fetchAllAdmins, deleteAdmin } = useAdminService();
   const { loading, error, admin, count } = useSelector((state) => state.admin);
   // Language translation
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
   // Pagination & Search
   const [currentPage, setCurrentPage] = useState(1);
   const [keyWord, setKeyword] = useState("");

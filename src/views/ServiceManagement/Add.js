@@ -31,10 +31,7 @@ const SerivceAdd = () => {
   const { contentType } = useParams();
   const navigate = useNavigate();
   // Language translation
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const onAdd = () => {
     createService({

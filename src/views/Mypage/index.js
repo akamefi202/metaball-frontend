@@ -25,10 +25,7 @@ const MyPage = () => {
   const [myInfo, setMyInfo] = useState({});
   const { updateAdmin } = useAdminService();
   // Language translation
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const onUpdate = () => {
     updateAdmin({ id: myInfo._id, email, password });

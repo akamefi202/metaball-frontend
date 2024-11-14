@@ -39,10 +39,7 @@ const RoundingManagement = () => {
   const { loading, error, rounding, count } = useSelector(
     (state) => state.rounding
   );
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const [roundings, setRoundings] = useState([]);
 

@@ -36,10 +36,7 @@ const ServiceUpdate = () => {
   const { contentType, id } = useParams();
   const navigate = useNavigate();
   // Language translation
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   const onUpdate = () => {
     updateService({
