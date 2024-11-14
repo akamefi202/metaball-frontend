@@ -1,4 +1,4 @@
-export const API_BASE_URL = "http://localhost:5000";
+export const API_BASE_URL = "http://154.44.26.246:5000";
 export const TEST_URL = `${API_BASE_URL}/hello`;
 export const AUTH_FAILURE_CODE = 401;
 export const TOKEN_NAME = "metaball-token-0123";
