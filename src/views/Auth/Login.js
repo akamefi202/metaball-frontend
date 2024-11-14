@@ -24,8 +24,8 @@ const Login = (props) => {
   const { signin } = useAuthService();
   const { loading, error, data } = useSelector((state) => state.auth);
 
-  const [email, setEmail] = useState("admin010@gmail.com");
-  const [password, setPassword] = useState("asdf");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (data && data.manager) {
