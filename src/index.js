@@ -14,6 +14,7 @@ import AuthLayout from "layouts/Auth.js";
 import "./locale/i18n.js";
 import { history, store } from "store/store";
 import { TOKEN_NAME } from "config/index.js";
+import Login from "views/Auth/Login";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -46,6 +47,7 @@ const App = () => {
           <Routes>
             <Route path="/auth/*" element={<AuthLayout />} />
             <Route path="*" element={<Navigate to="/auth/login" replace />} />
+            {/* <Route path="/login" element={<Login />} /> */}
           </Routes>
         )}
       </BrowserRouter>

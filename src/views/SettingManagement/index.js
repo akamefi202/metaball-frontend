@@ -64,6 +64,7 @@ const SettingModal = ({
     } else {
       createSetting({
         title: name,
+        files: pictures[0],
         type,
       });
     }
@@ -81,6 +82,7 @@ const SettingModal = ({
       updateSetting({
         _id: settingItem._id,
         title: name,
+        files: pictures[0],
         type,
       });
     }
@@ -122,7 +124,7 @@ const SettingModal = ({
             </FormGroup>
           </Col>
         </Row>
-        {mode === 0 && type === "location" && (
+        {mode === 0 && (
           <Row className="justify-content-center mt-2">
             <div
               style={{
@@ -139,7 +141,7 @@ const SettingModal = ({
             </div>
           </Row>
         )}
-        {mode === 2 && type === "location" && (
+        {mode === 2 && (
           <Row className="justify-content-center mt-2">
             <div
               style={{
@@ -161,7 +163,7 @@ const SettingModal = ({
           </Row>
         )}
 
-        {mode === 1 && type === "location" && pictures.length > 0 && (
+        {mode === 1 && pictures.length > 0 && (
           <Row className="justify-content-center my-2">
             <div style={{ display: "flex", width: 250, height: 250 }}>
               <img
@@ -172,7 +174,7 @@ const SettingModal = ({
             </div>
           </Row>
         )}
-        {mode !== 0 && type === "location" && (
+        {mode !== 0 && (
           <ImageUploader
             withIcon={true}
             buttonText="Choose images"
@@ -572,6 +574,7 @@ const SettingManagement = () => {
                         <th scope="col">No</th>
                         <th scope="col">ID</th>
                         <th scope="col">{t("common.title")}</th>
+                        <th scope="col">{t("settingPage.image")}</th>
                         <th scope="col" />
                       </tr>
                     </thead>
@@ -595,6 +598,21 @@ const SettingManagement = () => {
                           </td>
                           <td>{item._id}</td>
                           <td>{item.title}</td>
+                          <td>
+                            <div
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                display: "flex",
+                              }}
+                            >
+                              <img
+                                src={`${API_BASE_URL}/${item.file}`}
+                                style={{ width: "100%", objectFit: "cover" }}
+                                alt=""
+                              />
+                            </div>
+                          </td>
                           <td
                             style={{
                               display: "flex",
@@ -746,6 +764,7 @@ const SettingManagement = () => {
                         <th scope="col">No</th>
                         <th scope="col">ID</th>
                         <th scope="col">{t("common.title")}</th>
+                        <th scope="col">{t("settingPage.image")}</th>
                         <th scope="col" />
                       </tr>
                     </thead>
@@ -769,6 +788,21 @@ const SettingManagement = () => {
                           </td>
                           <td>{item._id}</td>
                           <td>{item.title}</td>
+                          <td>
+                            <div
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                display: "flex",
+                              }}
+                            >
+                              <img
+                                src={`${API_BASE_URL}/${item.file}`}
+                                style={{ width: "100%", objectFit: "cover" }}
+                                alt=""
+                              />
+                            </div>
+                          </td>
                           <td
                             style={{
                               display: "flex",
@@ -920,6 +954,7 @@ const SettingManagement = () => {
                         <th scope="col">No</th>
                         <th scope="col">ID</th>
                         <th scope="col">{t("common.title")}</th>
+                        <th scope="col">{t("settingPage.image")}</th>
                         <th scope="col" />
                       </tr>
                     </thead>
@@ -943,6 +978,21 @@ const SettingManagement = () => {
                           </td>
                           <td>{item._id}</td>
                           <td>{item.title}</td>
+                          <td>
+                            <div
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                display: "flex",
+                              }}
+                            >
+                              <img
+                                src={`${API_BASE_URL}/${item.file}`}
+                                style={{ width: "100%", objectFit: "cover" }}
+                                alt=""
+                              />
+                            </div>
+                          </td>
                           <td
                             style={{
                               display: "flex",
@@ -1094,6 +1144,7 @@ const SettingManagement = () => {
                         <th scope="col">No</th>
                         <th scope="col">ID</th>
                         <th scope="col">{t("common.title")}</th>
+                        <th scope="col">{t("settingPage.image")}</th>
                         <th scope="col" />
                       </tr>
                     </thead>
@@ -1117,6 +1168,21 @@ const SettingManagement = () => {
                           </td>
                           <td>{item._id}</td>
                           <td>{item.title}</td>
+                          <td>
+                            <div
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                display: "flex",
+                              }}
+                            >
+                              <img
+                                src={`${API_BASE_URL}/${item.file}`}
+                                style={{ width: "100%", objectFit: "cover" }}
+                                alt=""
+                              />
+                            </div>
+                          </td>
                           <td
                             style={{
                               display: "flex",

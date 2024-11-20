@@ -37,7 +37,7 @@ export const createSetting = (data) => {
   };
 
   if (data.type !== "location") {
-    return api.post(SETTING_BASE_URL, data);
+    return api.post(SETTING_BASE_URL, data, config);
   } else {
     const formData = new FormData();
     formData.append("name", data.name);
@@ -55,7 +55,7 @@ export const updateSetting = (data) => {
     },
   };
   if (data.type !== "location") {
-    return api.put(`${SETTING_BASE_URL}/${_id}`, rest);
+    return api.put(`${SETTING_BASE_URL}/${_id}`, rest, config);
   } else {
     return api.put(`${SETTING_BASE_URL}/${_id}`, rest, config);
   }
