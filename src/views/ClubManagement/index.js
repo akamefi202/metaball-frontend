@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 // reactstrap components
 import {
@@ -36,7 +37,7 @@ import Header from "components/Headers/Header.js";
 const ClubManagement = () => {
   const navigate = useNavigate();
   const { fetchAllClubs, deleteClub } = useClubService();
-  const { loading, error, club, count } = useSelector((state) => state.club);
+  const { club, count } = useSelector((state) => state.club);
   const { t } = useTranslation();
 
   const [clubs, setClubs] = useState([]);

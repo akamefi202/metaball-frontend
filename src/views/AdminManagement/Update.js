@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import {
   Container,
@@ -11,8 +12,6 @@ import {
   FormGroup,
   InputGroup,
   Input,
-  InputGroupAddon,
-  InputGroupText,
 } from "reactstrap";
 
 import { useNavigate, useParams } from "react-router-dom";

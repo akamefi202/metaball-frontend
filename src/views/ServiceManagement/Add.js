@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState } from "react";
 import {
   Container,
   Card,
   Row,
   Col,
   CardBody,
-  CardFooter,
   CardHeader,
   Button,
   Input,
@@ -52,9 +52,9 @@ const SerivceAdd = () => {
     setPicturesURI(pictureDataURLs);
   };
   // Content Change
-  const onChangeContent = (html) => {
-    setContentData(html);
-  };
+  // const onChangeContent = (html) => {
+  //   setContentData(html);
+  // };
 
   // Preview
   const onOpenContentModal = () => {
@@ -108,6 +108,7 @@ const SerivceAdd = () => {
               <Col>
                 <div style={{ width: 250, height: 250, display: "flex" }}>
                   <img
+                    alt="#"
                     src={picturesUri[0]}
                     style={{ width: "100%", objectFit: "cover" }}
                   />

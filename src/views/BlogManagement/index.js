@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 // reactstrap components
 import {
@@ -37,7 +38,7 @@ import { API_BASE_URL } from "config";
 const BlogManagement = () => {
   const navigate = useNavigate();
   const { fetchAllBlogs, deleteBlog } = useBlogService();
-  const { loading, error, blog, count } = useSelector((state) => state.blog);
+  const { blog, count } = useSelector((state) => state.blog);
   const { t } = useTranslation();
 
   const [blogs, setBlogs] = useState([]);
@@ -186,6 +187,7 @@ const BlogManagement = () => {
                               }}
                             >
                               <img
+                                alt="#"
                                 src={
                                   item.files
                                     ? `${API_BASE_URL}/${item.files[0]}`

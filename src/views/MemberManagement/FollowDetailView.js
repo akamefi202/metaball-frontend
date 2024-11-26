@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import {
   Container,
@@ -46,23 +47,23 @@ const FollowDetailView = () => {
   // Language translation
   const { t } = useTranslation();
 
-  const onBack = () => {
-    navigate("/admin/user_management");
-  };
+  // const onBack = () => {
+  //   navigate("/admin/user_management");
+  // };
   // Tab Implementation
   const [tabKey, setTabKey] = useState("followed_by");
   // Pagination & Search
   const [currentPage, setCurrentPage] = useState(1);
   const [keyWord, setKeyword] = useState("");
-  const onSearch = () => {
-    setCurrentPage(1);
-    fetchUserMessage({
-      id: id,
-      limit: TABLE_PAGE_LIMIT,
-      skip: (currentPage - 1) * TABLE_PAGE_LIMIT,
-      key: keyWord,
-    });
-  };
+  // const onSearch = () => {
+  //   setCurrentPage(1);
+  //   fetchUserMessage({
+  //     id: id,
+  //     limit: TABLE_PAGE_LIMIT,
+  //     skip: (currentPage - 1) * TABLE_PAGE_LIMIT,
+  //     key: keyWord,
+  //   });
+  // };
 
   useEffect(() => {
     if (follow) {

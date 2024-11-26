@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import {
   Container,
@@ -47,40 +48,23 @@ const BlogDetailView = () => {
   // Pagination & Search
   const [currentPage, setCurrentPage] = useState(1);
   const [keyWord, setKeyword] = useState("");
-  const onSearch = () => {
-    setCurrentPage(1);
-    fetchReviews({
-      id: id,
-      limit: TABLE_PAGE_LIMIT,
-      skip: (currentPage - 1) * TABLE_PAGE_LIMIT,
-      key: keyWord,
-    });
-  };
 
   // For Delete
   const [idCheckField, setIdCheckField] = useState({});
-  const cleanIdCheckField = () => {
-    setIdCheckField((prevState) => {
-      for (let [key, value] of Object.entries(prevState)) {
-        prevState[key] = false;
-      }
-      return { ...prevState };
-    });
-  };
+  // const cleanIdCheckField = () => {
+  //   setIdCheckField((prevState) => {
+  //     for (let [key, value] of Object.entries(prevState)) {
+  //       prevState[key] = false;
+  //     }
+  //     return { ...prevState };
+  //   });
+  // };
+
   const onChangeSelect = (name, value) => {
     setIdCheckField((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-  };
-
-  const onDeleteArray = () => {
-    const selectedIds = [];
-    for (let [key, value] of Object.entries(idCheckField)) {
-      if (value) selectedIds.push(key);
-    }
-    deleteReview(selectedIds);
-    setCurrentPage(1);
   };
 
   const onDeleteReview = (id) => {
@@ -287,6 +271,7 @@ const BlogDetailView = () => {
                         }}
                       >
                         <img
+                          alt="#"
                           src={`${API_BASE_URL}/${file}`}
                           style={{ width: "100%", objectFit: "cover" }}
                         />
@@ -420,6 +405,7 @@ const BlogDetailView = () => {
                           style={{ width: 250, height: 250, display: "flex" }}
                         >
                           <img
+                            alt="#"
                             src={`${API_BASE_URL}/${tmpData?.file}`}
                             style={{ width: "100%", objectFit: "cover" }}
                           />

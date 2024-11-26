@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import {
   Container,
@@ -18,7 +19,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import UserHeader from "components/Headers/UserHeader";
-import { API_BASE_URL } from "config";
 import useClubService from "features/club/hooks/useClubService";
 import useMessageService from "features/message/hooks/useMessageService";
 import { TABLE_PAGE_LIMIT } from "config";
@@ -34,34 +34,9 @@ const MessageDetailView = () => {
   // Language translation
   const { t } = useTranslation();
 
-  const onBack = () => {
-    navigate("/admin/round_management");
-  };
-
-  const getAgeRange = () => {
-    if (selected.start_age && selected.end_age) {
-      return `${selected.start_age} ~ ${selected.end_age}`;
-    } else if (selected.start_age && !selected.end_age) {
-      return `${selected.start_age} ~ `;
-    } else if (!selected.start_age && selected.end_age) {
-      return `~ ${selected.end_age}`;
-    } else {
-      return "";
-    }
-  };
-
   // Pagination & Search
   const [currentPage, setCurrentPage] = useState(1);
   const [keyWord, setKeyword] = useState("");
-  const onSearch = () => {
-    setCurrentPage(1);
-    fetchClubMessage({
-      id: id,
-      limit: TABLE_PAGE_LIMIT,
-      skip: (currentPage - 1) * TABLE_PAGE_LIMIT,
-      key: keyWord,
-    });
-  };
 
   useEffect(() => {
     getClub({ id });

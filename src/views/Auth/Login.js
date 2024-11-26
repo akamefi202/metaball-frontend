@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // reactstrap components
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,17 +13,15 @@ import {
   InputGroupAddon,
   InputGroupText,
   InputGroup,
-  Row,
   Col,
 } from "reactstrap";
 import { useAuthService } from "features/auth/hooks/useAuthService";
 import { useSelector } from "react-redux";
-import useAlert from "features/alert/hook/useAlert";
 
-const Login = (props) => {
+const Login = () => {
   const navigate = useNavigate();
   const { signin } = useAuthService();
-  const { loading, error, data } = useSelector((state) => state.auth);
+  const { loading, data } = useSelector((state) => state.auth);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -112,9 +111,9 @@ const Login = (props) => {
             </Form>
           </CardBody>
         </Card>
-        <Row className="mt-3">
+        {/* <Row className="mt-3">
           <Col xs="6">
-            <a className="text-light" onClick={(e) => e.preventDefault()}>
+            <a href="" className="text-light" onClick={(e) => e.preventDefault()}>
               <small>Forgot password?</small>
             </a>
           </Col>
@@ -123,7 +122,7 @@ const Login = (props) => {
               <small>Create new account</small>
             </a>
           </Col>
-        </Row>
+        </Row> */}
       </Col>
     </>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import {
   Container,
@@ -34,17 +35,17 @@ const ClubDetailView = () => {
     navigate("/admin/club_management");
   };
 
-  const getAgeRange = () => {
-    if (selected.start_age && selected.end_age) {
-      return `${selected.start_age} ~ ${selected.end_age}`;
-    } else if (selected.start_age && !selected.end_age) {
-      return `${selected.start_age} ~ `;
-    } else if (!selected.start_age && selected.end_age) {
-      return `~ ${selected.end_age}`;
-    } else {
-      return "";
-    }
-  };
+  // const getAgeRange = () => {
+  //   if (selected.start_age && selected.end_age) {
+  //     return `${selected.start_age} ~ ${selected.end_age}`;
+  //   } else if (selected.start_age && !selected.end_age) {
+  //     return `${selected.start_age} ~ `;
+  //   } else if (!selected.start_age && selected.end_age) {
+  //     return `~ ${selected.end_age}`;
+  //   } else {
+  //     return "";
+  //   }
+  // };
 
   useEffect(() => {
     getClub({ id });
@@ -97,6 +98,7 @@ const ClubDetailView = () => {
                     }}
                   >
                     <img
+                      alt="#"
                       src={`${API_BASE_URL}/${selected.logo}`}
                       style={{ width: "100%", objectFit: "cover" }}
                     />
@@ -196,6 +198,7 @@ const ClubDetailView = () => {
                       <Col md="3">
                         <div>
                           <img
+                            alt="#"
                             src={`${API_BASE_URL}/${selectedLocation?.file}`}
                           />
                         </div>

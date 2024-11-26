@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // reactstrap components
@@ -5,7 +6,6 @@ import {
   Container,
   Table,
   Row,
-  Col,
   Card,
   CardHeader,
   FormGroup,
@@ -36,7 +36,7 @@ import Header from "components/Headers/Header.js";
 const AdminManagement = () => {
   const navigate = useNavigate();
   const { fetchAllAdmins, deleteAdmin } = useAdminService();
-  const { loading, error, admin, count } = useSelector((state) => state.admin);
+  const { loading, admin, count } = useSelector((state) => state.admin);
   // Language translation
   const { t } = useTranslation();
   // Pagination & Search

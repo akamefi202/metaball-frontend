@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 // reactstrap components
 import {
@@ -35,9 +36,7 @@ import Header from "components/Headers/Header.js";
 const MemberManagement = () => {
   const navigate = useNavigate();
   const { fetchAllMembers, deleteMember } = useMemberService();
-  const { loading, error, member, count } = useSelector(
-    (state) => state.member
-  );
+  const { member, count } = useSelector((state) => state.member);
   const { t } = useTranslation();
 
   const [members, setMembers] = useState([]);

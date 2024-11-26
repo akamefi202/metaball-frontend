@@ -1,11 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 // reactstrap components
 import {
   Container,
   Table,
   Row,
-  Col,
   Card,
   CardHeader,
   FormGroup,
@@ -18,11 +17,6 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
-  Label,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
 } from "reactstrap";
 
 // core components
@@ -34,11 +28,9 @@ import Header from "components/Headers/Header.js";
 import useSyslogService from "features/syslog/hooks/useSyslogService";
 
 const LogManagement = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { fetchAllSyslog } = useSyslogService();
-  const { loading, error, syslog, count } = useSelector(
-    (state) => state.syslog
-  );
+  const { loading, syslog, count } = useSelector((state) => state.syslog);
   const [tblData, setTblData] = useState([]);
   // Language translation
   const { t } = useTranslation();
@@ -59,15 +51,6 @@ const LogManagement = () => {
       type,
       action,
     });
-  };
-
-  // For delete
-  const [idCheckField, setIdCheckField] = useState({});
-  const onChangeSelect = (name, value) => {
-    setIdCheckField((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
   };
 
   useEffect(() => {

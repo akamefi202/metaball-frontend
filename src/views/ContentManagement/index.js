@@ -1,13 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
 // reactstrap components
 import {
   Container,
   Table,
   Row,
-  Col,
   Card,
   CardHeader,
   FormGroup,
@@ -21,10 +19,6 @@ import {
   PaginationItem,
   PaginationLink,
   Label,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
   CardBody,
 } from "reactstrap";
 
@@ -46,9 +40,7 @@ const ContentManagement = () => {
   const [contentData, setContentData] = useState({});
   const { fetchAllContents, deleteContent } = useContentService();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const { loading, error, content, count } = useSelector(
-    (state) => state.content
-  );
+  const { loading, content } = useSelector((state) => state.content);
 
   const onChangeTab = (k) => {
     setTabKey(k);
@@ -249,6 +241,7 @@ const ContentManagement = () => {
                             }}
                           >
                             <img
+                              alt="#"
                               src={`${API_BASE_URL}/${item.file}`}
                               style={{ width: "100%", objectFit: "cover" }}
                             />

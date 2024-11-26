@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 // node.js library that concatenates classes (strings)
@@ -35,7 +36,7 @@ import { useDashboardService } from "features/dashboard/hooks/useDashboardServic
 
 const Index = (props) => {
   const { getDashboardInfo } = useDashboardService();
-  const { loading, error, data } = useSelector((state) => state.dashboard);
+  const { data } = useSelector((state) => state.dashboard);
   const [activeNav, setActiveNav] = useState(1);
   const [chartExample1Data, setChartExample1Data] = useState("data1");
 

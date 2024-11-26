@@ -1,29 +1,13 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Row,
   Col,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Table,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
   Button,
-  FormGroup,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Label,
-  Container,
 } from "reactstrap";
-import { ContentType } from "config";
 import { useTranslation } from "react-i18next";
 import parser from "html-react-parser";
 
@@ -78,7 +62,7 @@ export const ContentDetailModal = ({
                   width: "100%",
                 }}
               >
-                <img src={contentItem.files} alt="featured image" />
+                <img src={contentItem.files} alt="#" />
               </div>
             </Row>
             <div className="editor-render" id="editor-render">
