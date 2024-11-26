@@ -24,11 +24,11 @@ const AdminNavbar = (props) => {
   const { logout } = useAuthService();
   const { data } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
-  const [lang, setLang] = useState(LanguageOption.en.name);
+  const [lang, setLang] = useState(LanguageOption.en.id);
 
   const changeLanguageHandler = (lang) => {
     i18n.changeLanguage(lang);
-    setLang(LanguageOption[lang].name);
+    setLang(lang);
   };
 
   useEffect(() => {
@@ -53,9 +53,13 @@ const AdminNavbar = (props) => {
               <DropdownToggle className="pr-0" nav>
                 <Media className="align-items-center">
                   <Media className="ml-2 d-none d-lg-block">
-                    <i className="ni ni-world mr-2" />
+                    <ReactCountryFlag
+                      className="mr-3"
+                      countryCode={LanguageOption[lang].flag}
+                      svg
+                    />
                     <span className="mb-0 text-sm font-weight-bold">
-                      {lang}
+                      {LanguageOption[lang].name}
                     </span>
                   </Media>
                 </Media>

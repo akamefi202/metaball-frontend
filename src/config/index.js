@@ -20,6 +20,6 @@ export const ContentType = {
 export const ServiceType = {};
 
 export const LanguageOption = {
-  en: { id: "en", name: "English" },
-  jp: { id: "jp", name: "Japanese" },
+  en: { id: "en", name: "English", flag: "us" },
+  jp: { id: "jp", name: "日本語", flag: "jp" },
 };
