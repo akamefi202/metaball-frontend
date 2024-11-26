@@ -18,3 +18,8 @@ export const ContentType = {
   NOTE: "note",
 };
 export const ServiceType = {};
+
+export const LanguageOption = {
+  en: { id: "en", name: "English" },
+  jp: { id: "jp", name: "Japanese" },
+};

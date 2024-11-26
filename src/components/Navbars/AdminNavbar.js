@@ -2,31 +2,34 @@ import { useState, useEffect } from "react";
 import { useAuthService } from "features/auth/hooks/useAuthService";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import ReactCountryFlag from "react-country-flag";
+
 // reactstrap components
 import {
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Form,
-  FormGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input,
-  InputGroup,
   Navbar,
   Nav,
   Container,
   Media,
 } from "reactstrap";
 import { useSelector } from "react-redux";
+import { LanguageOption } from "config";
 
 const AdminNavbar = (props) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { logout } = useAuthService();
   const { data } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
+  const [lang, setLang] = useState(LanguageOption.en.name);
+
+  const changeLanguageHandler = (lang) => {
+    i18n.changeLanguage(lang);
+    setLang(LanguageOption[lang].name);
+  };
 
   useEffect(() => {
     if (data && data.manager) {
@@ -44,7 +47,34 @@ const AdminNavbar = (props) => {
           >
             {props.brandText}
           </Link>
+
           <Nav className="align-items-center d-none d-md-flex" navbar>
+            <UncontrolledDropdown nav>
+              <DropdownToggle className="pr-0" nav>
+                <Media className="align-items-center">
+                  <Media className="ml-2 d-none d-lg-block">
+                    <i className="ni ni-world mr-2" />
+                    <span className="mb-0 text-sm font-weight-bold">
+                      {lang}
+                    </span>
+                  </Media>
+                </Media>
+              </DropdownToggle>
+              <DropdownMenu className="dropdown-menu-arrow" right>
+                <DropdownItem
+                  onClick={() => changeLanguageHandler(LanguageOption.en.id)}
+                >
+                  <ReactCountryFlag className="mr-3" countryCode="us" svg />
+                  <span>{LanguageOption.en.name}</span>
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() => changeLanguageHandler(LanguageOption.jp.id)}
+                >
+                  <ReactCountryFlag className="mr-3" countryCode="jp" svg />
+                  <span>{LanguageOption.jp.name}</span>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
             <UncontrolledDropdown nav>
               <DropdownToggle className="pr-0" nav>
                 <Media className="align-items-center">
