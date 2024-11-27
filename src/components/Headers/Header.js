@@ -1,10 +1,7 @@
 // reactstrap components
-import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
-import { useTranslation } from "react-i18next";
+import { Container } from "reactstrap";
 
 const Header = () => {
-  const { t } = useTranslation();
-
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">

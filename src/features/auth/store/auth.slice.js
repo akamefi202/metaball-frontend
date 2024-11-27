@@ -2,7 +2,7 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 import { TOKEN_EXPIRE } from "config";
 import { TOKEN_NAME } from "config";
-import { AUTH_FAILURE_CODE } from "config";
+// import { AUTH_FAILURE_CODE } from "config";
 
 const initialState = {
   loading: false,

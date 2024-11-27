@@ -1,5 +1,5 @@
 // DUCKS pattern
-import { createAction, createSlice, nanoid } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,

@@ -1,7 +1,7 @@
 // src/sagas/alertSaga.js
 import { put, takeEvery } from "redux-saga/effects";
 import Swal from "sweetalert2";
-import { showAlert, hideAlert } from "features/alert/store/alert.slice";
+import { hideAlert } from "features/alert/store/alert.slice";
 
 // Saga to handle success alert
 function* showSuccessAlertSaga(action) {
