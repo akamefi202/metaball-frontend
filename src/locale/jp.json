@@ -60,6 +60,7 @@
       "nickname": "ニックネーム",
       "email": "メール",
       "password": "パスワード",
+      "confirmPassword": "パスワード確認",
       "phone": "電話番号",
       "status": "状態",
       "action": "アクション",
@@ -92,7 +93,12 @@
       "failed": "失敗しました。",
       "admin203": "アドミンはすでに存在しています。",
       "loginFailed01": "メールアドレスまたはパスワードが正しくありません。",
-      "networkError": "ネットワーク エラー"
+      "networkError": "ネットワーク エラー",
+      "titleSuccess": "成功",
+      "msgSuccess": "成功しました！",
+      "titleError": "エラー",
+      "msgErrorPWNotMatch": "パスワードが一致しません。",
+      "msgErrorNotSelected": "アイテムは選択されていません。"
     },
     "roundingPage": {
       "address": "住所",
@@ -122,6 +128,7 @@
       "image": "イメージ"
     },
     "contentPage": {
+      "advertising": "広告",
       "news": "ニュース",
       "notification": "通知",
       "note": "お知らせ"

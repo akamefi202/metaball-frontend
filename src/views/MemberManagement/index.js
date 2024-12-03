@@ -32,13 +32,14 @@ import { useMemberService } from "features/member/hooks";
 import { TABLE_PAGE_LIMIT } from "config";
 // core components
 import Header from "components/Headers/Header.js";
+import useAlert from "features/alert/hook/useAlert";
 
 const MemberManagement = () => {
   const navigate = useNavigate();
   const { fetchAllMembers, deleteMember } = useMemberService();
   const { member, count } = useSelector((state) => state.member);
   const { t } = useTranslation();
-
+  const { showErrorAlert } = useAlert();
   const [members, setMembers] = useState([]);
 
   // Pagination & Search
@@ -64,6 +65,10 @@ const MemberManagement = () => {
     const selectedIds = [];
     for (let [key, value] of Object.entries(idCheckField)) {
       if (value) selectedIds.push(key);
+    }
+    if (selectedIds.length === 0) {
+      showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
+      return;
     }
     deleteMember(selectedIds);
     setCurrentPage(1);

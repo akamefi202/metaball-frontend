@@ -33,13 +33,14 @@ import { TABLE_PAGE_LIMIT } from "config";
 
 // core components
 import Header from "components/Headers/Header.js";
+import useAlert from "features/alert/hook/useAlert";
 
 const ClubManagement = () => {
   const navigate = useNavigate();
   const { fetchAllClubs, deleteClub } = useClubService();
   const { club, count } = useSelector((state) => state.club);
   const { t } = useTranslation();
-
+  const { showErrorAlert } = useAlert();
   const [clubs, setClubs] = useState([]);
 
   // Pagination & Search
@@ -66,6 +67,10 @@ const ClubManagement = () => {
     const selectedIds = [];
     for (let [key, value] of Object.entries(idCheckField)) {
       if (value) selectedIds.push(key);
+    }
+    if (selectedIds.length === 0) {
+      showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
+      return;
     }
     deleteClub(selectedIds);
     setCurrentPage(1);

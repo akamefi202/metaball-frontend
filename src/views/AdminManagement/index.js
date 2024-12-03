@@ -32,6 +32,7 @@ import { useAdminService } from "features/admin/hooks/useAdminService";
 
 import { TABLE_PAGE_LIMIT } from "config";
 import Header from "components/Headers/Header.js";
+import useAlert from "features/alert/hook/useAlert";
 
 const AdminManagement = () => {
   const navigate = useNavigate();
@@ -42,6 +43,8 @@ const AdminManagement = () => {
   // Pagination & Search
   const [currentPage, setCurrentPage] = useState(1);
   const [keyWord, setKeyword] = useState("");
+  const { showErrorAlert } = useAlert();
+
   const onSearch = () => {
     setCurrentPage(1);
     fetchAllAdmins({
@@ -63,6 +66,10 @@ const AdminManagement = () => {
     const selectedIds = [];
     for (let [key, value] of Object.entries(idCheckField)) {
       if (value) selectedIds.push(key);
+    }
+    if (selectedIds.length === 0) {
+      showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
+      return;
     }
     deleteAdmin(selectedIds);
   };

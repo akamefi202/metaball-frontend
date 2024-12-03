@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useAdminService } from "features/admin/hooks/useAdminService";
 import Header from "components/Headers/Header";
+import useAlert from "features/alert/hook/useAlert";
 
 const AdminUpdate = () => {
   const navigate = useNavigate();
@@ -26,7 +27,9 @@ const AdminUpdate = () => {
   const { selected } = useSelector((state) => state.admin);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { id } = useParams();
+  const { showErrorAlert } = useAlert();
   // Language translation
   const { t } = useTranslation();
 
@@ -35,6 +38,10 @@ const AdminUpdate = () => {
   };
 
   const onUpdate = () => {
+    if (password !== confirmPassword) {
+      showErrorAlert(t("alert.titleError"), t("alert.msgErrorPWNotMatch"));
+      return;
+    }
     updateAdmin({ id, email, password });
   };
 
@@ -97,6 +104,28 @@ const AdminUpdate = () => {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            required
+                          />
+                        </InputGroup>
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row
+                    className="py-2 mt-2"
+                    style={{
+                      borderBottom: "1px solid #e9ecef",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Col md="2">{t("common.confirmPassword")}:</Col>
+                    <Col md="">
+                      <FormGroup className="mb-0">
+                        <InputGroup>
+                          <Input
+                            placeholder={t("common.confirmPassword")}
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                             required
                           />
                         </InputGroup>

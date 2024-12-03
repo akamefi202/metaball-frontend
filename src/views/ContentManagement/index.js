@@ -32,6 +32,7 @@ import { ContentType } from "config";
 import { API_BASE_URL } from "config";
 import { useContentService } from "features/content/hooks/useContentService";
 import { ContentDetailModal } from "./DetailView";
+import useAlert from "features/alert/hook/useAlert";
 
 const ContentManagement = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const ContentManagement = () => {
   const { fetchAllContents, deleteContent } = useContentService();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { loading, content } = useSelector((state) => state.content);
-
+  const { showErrorAlert } = useAlert();
   const onChangeTab = (k) => {
     setTabKey(k);
     setCurrentPage(1);
@@ -72,6 +73,10 @@ const ContentManagement = () => {
     const selectedIds = [];
     for (let [key, value] of Object.entries(idCheckField)) {
       if (value) selectedIds.push(key);
+    }
+    if (selectedIds.length === 0) {
+      showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
+      return;
     }
     deleteContent({ type: tabKey, ids: selectedIds });
     setCurrentPage(1);
@@ -116,7 +121,7 @@ const ContentManagement = () => {
     <>
       <Header />
       {/* Page content */}
-      <Container className="mt--7">
+      <Container className="mt--7" fluid>
         <Row>
           <div className="col">
             <Card className="shadow">
@@ -139,6 +144,9 @@ const ContentManagement = () => {
                     >
                       <option value={ContentType.NEWS}>
                         {t("contentPage.news")}
+                      </option>
+                      <option value={ContentType.ADVERTISING}>
+                        {t("contentPage.advertising")}
                       </option>
                       <option value={ContentType.NOTIFICATION}>
                         {t("contentPage.notification")}

@@ -34,7 +34,7 @@ export const authSlice = createSlice({
       localStorage.removeItem(TOKEN_NAME);
       localStorage.removeItem(TOKEN_EXPIRE);
       state.error = action.payload;
-      window.location.reload(false);
+      state.data = null;
     },
   },
 });

@@ -32,6 +32,7 @@ import { useSettingService } from "features/setting/hooks/useSettingService";
 import { TABLE_PAGE_LIMIT } from "config";
 import { useSelector } from "react-redux";
 import { API_BASE_URL } from "config";
+import useAlert from "features/alert/hook/useAlert";
 // mode = 0// for view, 1 for add, 2 for update
 const SettingModal = ({
   isOpen,
@@ -228,6 +229,7 @@ const SettingManagement = () => {
   const [modalTitle, setModalTitle] = useState("");
 
   const { t } = useTranslation();
+  const { showErrorAlert } = useAlert();
 
   const { fetchAllSettings, deleteSetting } = useSettingService();
 
@@ -281,6 +283,10 @@ const SettingManagement = () => {
     const selectedIds = [];
     for (let [key, value] of Object.entries(idCheckField)) {
       if (value) selectedIds.push(key);
+    }
+    if (selectedIds.length === 0) {
+      showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
+      return;
     }
     deleteSetting({ ids: selectedIds, type: tabKey });
     setCurrentPage(1);

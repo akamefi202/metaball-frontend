@@ -33,13 +33,14 @@ import { TABLE_PAGE_LIMIT } from "config";
 
 // core components
 import Header from "components/Headers/Header.js";
+import useAlert from "features/alert/hook/useAlert";
 
 const RoundingManagement = () => {
   const navigate = useNavigate();
   const { fetchAllRoundings, deleteRounding } = useRoundingService();
   const { rounding, count } = useSelector((state) => state.rounding);
   const { t } = useTranslation();
-
+  const { showErrorAlert } = useAlert();
   const [roundings, setRoundings] = useState([]);
 
   // Pagination & Search
@@ -68,6 +69,10 @@ const RoundingManagement = () => {
     const selectedIds = [];
     for (let [key, value] of Object.entries(idCheckField)) {
       if (value) selectedIds.push(key);
+    }
+    if (selectedIds.length === 0) {
+      showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
+      return;
     }
     deleteRounding(selectedIds);
     setCurrentPage(1);

@@ -2,6 +2,7 @@ import { useCallback } from "react";
 
 import { authActions, selectAuth } from "features/auth/store";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useNavigate } from "react-router-dom";
 
 /**
  * PostService custom-hooks
@@ -9,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
  */
 export const useAuthService = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   return {
     data: useAppSelector(selectAuth),
@@ -26,6 +28,7 @@ export const useAuthService = () => {
     ),
     logout: useCallback(() => {
       dispatch(authActions.logout());
+      navigate("auth/login");
     }, [dispatch]),
   };
 };

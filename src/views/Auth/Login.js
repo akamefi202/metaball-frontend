@@ -26,6 +26,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleKeyDown = (event) => {
+    // Check if the pressed key is Enter (key code 13)
+    if (event.key === "Enter") {
+      // Handle Enter key press here (e.g., submit the form, etc.)
+      signin({ email, password });
+    }
+  };
+
   useEffect(() => {
     if (data && data.manager) {
       navigate("/admin/index");
@@ -62,6 +70,7 @@ const Login = () => {
                     onChange={(e) => {
                       setEmail(e.target.value);
                     }}
+                    onKeyDown={(e) => handleKeyDown(e)}
                   />
                 </InputGroup>
               </FormGroup>
@@ -80,10 +89,11 @@ const Login = () => {
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
+                    onKeyDown={(e) => handleKeyDown(e)}
                   />
                 </InputGroup>
               </FormGroup>
-              <div className="custom-control custom-control-alternative custom-checkbox">
+              {/* <div className="custom-control custom-control-alternative custom-checkbox">
                 <input
                   className="custom-control-input"
                   id=" customCheckLogin"
@@ -95,7 +105,7 @@ const Login = () => {
                 >
                   <span className="text-muted">Remember me</span>
                 </label>
-              </div>
+              </div> */}
               <div className="text-center">
                 <Button
                   className="my-4"

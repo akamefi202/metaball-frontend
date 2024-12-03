@@ -34,13 +34,14 @@ import { TABLE_PAGE_LIMIT } from "config";
 import Header from "components/Headers/Header.js";
 import useBlogService from "features/blog/hooks/useBlogService";
 import { API_BASE_URL } from "config";
+import useAlert from "features/alert/hook/useAlert";
 
 const BlogManagement = () => {
   const navigate = useNavigate();
   const { fetchAllBlogs, deleteBlog } = useBlogService();
   const { blog, count } = useSelector((state) => state.blog);
   const { t } = useTranslation();
-
+  const { showErrorAlert } = useAlert();
   const [blogs, setBlogs] = useState([]);
 
   // Pagination & Search
@@ -67,6 +68,10 @@ const BlogManagement = () => {
     const selectedIds = [];
     for (let [key, value] of Object.entries(idCheckField)) {
       if (value) selectedIds.push(key);
+    }
+    if (selectedIds.length === 0) {
+      showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
+      return;
     }
     deleteBlog(selectedIds);
     setCurrentPage(1);

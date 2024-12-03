@@ -59,6 +59,7 @@
       "nickname": "Nickname",
       "email": "Email",
       "password": "Password",
+      "confirmPassword": "Confirm Password",
       "status": "Status",
       "phone": "Phone",
       "action": "Actions",
@@ -91,7 +92,12 @@
       "failed": "Failed",
       "admin203": "Admin already exists",
       "loginFailed01": "Email or password is not correct!",
-      "networkError": "Network Error"
+      "networkError": "Network Error",
+      "titleSuccess": "Success",
+      "msgSuccess": "Successfully done!",
+      "titleError": "Error",
+      "msgErrorPWNotMatch": "Passwords do not match.",
+      "msgErrorNotSelected": "No items were selected."
     },
     "roundingPage": {
       "rounding": "Rounding",
@@ -120,6 +126,7 @@
       "image": "Image"
     },
     "contentPage": {
+      "advertising": "Advertisements",
       "news": "News",
       "notification": "Notification",
       "note": "Notice"

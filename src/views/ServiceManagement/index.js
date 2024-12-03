@@ -32,6 +32,7 @@ import Header from "components/Headers/Header.js";
 import { API_BASE_URL } from "config";
 import { ServiceDetailModal } from "./DetailView";
 import { useServiceService } from "features/service/hooks/useServiceService";
+import useAlert from "features/alert/hook/useAlert";
 
 const ContentManagement = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const ContentManagement = () => {
   const { fetchAllServices, deleteService } = useServiceService();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { loading, service } = useSelector((state) => state.service);
-
+  const { showErrorAlert } = useAlert();
   // Language translation
   const { t } = useTranslation();
   // Pagination & Search
@@ -68,6 +69,10 @@ const ContentManagement = () => {
     const selectedIds = [];
     for (let [key, value] of Object.entries(idCheckField)) {
       if (value) selectedIds.push(key);
+    }
+    if (selectedIds.length === 0) {
+      showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
+      return;
     }
     deleteService({ type: tabKey, ids: selectedIds });
     setCurrentPage(1);
@@ -113,7 +118,7 @@ const ContentManagement = () => {
     <>
       <Header />
       {/* Page content */}
-      <Container className="mt--7">
+      <Container className="mt--7" fluid>
         <Row>
           <div className="col">
             <Card className="shadow">

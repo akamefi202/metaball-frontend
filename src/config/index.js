@@ -13,6 +13,7 @@ export const SettingType = {
   BLOG_THEME: "blog",
 };
 export const ContentType = {
+  ADVERTISING: "advertising",
   NEWS: "news",
   NOTIFICATION: "notification",
   NOTE: "note",
