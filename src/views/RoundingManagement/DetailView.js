@@ -252,11 +252,13 @@ const RoundingDetailView = () => {
                             className="form-control-label"
                             htmlFor="input-address"
                           >
-                            {t("roundingPage.address")}
+                            {t("common.address")}
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={selected.address}
+                            defaultValue={
+                              selected.address ? selected.address.address : ""
+                            }
                             id="input-address"
                             placeholder={t("common.address")}
                             type="text"

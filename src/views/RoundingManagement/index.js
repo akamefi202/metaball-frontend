@@ -187,7 +187,7 @@ const RoundingManagement = () => {
                           <td>{item.title}</td>
                           <td>{item.user.fullname}</td>
                           <td>{item.opening_date}</td>
-                          <td>{item.address}</td>
+                          <td>{item.address ? item.address.address : ""}</td>
                           <td>{item.cost}</td>
                           <td className="text-left">
                             <UncontrolledDropdown>
