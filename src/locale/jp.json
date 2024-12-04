@@ -45,7 +45,13 @@
       "occupation": "職業",
       "introduction": "紹介",
       "message": "メッセージ",
-      "followInfo": "フォロー情報"
+      "followInfo": "フォロー情報",
+      "age": "年齢",
+      "gender": "性別",
+      "location": "場所",
+      "theme": "テーマ",
+      "male": "男",
+      "female": "女"
     },
     "common": {
       "add": "追加",

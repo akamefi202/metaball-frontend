@@ -166,9 +166,14 @@ const MemberManagement = () => {
                         <th scope="col"></th>
                         <th scope="col">No</th>
                         <th scope="col">{t("common.fullname")}</th>
-                        <th scope="col">{t("common.nickname")}</th>
                         <th scope="col">{t("common.email")}</th>
-                        <th scope="col">{t("common.phone")}</th>
+                        <th scope="col">{t("memberPage.age")}</th>
+                        <th scope="col">{t("memberPage.gender")}</th>
+                        <th scope="col">{t("memberPage.experience")}</th>
+                        <th scope="col">{t("memberPage.averageScore")}</th>
+                        <th scope="col">{t("memberPage.monthAverageScore")}</th>
+                        <th scope="col">{t("memberPage.location")}</th>
+                        <th scope="col">{t("memberPage.theme")}</th>
                         <th scope="col" />
                       </tr>
                     </thead>
@@ -191,9 +196,25 @@ const MemberManagement = () => {
                             {(currentPage - 1) * TABLE_PAGE_LIMIT + idx + 1}
                           </td>
                           <td>{item.fullname}</td>
-                          <td>{item.nickname}</td>
                           <td>{item.email}</td>
-                          <td>{item.phone}</td>
+                          <td>
+                            {item.birthday
+                              ? new Date().getFullYear() -
+                                new Date(item.birthday).getFullYear()
+                              : ""}
+                          </td>
+                          <td>{item.sex ? t("memberPage." + item.sex) : ""}</td>
+                          <td>{item.experience}</td>
+                          <td>
+                            {item.average_score ? item.average_score : ""}
+                          </td>
+                          <td>
+                            {item.month_average_score
+                              ? item.month_average_score
+                              : ""}
+                          </td>
+                          <td>{item.location ? item.location : ""}</td>
+                          <td>{item.theme ? item.theme.join(",") : ""}</td>
                           <td className="text-left">
                             <UncontrolledDropdown>
                               <DropdownToggle

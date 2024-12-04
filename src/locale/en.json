@@ -44,7 +44,14 @@
       "contactInfo": "Contact Information",
       "occupation": "Occupation",
       "introduction": "Introduction",
-      "message": "Message"
+      "message": "Message",
+      "followInfo": "Follows",
+      "age": "Age",
+      "gender": "Gender",
+      "location": "Location",
+      "theme": "Theme",
+      "male": "M",
+      "female": "F"
     },
     "common": {
       "address": "Address",
