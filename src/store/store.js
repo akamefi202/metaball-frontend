@@ -19,6 +19,7 @@ import contentReducer from "features/content/store/content.slice";
 import serviceReducer from "features/service/store/service.slice";
 import syslogReducer from "features/syslog/store/syslog.slice";
 import blogReducer from "features/blog/store/blog.slice";
+import courseReducer from "features/course/store/course.slice";
 
 import { rootSaga } from "store/rootSaga";
 import Env from "config/Env";
@@ -50,6 +51,7 @@ const makeStore = () => {
       service: serviceReducer,
       syslog: syslogReducer,
       blog: blogReducer,
+      course: courseReducer,
       router: routerReducer,
     },
     // devTools: Env.isDev(),

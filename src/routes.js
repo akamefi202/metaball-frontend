@@ -26,6 +26,8 @@ import SerivceAdd from "views/ServiceManagement/Add";
 import ServiceUpdate from "views/ServiceManagement/Update";
 import BlogDetailView from "views/BlogManagement/DetailView";
 import MyPage from "views/Mypage";
+import CourseManagement from "views/CourseManagement";
+import CourseDetailView from "views/CourseManagement/DetailView";
 const routes = [
   {
     path: "/index",
@@ -222,6 +224,21 @@ const routes = [
     name: "sideMenu.contentManagement",
     icon: "ni ni-settings-gear-65 text-yellow",
     component: <ServiceUpdate />,
+    layout: "/admin",
+    isNotInSidebar: true,
+  },
+  {
+    path: "/course_management/",
+    name: "sideMenu.courseManagement",
+    icon: "ni ni-settings-gear-65 text-yellow",
+    component: <CourseManagement />,
+    layout: "/admin",
+  },
+  {
+    path: "/course_management/detail/:id",
+    name: "sideMenu.courseManagement",
+    icon: "ni ni-settings-gear-65 text-yellow",
+    component: <CourseDetailView />,
     layout: "/admin",
     isNotInSidebar: true,
   },

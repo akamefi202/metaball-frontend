@@ -104,7 +104,8 @@
       "msgSuccess": "成功しました！",
       "titleError": "エラー",
       "msgErrorPWNotMatch": "パスワードが一致しません。",
-      "msgErrorNotSelected": "アイテムは選択されていません。"
+      "msgErrorNotSelected": "アイテムは選択されていません。",
+      "msgGolfCourseNameFieldEmpty": "ゴルフコース名を入力してください"
     },
     "roundingPage": {
       "address": "住所",
@@ -159,6 +160,12 @@
         "201": "メールやパスワードが正しくありません。",
         "202": "メールやパスワードが正しくありません。"
       }
+    },
+    "coursePage": {
+      "golfCourse": "ゴルフコース",
+      "name": "コース名",
+      "address": "住所",
+      "phone": "電話"
     }
   }
 }
