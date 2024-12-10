@@ -42,5 +42,11 @@ export const useSettingService = () => {
       },
       [dispatch]
     ),
+    updateStatus: useCallback(
+      (data) => {
+        dispatch(settingActions.updateStatus(data));
+      },
+      [dispatch]
+    ),
   };
 };

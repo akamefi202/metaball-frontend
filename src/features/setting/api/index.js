@@ -61,6 +61,13 @@ export const updateSetting = (data) => {
   }
 };
 
+export const updateStatus = (data) => {
+  const { _id, ...rest } = data;
+  const SETTING_BASE_URL = getSettingBaseURL(data);
+
+  return api.post(`${SETTING_BASE_URL}/${_id}`, rest);
+};
+
 export const deleteSetting = (data) => {
   const SETTING_BASE_URL = getSettingBaseURL(data);
   const { type, ...rest } = data;

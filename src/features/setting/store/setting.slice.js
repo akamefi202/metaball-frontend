@@ -51,6 +51,9 @@ export const settingActions = {
   update: createAction(`${settingSlice.name}/update`, (data) => ({
     payload: data,
   })),
+  updateStatus: createAction(`${settingSlice.name}/updateStatus`, (data) => ({
+    payload: data,
+  })),
   delete: createAction(`${settingSlice.name}/delete`, (data) => ({
     payload: data,
   })),

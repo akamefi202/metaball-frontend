@@ -56,6 +56,12 @@ export const updateContent = (data) => {
   return api.put(`${CONTENT_BASE_URL}/${_id}`, rest, config);
 };
 
+export const updateStatus = (data) => {
+  const { _id, ...rest } = data;
+  const CONTENT_BASE_URL = getContentBaseURL(data);
+  return api.post(`${CONTENT_BASE_URL}/${_id}`, rest);
+};
+
 export const deleteContent = (data) => {
   const CONTENT_BASE_URL = getContentBaseURL(data);
   const { type, ...rest } = data;

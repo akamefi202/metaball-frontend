@@ -20,6 +20,7 @@ import {
   PaginationLink,
   Label,
   CardBody,
+  Form,
 } from "reactstrap";
 
 // core components
@@ -39,7 +40,7 @@ const ContentManagement = () => {
   const [tabKey, setTabKey] = useState(ContentType.NEWS);
   const [selected, setSelected] = useState({});
   const [contentData, setContentData] = useState({});
-  const { fetchAllContents, deleteContent } = useContentService();
+  const { fetchAllContents, deleteContent, updateStatus } = useContentService();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { loading, content } = useSelector((state) => state.content);
   const { showErrorAlert } = useAlert();
@@ -94,6 +95,9 @@ const ContentManagement = () => {
     navigate(`/admin/content_management/update/${tabKey}/${id}`);
   };
 
+  const onUpdateStatus = (item) => {
+    updateStatus({ _id: item._id, active: !item.active, type: item.type });
+  };
   // Preview
   const onOpenContentModal = (item) => {
     setSelected(item);
@@ -222,6 +226,7 @@ const ContentManagement = () => {
                       <th scope="col">No</th>
                       <th scope="col">{t("settingPage.image")}</th>
                       <th scope="col">{t("common.title")}</th>
+                      <th scope="col">{t("common.status")}</th>
                       <th scope="col" />
                     </tr>
                   </thead>
@@ -259,6 +264,21 @@ const ContentManagement = () => {
                           </div>
                         </td>
                         <td>{item.title}</td>
+                        <td>
+                          <Form>
+                            <div class="form-check form-switch">
+                              <input
+                                type="checkbox"
+                                class="form-check-input"
+                                checked={item.active}
+                                onClick={() => {
+                                  onUpdateStatus(item);
+                                }}
+                              />
+                              <label class="form-check-label"></label>
+                            </div>
+                          </Form>
+                        </td>
                         <td
                           style={{
                             display: "flex",

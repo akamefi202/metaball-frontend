@@ -6,6 +6,7 @@ import {
   getContent,
   getContents,
   updateContent,
+  updateStatus,
 } from "features/content/api";
 import { contentActions } from "features/content/store/content.slice";
 import { authActions } from "features/auth/store/auth.slice";
@@ -62,6 +63,17 @@ function* onUpdateContent({ payload }) {
   yield put(contentActions.fetchAll(dumpBody));
 }
 
+function* onUpdateStatus({ payload }) {
+  const data = yield call(updateStatus, payload);
+  if (data.status) {
+    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
+  } else {
+    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  }
+  dumpBody.type = payload.type;
+  yield put(contentActions.fetchAll(dumpBody));
+}
+
 function* onDeleteContent({ payload }) {
   const data = yield call(deleteContent, payload);
   if (data.status) {
@@ -78,6 +90,7 @@ export function* contentWatcherSaga() {
   yield takeEvery(contentActions.get.type, onGetContent);
   yield takeEvery(contentActions.fetchAll.type, onGetContents);
   yield takeEvery(contentActions.update.type, onUpdateContent);
+  yield takeEvery(contentActions.updateStatus.type, onUpdateStatus);
   yield takeEvery(contentActions.delete.type, onDeleteContent);
   yield takeEvery(contentActions.create.type, onCreateContent);
 }

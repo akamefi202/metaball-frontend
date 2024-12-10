@@ -6,6 +6,7 @@ import {
   getSetting,
   getSettings,
   updateSetting,
+  updateStatus,
 } from "features/setting/api";
 import { settingActions } from "features/setting/store/setting.slice";
 import { authActions } from "features/auth/store/auth.slice";
@@ -62,6 +63,17 @@ function* onUpdateSetting({ payload }) {
   yield put(settingActions.fetchAll(dumpBody));
 }
 
+function* onUpdateStatus({ payload }) {
+  const data = yield call(updateStatus, payload);
+  if (data.status) {
+    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
+  } else {
+    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  }
+  dumpBody.type = payload.type;
+  yield put(settingActions.fetchAll(dumpBody));
+}
+
 function* onDeleteSetting({ payload }) {
   const data = yield call(deleteSetting, payload);
   if (data.status) {
@@ -78,6 +90,7 @@ export function* settingWatcherSaga() {
   yield takeEvery(settingActions.get.type, onGetSetting);
   yield takeEvery(settingActions.fetchAll.type, onGetSettings);
   yield takeEvery(settingActions.update.type, onUpdateSetting);
+  yield takeEvery(settingActions.updateStatus.type, onUpdateStatus);
   yield takeEvery(settingActions.delete.type, onDeleteSetting);
   yield takeEvery(settingActions.create.type, onCreateSetting);
 }

@@ -42,5 +42,11 @@ export const useContentService = () => {
       },
       [dispatch]
     ),
+    updateStatus: useCallback(
+      (data) => {
+        dispatch(contentActions.updateStatus(data));
+      },
+      [dispatch]
+    ),
   };
 };

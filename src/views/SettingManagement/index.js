@@ -33,7 +33,15 @@ import { TABLE_PAGE_LIMIT } from "config";
 import { useSelector } from "react-redux";
 import { API_BASE_URL } from "config";
 import useAlert from "features/alert/hook/useAlert";
+import { SettingType } from "config";
 // mode = 0// for view, 1 for add, 2 for update
+const isShowImg = (type) => {
+  if (type === SettingType.LOCATION || type === SettingType.THEME) {
+    return true;
+  }
+  return false;
+};
+
 const SettingModal = ({
   isOpen,
   toggle,
@@ -126,7 +134,7 @@ const SettingModal = ({
             </FormGroup>
           </Col>
         </Row>
-        {mode === 0 && (
+        {mode === 0 && isShowImg(type) && (
           <Row className="justify-content-center mt-2">
             <div
               style={{
@@ -143,7 +151,7 @@ const SettingModal = ({
             </div>
           </Row>
         )}
-        {mode === 2 && (
+        {mode === 2 && isShowImg(type) && (
           <Row className="justify-content-center mt-2">
             <div
               style={{
@@ -165,7 +173,7 @@ const SettingModal = ({
           </Row>
         )}
 
-        {mode === 1 && pictures.length > 0 && (
+        {mode === 1 && isShowImg(type) && pictures.length > 0 && (
           <Row className="justify-content-center my-2">
             <div style={{ display: "flex", width: 250, height: 250 }}>
               <img
@@ -176,7 +184,7 @@ const SettingModal = ({
             </div>
           </Row>
         )}
-        {mode !== 0 && (
+        {mode !== 0 && isShowImg(type) && (
           <ImageUploader
             withIcon={true}
             buttonText="Choose images"
@@ -231,7 +239,7 @@ const SettingManagement = () => {
   const { t } = useTranslation();
   const { showErrorAlert } = useAlert();
 
-  const { fetchAllSettings, deleteSetting } = useSettingService();
+  const { fetchAllSettings, deleteSetting, updateStatus } = useSettingService();
 
   const onChangeTab = (k) => {
     setTabKey(k);
@@ -294,6 +302,10 @@ const SettingManagement = () => {
 
   const onDeleteOne = (id) => {
     deleteSetting({ ids: [id], type: tabKey });
+  };
+
+  const onUpdateStatus = (item) => {
+    updateStatus({ _id: item._id, type: item.type, active: !item.active });
   };
 
   useEffect(() => {
@@ -581,7 +593,6 @@ const SettingManagement = () => {
                         <th scope="col">No</th>
                         <th scope="col">ID</th>
                         <th scope="col">{t("common.title")}</th>
-                        <th scope="col">{t("settingPage.image")}</th>
                         <th scope="col" />
                       </tr>
                     </thead>
@@ -605,21 +616,6 @@ const SettingManagement = () => {
                           </td>
                           <td>{item._id}</td>
                           <td>{item.title}</td>
-                          <td>
-                            <div
-                              style={{
-                                width: "50px",
-                                height: "50px",
-                                display: "flex",
-                              }}
-                            >
-                              <img
-                                src={`${API_BASE_URL}/${item.file}`}
-                                style={{ width: "100%", objectFit: "cover" }}
-                                alt=""
-                              />
-                            </div>
-                          </td>
                           <td
                             style={{
                               display: "flex",
@@ -771,7 +767,7 @@ const SettingManagement = () => {
                         <th scope="col">No</th>
                         <th scope="col">ID</th>
                         <th scope="col">{t("common.title")}</th>
-                        <th scope="col">{t("settingPage.image")}</th>
+                        {/* <th scope="col">{t("settingPage.image")}</th> */}
                         <th scope="col" />
                       </tr>
                     </thead>
@@ -795,7 +791,7 @@ const SettingManagement = () => {
                           </td>
                           <td>{item._id}</td>
                           <td>{item.title}</td>
-                          <td>
+                          {/* <td>
                             <div
                               style={{
                                 width: "50px",
@@ -809,7 +805,7 @@ const SettingManagement = () => {
                                 alt=""
                               />
                             </div>
-                          </td>
+                          </td> */}
                           <td
                             style={{
                               display: "flex",
@@ -962,6 +958,7 @@ const SettingManagement = () => {
                         <th scope="col">ID</th>
                         <th scope="col">{t("common.title")}</th>
                         <th scope="col">{t("settingPage.image")}</th>
+                        <th scope="col">{t("common.status")}</th>
                         <th scope="col" />
                       </tr>
                     </thead>
@@ -999,6 +996,15 @@ const SettingManagement = () => {
                                 alt=""
                               />
                             </div>
+                          </td>
+                          <td>
+                            <input
+                              type="checkbox"
+                              checked={item.active}
+                              onClick={() => {
+                                onUpdateStatus(item);
+                              }}
+                            />
                           </td>
                           <td
                             style={{
@@ -1151,7 +1157,7 @@ const SettingManagement = () => {
                         <th scope="col">No</th>
                         <th scope="col">ID</th>
                         <th scope="col">{t("common.title")}</th>
-                        <th scope="col">{t("settingPage.image")}</th>
+                        {/* <th scope="col">{t("settingPage.image")}</th> */}
                         <th scope="col" />
                       </tr>
                     </thead>
@@ -1175,7 +1181,7 @@ const SettingManagement = () => {
                           </td>
                           <td>{item._id}</td>
                           <td>{item.title}</td>
-                          <td>
+                          {/* <td>
                             <div
                               style={{
                                 width: "50px",
@@ -1189,7 +1195,7 @@ const SettingManagement = () => {
                                 alt=""
                               />
                             </div>
-                          </td>
+                          </td> */}
                           <td
                             style={{
                               display: "flex",

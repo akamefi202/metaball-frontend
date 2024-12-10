@@ -47,6 +47,9 @@ export const contentActions = {
   delete: createAction(`${contentSlice.name}/delete`, (data) => ({
     payload: data,
   })),
+  updateStatus: createAction(`${contentSlice.name}/updateStatus`, (data) => ({
+    payload: data,
+  })),
 };
 
 // Selectors
