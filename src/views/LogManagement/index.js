@@ -26,6 +26,7 @@ import { useSelector } from "react-redux";
 import { TABLE_PAGE_LIMIT_LARGE } from "config";
 import Header from "components/Headers/Header.js";
 import useSyslogService from "features/syslog/hooks/useSyslogService";
+import { getFormatString } from "libs/utils";
 
 const LogManagement = () => {
   // const navigate = useNavigate();
@@ -176,7 +177,7 @@ const LogManagement = () => {
                         <td>{tbItem.type}</td>
                         <td>{tbItem.action}</td>
                         <td>{tbItem.code}</td>
-                        <td>{tbItem.created_at}</td>
+                        <td>{getFormatString(tbItem.created_at)}</td>
                       </tr>
                     ))}
                   </tbody>

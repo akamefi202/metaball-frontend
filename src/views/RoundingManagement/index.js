@@ -34,6 +34,7 @@ import { TABLE_PAGE_LIMIT } from "config";
 // core components
 import Header from "components/Headers/Header.js";
 import useAlert from "features/alert/hook/useAlert";
+import { getFormatString } from "libs/utils";
 
 const RoundingManagement = () => {
   const navigate = useNavigate();
@@ -186,7 +187,7 @@ const RoundingManagement = () => {
                           </td>
                           <td>{item.title}</td>
                           <td>{item.user.fullname}</td>
-                          <td>{item.opening_date}</td>
+                          <td>{getFormatString(item.opening_date)}</td>
                           <td>{item.address ? item.address.address : ""}</td>
                           <td>{item.cost}</td>
                           <td className="text-left">
