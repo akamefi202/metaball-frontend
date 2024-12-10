@@ -138,7 +138,8 @@
       "advertising": "広告",
       "news": "ニュース",
       "notification": "通知",
-      "note": "お知らせ"
+      "note": "お知らせ",
+      "event": "イベント"
     },
     "servicePage": {
       "service": "サービス"

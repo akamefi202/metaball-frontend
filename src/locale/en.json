@@ -135,7 +135,8 @@
       "advertising": "Advertisements",
       "news": "News",
       "notification": "Notification",
-      "note": "Notice"
+      "note": "Notice",
+      "event": "Event"
     },
     "servicePage": {
       "service": "Service"

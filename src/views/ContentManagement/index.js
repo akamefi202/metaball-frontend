@@ -145,6 +145,9 @@ const ContentManagement = () => {
                       <option value={ContentType.NEWS}>
                         {t("contentPage.news")}
                       </option>
+                      <option value={ContentType.EVENT}>
+                        {t("contentPage.event")}
+                      </option>
                       <option value={ContentType.ADVERTISING}>
                         {t("contentPage.advertising")}
                       </option>

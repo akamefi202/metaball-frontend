@@ -17,6 +17,7 @@ export const ContentType = {
   NEWS: "news",
   NOTIFICATION: "notification",
   NOTE: "note",
+  EVENT: "event",
 };
 export const ServiceType = {};
 
