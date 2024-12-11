@@ -26,6 +26,11 @@ export const authSlice = createSlice({
       localStorage.setItem(TOKEN_NAME, token);
       localStorage.setItem(TOKEN_EXPIRE, expiryTime);
     },
+    loginStarted: (state, action) => {
+      state.loading = true;
+      state.error = null;
+      state.data = null;
+    },
     loginFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
@@ -36,6 +41,16 @@ export const authSlice = createSlice({
       state.error = action.payload;
       state.data = null;
     },
+    verifyTokenStarted: (state, action) => {
+      state.loading = true;
+      state.data = null;
+      state.error = null;
+    },
+    verifyTokenSuccess: (state, action) => {
+      state.loading = false;
+      state.data = action.payload.data;
+      state.error = null;
+    },
   },
 });
 
@@ -44,7 +59,13 @@ export const authActions = {
   loginRequest: createAction(`${authSlice.name}/signin`, (data) => ({
     payload: { email: data.email, password: data.password },
   })),
+  verifyTokenStarted: authSlice.actions.verifyTokenStarted,
+  verifyToken: createAction(`${authSlice.name}/verifyToken`, (data) => ({
+    payload: { token: data.token },
+  })),
+  verifyTokenSuccess: authSlice.actions.verifyTokenSuccess,
   loginSuccess: authSlice.actions.loginSuccess,
+  loginStarted: authSlice.actions.loginStarted,
   loginFailure: authSlice.actions.loginFailure,
   logout: authSlice.actions.logout,
 };

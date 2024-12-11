@@ -185,7 +185,7 @@ const AdminManagement = () => {
                   <thead className="thead-light">
                     <tr>
                       {tblData.thData.map((thItem, idx) => (
-                        <th scope="col" className={"thItem" + idx}>
+                        <th scope="col" key={"thitem" + idx}>
                           {thItem}
                         </th>
                       ))}

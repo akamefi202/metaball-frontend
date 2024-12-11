@@ -22,11 +22,18 @@ const Admin = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
+  console.info(location.pathname);
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
+      console.info(prop.path);
       if (prop.layout === "/admin") {
         return (
-          <Route path={prop.path} element={prop.component} key={key} exact />
+          <Route
+            path={`${prop.path}`}
+            element={prop.component}
+            key={key}
+            exact
+          />
         );
       } else {
         return null;
@@ -36,10 +43,7 @@ const Admin = (props) => {
 
   const getBrandText = (path) => {
     for (let i = 0; i < routes.length; i++) {
-      if (
-        props?.location?.pathname.indexOf(routes[i].layout + routes[i].path) !==
-        -1
-      ) {
+      if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
         return t(routes[i].name);
       }
     }
@@ -64,7 +68,7 @@ const Admin = (props) => {
         />
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/admin/index" replace />} />
+          {/* <Route path="*" element={<Navigate to="/admin/index" replace />} /> */}
         </Routes>
         <Container fluid>
           <AdminFooter />

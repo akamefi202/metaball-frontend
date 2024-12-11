@@ -2,6 +2,7 @@
 // reactstrap components
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { LoadingComponent } from "components/Loading";
 import {
   Button,
   Card,
@@ -41,7 +42,11 @@ const Login = () => {
   }, [data, navigate]);
 
   if (loading) {
-    return <></>;
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
   }
 
   return (

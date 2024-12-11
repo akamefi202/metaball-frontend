@@ -51,11 +51,7 @@ const Sidebar = (props) => {
       if (!prop.isNotInSidebar) {
         return (
           <NavItem key={key}>
-            <NavLink
-              to={prop.layout + prop.path}
-              tag={NavLinkRRD}
-              onClick={closeCollapse}
-            >
+            <NavLink to={prop.path} tag={NavLinkRRD} onClick={closeCollapse}>
               <i className={prop.icon} />
               {t(prop.name)}
             </NavLink>

@@ -23,7 +23,7 @@ const Header = ({ data }) => {
                           {t("dashboardPage.user")}
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
-                          {data.users}
+                          {data && data.users}
                         </span>
                       </div>
                       <Col className="col-auto">
@@ -53,7 +53,7 @@ const Header = ({ data }) => {
                           {t("dashboardPage.round")}
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
-                          {data.roundings}
+                          {data && data.roundings}
                         </span>
                       </div>
                       <Col className="col-auto">
@@ -77,7 +77,7 @@ const Header = ({ data }) => {
                           {t("dashboardPage.course")}
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
-                          {data.clubs}
+                          {data && data.clubs}
                         </span>
                       </div>
                       <Col className="col-auto">
