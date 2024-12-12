@@ -62,7 +62,9 @@ export const ServiceDetailModal = ({
                   width: "100%",
                 }}
               >
-                <img src={contentItem.files} alt="featured image" />
+                {contentItem.files && (
+                  <img src={contentItem.files} alt="featured image" />
+                )}
               </div>
             </Row>
             <div className="editor-render" id="editor-render">

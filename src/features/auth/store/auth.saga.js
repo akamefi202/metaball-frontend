@@ -30,19 +30,15 @@ function* onVerifyToken({ payload }) {
   try {
     yield put(authActions.verifyTokenStarted());
     const response = yield call(verifyToken, payload.token);
-    console.info(response);
     if (response.status) {
-      console.info("Verify token success");
       yield put(authActions.verifyTokenSuccess(response));
     } else {
-      console.info("Verify token fail");
       yield put(authActions.loginFailure(response));
       yield put(
         showAlert({ type: "error", message: i18n.t("alert.loginFailed01") })
       );
     }
   } catch (error) {
-    console.info("Verify token error", error);
     yield put(authActions.loginFailure({ error }));
     yield put(
       showAlert({ type: "error", message: i18n.t("alert.networkError") })

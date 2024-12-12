@@ -213,7 +213,7 @@ const MemberManagement = () => {
                               ? item.month_average_score
                               : ""}
                           </td>
-                          <td>{item.location ? item.location : ""}</td>
+                          <td>{item.location ? item.location.name : ""}</td>
                           <td>{item.theme ? item.theme.join(",") : ""}</td>
                           <td className="text-left">
                             <UncontrolledDropdown>

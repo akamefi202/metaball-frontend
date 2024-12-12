@@ -30,7 +30,8 @@
     "dashboardPage": {
       "user": "会員",
       "round": "ラウンディング",
-      "course": "ゴルフコース"
+      "course": "ゴルフコース",
+      "club": "クラブ"
     },
     "adminPage": {
       "admin": "アドミン"

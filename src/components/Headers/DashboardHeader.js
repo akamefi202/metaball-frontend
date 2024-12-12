@@ -74,7 +74,7 @@ const Header = ({ data }) => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          {t("dashboardPage.course")}
+                          {t("dashboardPage.club")}
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
                           {data && data.clubs}

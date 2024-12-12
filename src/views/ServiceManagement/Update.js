@@ -124,11 +124,13 @@ const ServiceUpdate = () => {
               <Col md="2">{t("common.image")}</Col>
               <Col>
                 <div style={{ width: 250, height: 250, display: "flex" }}>
-                  <img
-                    alt="#"
-                    src={fileURI}
-                    style={{ width: "100%", objectFit: "cover" }}
-                  />
+                  {fileURI && (
+                    <img
+                      alt="#"
+                      src={fileURI}
+                      style={{ width: "100%", objectFit: "cover" }}
+                    />
+                  )}
                 </div>
               </Col>
 

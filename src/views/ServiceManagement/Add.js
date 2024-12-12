@@ -107,11 +107,13 @@ const SerivceAdd = () => {
               <Col md="2">{t("common.image")}</Col>
               <Col>
                 <div style={{ width: 250, height: 250, display: "flex" }}>
-                  <img
-                    alt="#"
-                    src={picturesUri[0]}
-                    style={{ width: "100%", objectFit: "cover" }}
-                  />
+                  {picturesUri[0] && (
+                    <img
+                      alt="#"
+                      src={picturesUri[0]}
+                      style={{ width: "100%", objectFit: "cover" }}
+                    />
+                  )}
                 </div>
               </Col>
 

@@ -22,10 +22,8 @@ const Admin = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
-  console.info(location.pathname);
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      console.info(prop.path);
       if (prop.layout === "/admin") {
         return (
           <Route

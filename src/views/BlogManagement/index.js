@@ -105,7 +105,7 @@ const BlogManagement = () => {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0 d-flex justify-content-between align-items-center">
-                <h3 className="mb-0">{t("clubPage.club")}</h3>
+                <h3 className="mb-0">{t("memberPage.user")}</h3>
                 <div className="d-flex align-items-center">
                   <FormGroup className="mb-0 mr-2">
                     <InputGroup className="input-group-alternative">
@@ -183,24 +183,26 @@ const BlogManagement = () => {
                           <td>{item.title}</td>
                           <td>{item.user?.fullname}</td>
                           <td>
-                            <div
-                              style={{
-                                width: 50,
-                                height: 50,
-                                display: "flex",
-                                padding: 0,
-                              }}
-                            >
-                              <img
-                                alt="#"
-                                src={
-                                  item.files
-                                    ? `${API_BASE_URL}/${item.files[0]}`
-                                    : ""
-                                }
-                                style={{ width: "100%", objectFit: "cover" }}
-                              />
-                            </div>
+                            {item.files && item.files[0] && (
+                              <div
+                                style={{
+                                  width: 50,
+                                  height: 50,
+                                  display: "flex",
+                                  padding: 0,
+                                }}
+                              >
+                                <img
+                                  alt="#"
+                                  src={
+                                    item.files
+                                      ? `${API_BASE_URL}/${item.files[0]}`
+                                      : ""
+                                  }
+                                  style={{ width: "100%", objectFit: "cover" }}
+                                />
+                              </div>
+                            )}
                           </td>
                           <td>{item.theme_ids.length}</td>
                           <td className="text-left">

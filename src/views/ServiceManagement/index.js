@@ -236,19 +236,21 @@ const ContentManagement = () => {
                           {(currentPage - 1) * TABLE_PAGE_LIMIT + idx + 1}
                         </td>
                         <td>
-                          <div
-                            style={{
-                              width: "50px",
-                              height: "50px",
-                              display: "flex",
-                            }}
-                          >
-                            <img
-                              src={`${API_BASE_URL}/${item.file}`}
-                              style={{ width: "100%", objectFit: "cover" }}
-                              alt="#"
-                            />
-                          </div>
+                          {item.file && (
+                            <div
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                display: "flex",
+                              }}
+                            >
+                              <img
+                                src={`${API_BASE_URL}/${item.file}`}
+                                style={{ width: "100%", objectFit: "cover" }}
+                                alt="#"
+                              />
+                            </div>
+                          )}
                         </td>
                         <td>{item.title}</td>
                         <td

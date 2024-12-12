@@ -30,7 +30,8 @@
     "dashboardPage": {
       "user": "Users",
       "round": "Rounds",
-      "course": "Courses"
+      "course": "Courses",
+      "club": "Club"
     },
     "adminPage": {
       "admin": "Admin"
@@ -49,7 +50,9 @@
       "age": "Age",
       "gender": "Gender",
       "location": "Location",
-      "theme": "Theme"
+      "theme": "Theme",
+      "male": "Male",
+      "female": "Female"
     },
     "common": {
       "address": "Address",

@@ -7,7 +7,6 @@ const api = makeApi(`${Env.API_BASE_URL}`);
 const COURSE_BASE_URL = `admin/golfcourse`;
 
 export const getCourses = (params) => {
-  console.info("Couse base url", COURSE_BASE_URL);
   return api.get(
     `${COURSE_BASE_URL}/?limit=${params.limit}&skip=${params.skip}&key=${params.key}`
   );
