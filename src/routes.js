@@ -31,6 +31,7 @@ import CourseDetailView from "views/CourseManagement/DetailView";
 const routes = [
   {
     path: "/admin/index",
+    pathName: "/admin/index",
     name: "sideMenu.dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: <Index />,
@@ -38,6 +39,7 @@ const routes = [
   },
   {
     path: "/admin/admin_management",
+    pathName: "/admin/admin_management",
     name: "sideMenu.adminManagement",
     icon: "ni ni-badge text-blue",
     component: <AdminManagement />,
@@ -45,6 +47,7 @@ const routes = [
   },
   {
     path: "/admin/admin_management/detail/:id",
+    pathName: "/admin/admin_management/detail",
     name: "sideMenu.adminManagement",
     icon: "ni ni-badge text-blue",
     component: <AdminDetailView />,
@@ -53,6 +56,7 @@ const routes = [
   },
   {
     path: "/admin/admin_management/add",
+    pathName: "/admin/admin_management/add",
     name: "sideMenu.adminManagement",
     icon: "ni ni-badge text-blue",
     component: <AdminAdd />,
@@ -61,6 +65,7 @@ const routes = [
   },
   {
     path: "/admin/admin_management/update/:id",
+    pathName: "/admin/admin_management/update",
     name: "sideMenu.adminManagement",
     icon: "ni ni-badge text-blue",
     component: <AdminUpdate />,
@@ -69,6 +74,7 @@ const routes = [
   },
   {
     path: "/admin/user_management",
+    pathName: "/admin/user_management",
     name: "sideMenu.userManagement",
     icon: "ni ni-circle-08 text-blue",
     component: <MemberManagement />,
@@ -76,6 +82,7 @@ const routes = [
   },
   {
     path: "/admin/user_management/detail/:id",
+    pathName: "/admin/user_management/detail",
     name: "sideMenu.userManagement",
     icon: "ni ni-circle-08 text-blue",
     component: <MemberDetailView />,
@@ -84,6 +91,7 @@ const routes = [
   },
   {
     path: "/admin/user_management/message/:id",
+    pathName: "/admin/user_management/message",
     name: "sideMenu.userManagement",
     icon: "ni ni-circle-08 text-blue",
     component: <UserMessageDetailView />,
@@ -92,6 +100,7 @@ const routes = [
   },
   {
     path: "/admin/user_management/follow/:id",
+    pathName: "/admin/user_management/follow",
     name: "sideMenu.userManagement",
     icon: "ni ni-circle-08 text-blue",
     component: <FollowDetailView />,
@@ -100,6 +109,7 @@ const routes = [
   },
   {
     path: "/admin/user_management/update/:id",
+    pathName: "/admin/user_management/update",
     name: "sideMenu.userManagement",
     icon: "ni ni-circle-08 text-blue",
     component: <MemberUpdate />,
@@ -108,6 +118,7 @@ const routes = [
   },
   {
     path: "/admin/user_management/add",
+    pathName: "/admin/user_management/add",
     name: "sideMenu.userManagement",
     icon: "ni ni-circle-08 text-blue",
     component: <MemberAdd />,
@@ -116,6 +127,7 @@ const routes = [
   },
   {
     path: "/admin/round_management",
+    pathName: "/admin/round_management",
     name: "sideMenu.roundManagement",
     icon: "ni ni-world text-yellow",
     component: <RoundingManagement />,
@@ -123,6 +135,7 @@ const routes = [
   },
   {
     path: "/admin/round_management/detail/:id",
+    pathName: "/admin/round_management/detail",
     name: "sideMenu.roundManagement",
     icon: "ni ni-world text-yellow",
     component: <RoundingDetailView />,
@@ -131,6 +144,7 @@ const routes = [
   },
   {
     path: "/admin/club_management",
+    pathName: "/admin/club_management",
     name: "sideMenu.clubManagement",
     icon: "ni ni-istanbul text-yellow",
     component: <ClubManagement />,
@@ -138,6 +152,7 @@ const routes = [
   },
   {
     path: "/admin/club_management/detail/:id",
+    pathName: "/admin/club_management/detail",
     name: "sideMenu.clubManagement",
     icon: "ni ni-istanbul text-yellow",
     component: <ClubDetailView />,
@@ -146,6 +161,7 @@ const routes = [
   },
   {
     path: "/admin/club_management/message/:id",
+    pathName: "/admin/club_management/message",
     name: "sideMenu.clubManagement",
     icon: "ni ni-istanbul text-yellow",
     component: <ClubMessageDetailView />,
@@ -154,6 +170,7 @@ const routes = [
   },
   {
     path: "/admin/setting_management",
+    pathName: "/admin/setting_management",
     name: "sideMenu.generalSetting",
     icon: "ni ni-settings text-yellow",
     component: <SettingManagement />,
@@ -161,6 +178,7 @@ const routes = [
   },
   {
     path: "/admin/blog_management",
+    pathName: "/admin/blog_management",
     name: "sideMenu.blogManagement",
     icon: "ni ni-archive-2 text-yellow",
     component: <BlogManagement />,
@@ -168,6 +186,7 @@ const routes = [
   },
   {
     path: "/admin/blog_management/detail/:id",
+    pathName: "/admin/blog_management/detail",
     name: "sideMenu.blogManagement",
     icon: "ni ni-archive-2 text-yellow",
     component: <BlogDetailView />,
@@ -176,6 +195,7 @@ const routes = [
   },
   {
     path: "/admin/content_management",
+    pathName: "/admin/content_management",
     name: "sideMenu.contentManagement",
     icon: "ni ni-bullet-list-67 text-yellow",
     component: <ContentManagement />,
@@ -183,6 +203,7 @@ const routes = [
   },
   {
     path: "/admin/content_management/add/:contentType",
+    pathName: "/admin/content_management/add",
     name: "sideMenu.contentManagement",
     icon: "ni ni-bullet-list-67 text-yellow",
     component: <ContentAdd />,
@@ -191,6 +212,7 @@ const routes = [
   },
   {
     path: "/admin/content_management/update/:contentType/:id",
+    pathName: "/admin/content_management/update",
     name: "sideMenu.contentManagement",
     icon: "ni ni-bullet-list-67 text-yellow",
     component: <ContentUpdate />,
@@ -199,6 +221,7 @@ const routes = [
   },
   {
     path: "/admin/log_management",
+    pathName: "/admin/log_management",
     name: "sideMenu.logManagement",
     icon: "ni ni-money-coins text-yellow",
     component: <LogManagement />,
@@ -206,6 +229,7 @@ const routes = [
   },
   {
     path: "/admin/service_management",
+    pathName: "/admin/service_management",
     name: "sideMenu.serviceManagement",
     icon: "ni ni-settings-gear-65 text-yellow",
     component: <ServiceManagement />,
@@ -213,6 +237,7 @@ const routes = [
   },
   {
     path: "/admin/service_management/add/:contentType",
+    pathName: "/admin/service_management/add",
     name: "sideMenu.contentManagement",
     icon: "ni ni-settings-gear-65 text-yellow",
     component: <SerivceAdd />,
@@ -221,6 +246,7 @@ const routes = [
   },
   {
     path: "/admin/service_management/update/:contentType/:id",
+    pathName: "/admin/service_management/update",
     name: "sideMenu.contentManagement",
     icon: "ni ni-settings-gear-65 text-yellow",
     component: <ServiceUpdate />,
@@ -229,6 +255,7 @@ const routes = [
   },
   {
     path: "/admin/course_management/",
+    pathName: "/admin/course_management",
     name: "sideMenu.courseManagement",
     icon: "ni ni-settings-gear-65 text-yellow",
     component: <CourseManagement />,
@@ -236,6 +263,7 @@ const routes = [
   },
   {
     path: "/admin/course_management/detail/:id",
+    pathName: "/admin/course_management/detail",
     name: "sideMenu.courseManagement",
     icon: "ni ni-settings-gear-65 text-yellow",
     component: <CourseDetailView />,
@@ -244,6 +272,7 @@ const routes = [
   },
   {
     path: "/admin/mypage",
+    pathName: "/admin/mypage",
     name: "sideMenu.mypage",
     icon: "ni ni-single-02 text-yellow",
     component: <MyPage />,
@@ -251,6 +280,7 @@ const routes = [
   },
   {
     path: "/login",
+    pathName: "/login",
     name: "sideMenu.serviceManagement",
     icon: "ni ni-single-02 text-yellow",
     component: <Login />,

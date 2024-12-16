@@ -36,53 +36,91 @@ export function* onGetSetting({ payload }) {
 }
 
 export function* onGetSettings({ payload }) {
-  const response = yield call(getSettings, payload);
-  response.type = payload.type;
-  yield put(settingActions.fetchAllSucceeded(response));
+  try {
+    const response = yield call(getSettings, payload);
+    response.type = payload.type;
+    yield put(settingActions.fetchAllSucceeded(response));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
 
 function* onCreateSetting({ payload }) {
-  const data = yield call(createSetting, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(createSetting, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    dumpBody.type = payload.type;
+    yield put(settingActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  dumpBody.type = payload.type;
-  yield put(settingActions.fetchAll(dumpBody));
 }
 
 function* onUpdateSetting({ payload }) {
-  const data = yield call(updateSetting, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(updateSetting, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    dumpBody.type = payload.type;
+    yield put(settingActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  dumpBody.type = payload.type;
-  yield put(settingActions.fetchAll(dumpBody));
 }
 
 function* onUpdateStatus({ payload }) {
-  const data = yield call(updateStatus, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(updateStatus, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    dumpBody.type = payload.type;
+    yield put(settingActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  dumpBody.type = payload.type;
-  yield put(settingActions.fetchAll(dumpBody));
 }
 
 function* onDeleteSetting({ payload }) {
-  const data = yield call(deleteSetting, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(deleteSetting, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    dumpBody.type = payload.type;
+    yield put(settingActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  dumpBody.type = payload.type;
-  yield put(settingActions.fetchAll(dumpBody));
 }
 
 // Watcher Saga

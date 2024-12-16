@@ -11,6 +11,7 @@ import { courseActions } from "features/course/store/course.slice";
 import { TABLE_PAGE_LIMIT } from "config";
 import i18n from "locale/i18n";
 import { showAlert } from "features/alert/store/alert.slice";
+import { authActions } from "features/auth/store/auth.slice";
 
 const dumpBody = {
   limit: TABLE_PAGE_LIMIT,
@@ -20,46 +21,82 @@ const dumpBody = {
 
 // Worker Sagas
 export function* onGetCourse({ payload }) {
-  const data = yield call(getCourse, payload);
-  if (data.status) {
-    yield put(courseActions.fetchOneSucceeded(data));
+  try {
+    const data = yield call(getCourse, payload);
+    if (data.status) {
+      yield put(courseActions.fetchOneSucceeded(data));
+    }
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
 }
 
 export function* onGetCourses({ payload }) {
-  const data = yield call(getCourses, payload);
-  yield put(courseActions.fetchAllSucceeded(data));
+  try {
+    const data = yield call(getCourses, payload);
+    yield put(courseActions.fetchAllSucceeded(data));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
 
 function* onCreateCourse({ payload }) {
-  const data = yield call(createCourse, payload);
-  yield put(courseActions.fetchAll(dumpBody));
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(createCourse, payload);
+    yield put(courseActions.fetchAll(dumpBody));
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
 }
 
 function* onUpdateCourse({ payload }) {
-  const data = yield call(updateCourse, payload);
-  yield put(courseActions.fetchAll(dumpBody));
-  yield put(courseActions.fetchAll(dumpBody));
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(updateCourse, payload);
+    yield put(courseActions.fetchAll(dumpBody));
+    yield put(courseActions.fetchAll(dumpBody));
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
 }
 
 function* onDeleteCourse({ payload }) {
-  const data = yield call(deleteCourse, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(deleteCourse, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    yield put(courseActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  yield put(courseActions.fetchAll(dumpBody));
 }
 
 // Watcher Saga

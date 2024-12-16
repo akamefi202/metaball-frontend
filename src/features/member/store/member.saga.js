@@ -34,38 +34,68 @@ export function* onGetMember({ payload }) {
 }
 
 export function* onGetMembers({ payload }) {
-  const response = yield call(getMembers, payload);
-  yield put(memberActions.fetchAllSucceeded(response));
+  try {
+    const response = yield call(getMembers, payload);
+    yield put(memberActions.fetchAllSucceeded(response));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
 
 function* onCreateMember({ payload }) {
-  const data = yield call(createMember, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(createMember, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    yield put(memberActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  yield put(memberActions.fetchAll(dumpBody));
 }
 
 function* onUpdateMember({ payload }) {
-  const data = yield call(updateMember, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(updateMember, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    yield put(memberActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  yield put(memberActions.fetchAll(dumpBody));
 }
 
 function* onDeleteMember({ payload }) {
-  const data = yield call(deleteMember, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(deleteMember, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    yield put(memberActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  yield put(memberActions.fetchAll(dumpBody));
 }
 
 // Watcher Saga

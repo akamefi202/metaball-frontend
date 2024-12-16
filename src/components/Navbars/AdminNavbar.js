@@ -41,12 +41,12 @@ const AdminNavbar = (props) => {
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
         <Container fluid>
-          <Link
+          <p
             className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-            to="/"
+            // to="/"
           >
             {props.brandText}
-          </Link>
+          </p>
 
           <Nav className="align-items-center d-none d-md-flex" navbar>
             <UncontrolledDropdown nav>

@@ -35,42 +35,72 @@ export function* onGetService({ payload }) {
 }
 
 export function* onGetServices({ payload }) {
-  const data = yield call(getServices, payload);
-  data.type = payload.type;
-  yield put(serviceActions.fetchAllSucceeded(data));
+  try {
+    const data = yield call(getServices, payload);
+    data.type = payload.type;
+    yield put(serviceActions.fetchAllSucceeded(data));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
 
 function* onCreateService({ payload }) {
-  const data = yield call(createService, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(createService, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    dumpBody.type = payload.type;
+    yield put(serviceActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  dumpBody.type = payload.type;
-  yield put(serviceActions.fetchAll(dumpBody));
 }
 
 function* onUpdateService({ payload }) {
-  const data = yield call(updateService, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(updateService, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    dumpBody.type = payload.type;
+    yield put(serviceActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  dumpBody.type = payload.type;
-  yield put(serviceActions.fetchAll(dumpBody));
 }
 
 function* onDeleteService({ payload }) {
-  const data = yield call(deleteService, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(deleteService, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    dumpBody.type = payload.type;
+    yield put(serviceActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  dumpBody.type = payload.type;
-  yield put(serviceActions.fetchAll(dumpBody));
 }
 
 // Watcher Saga

@@ -11,6 +11,7 @@ import { roundingActions } from "features/rounding/store/rounding.slice";
 import { TABLE_PAGE_LIMIT } from "config";
 import i18n from "locale/i18n";
 import { showAlert } from "features/alert/store/alert.slice";
+import { authActions } from "features/auth/store/auth.slice";
 
 const dumpBody = {
   limit: TABLE_PAGE_LIMIT,
@@ -22,34 +23,66 @@ const dumpBody = {
 
 // Worker Sagas
 export function* onGetRounding({ payload }) {
-  const data = yield call(getRounding, payload);
-  if (data.status) {
-    yield put(roundingActions.fetchOneSucceeded(data));
+  try {
+    const data = yield call(getRounding, payload);
+    if (data.status) {
+      yield put(roundingActions.fetchOneSucceeded(data));
+    }
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
 }
 
 export function* onGetRoundings({ payload }) {
-  const data = yield call(getRoundings, payload);
-  yield put(roundingActions.fetchAllSucceeded(data));
+  try {
+    const data = yield call(getRoundings, payload);
+    yield put(roundingActions.fetchAllSucceeded(data));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
 
 function* onCreateRounding({ payload }) {
-  yield call(createRounding, payload);
-  yield put(roundingActions.fetchAll(dumpBody));
+  try {
+    yield call(createRounding, payload);
+    yield put(roundingActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
 
 function* onUpdateRounding({ payload }) {
-  yield call(updateRounding, payload);
-  yield put(roundingActions.fetchAll(dumpBody));
+  try {
+    yield call(updateRounding, payload);
+    yield put(roundingActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
 
 function* onDeleteRounding({ payload }) {
-  const data = yield call(deleteRounding, payload);
-  yield put(roundingActions.fetchAll(dumpBody));
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(deleteRounding, payload);
+    yield put(roundingActions.fetchAll(dumpBody));
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
 }
 
