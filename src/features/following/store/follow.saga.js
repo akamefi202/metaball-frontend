@@ -7,23 +7,51 @@ import {
   getFollowingBlog,
 } from "features/following/api";
 import { followActions } from "features/following/store/follow.slice";
+import { authActions } from "features/auth/store/auth.slice";
 
 // Worker Sagas
 export function* onGetFollowedUser({ payload }) {
-  const response = yield call(getFollowedUser, payload);
-  yield put(followActions.fetchUserFollowedSucceeded(response.data));
+  try {
+    const response = yield call(getFollowedUser, payload);
+    yield put(followActions.fetchUserFollowedSucceeded(response.data));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
+
 export function* onGetFollowingUser({ payload }) {
-  const response = yield call(getFollowingUser, payload);
-  yield put(followActions.fetchUserFollowingSucceeded(response.data));
+  try {
+    const response = yield call(getFollowingUser, payload);
+    yield put(followActions.fetchUserFollowingSucceeded(response.data));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
+
 export function* onGetFollowingRounding({ payload }) {
-  const response = yield call(getFollowingRounding, payload);
-  yield put(followActions.fetchRoundFollowingSucceeded(response.data));
+  try {
+    const response = yield call(getFollowingRounding, payload);
+    yield put(followActions.fetchRoundFollowingSucceeded(response.data));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
+
 export function* onGetFollowingBlog({ payload }) {
-  const response = yield call(getFollowingBlog, payload);
-  yield put(followActions.fetchBlogFollowingSucceeded(response.data));
+  try {
+    const response = yield call(getFollowingBlog, payload);
+    yield put(followActions.fetchBlogFollowingSucceeded(response.data));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
 
 // Watcher Saga

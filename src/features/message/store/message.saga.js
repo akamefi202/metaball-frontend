@@ -2,15 +2,28 @@ import { call, put, takeEvery } from "redux-saga/effects";
 
 import { getUserMessage, getClubMessage } from "features/message/api";
 import { messageActions } from "features/message/store/message.slice";
+import { authActions } from "features/auth/store/auth.slice";
 
 // Worker Sagas
 export function* onGetUserMessage({ payload }) {
-  const response = yield call(getUserMessage, payload);
-  yield put(messageActions.fetchUserMessageSucceeded(response));
+  try {
+    const response = yield call(getUserMessage, payload);
+    yield put(messageActions.fetchUserMessageSucceeded(response));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
 export function* onGetClubMessage({ payload }) {
-  const response = yield call(getClubMessage, payload);
-  yield put(messageActions.fetchClubMessageSucceeded(response));
+  try {
+    const response = yield call(getClubMessage, payload);
+    yield put(messageActions.fetchClubMessageSucceeded(response));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
 
 // Watcher Saga

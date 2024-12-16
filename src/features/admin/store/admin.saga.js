@@ -47,33 +47,59 @@ export function* onGetAdmins({ payload }) {
 }
 
 function* onCreateAdmin({ payload }) {
-  const data = yield call(createAdmin, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-    yield put(adminActions.fetchAll(dumpBody));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.admin203") }));
+  try {
+    const data = yield call(createAdmin, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+      yield put(adminActions.fetchAll(dumpBody));
+    } else {
+      yield put(
+        showAlert({ type: "error", message: i18n.t("alert.admin203") })
+      );
+    }
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
 }
 
 function* onUpdateAdmin({ payload }) {
-  const data = yield call(updateAdmin, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(updateAdmin, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    yield put(adminActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  yield put(adminActions.fetchAll(dumpBody));
 }
 
 function* onDeleteAdmin({ payload }) {
-  const data = yield call(deleteAdmin, payload);
-  if (data.status) {
-    yield put(showAlert({ type: "success", message: i18n.t("alert.success") }));
-  } else {
-    yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+  try {
+    const data = yield call(deleteAdmin, payload);
+    if (data.status) {
+      yield put(
+        showAlert({ type: "success", message: i18n.t("alert.success") })
+      );
+    } else {
+      yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
+    }
+    yield put(adminActions.fetchAll(dumpBody));
+  } catch (error) {
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
   }
-  yield put(adminActions.fetchAll(dumpBody));
 }
 
 // Watcher Saga
