@@ -179,7 +179,7 @@ const MessageDetailView = () => {
                       color="warning"
                       onClick={(e) => {
                         e.preventDefault();
-                        navigate(`/admin/user_management/following/${id}`);
+                        navigate(`/admin/user_management/follow/${id}`);
                       }}
                       size="sm"
                     >
