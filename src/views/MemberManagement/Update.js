@@ -20,12 +20,13 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 import { useMemberService } from "features/member/hooks/useMemberService";
 import UserHeader from "components/Headers/UserHeader";
+import { LoadingComponent } from "components/Loading";
 
 const MemberUpdate = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const { getMember, updateMember } = useMemberService();
-  const { selected } = useSelector((state) => state.member);
+  const { selected, loading } = useSelector((state) => state.member);
   const { id } = useParams();
   // Language translation
   const { t } = useTranslation();
@@ -52,6 +53,14 @@ const MemberUpdate = () => {
   useEffect(() => {
     setFormData(selected);
   }, [selected]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

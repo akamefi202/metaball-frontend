@@ -20,6 +20,9 @@ import { useContentService } from "features/content/hooks/useContentService";
 
 import { ContentDetailModal } from "./DetailView";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { LoadingComponent } from "components/Loading";
+
 const ContentAdd = () => {
   const [contentTitle, setContentTitle] = useState("");
   const [subType, setSubType] = useState("");
@@ -29,6 +32,8 @@ const ContentAdd = () => {
   const [contentData, setContentData] = useState("");
   const { createContent } = useContentService();
   const { contentType } = useParams();
+  const { loading } = useSelector((state) => state.content);
+
   const navigate = useNavigate();
   // Language translation
   const { t } = useTranslation();
@@ -60,6 +65,15 @@ const ContentAdd = () => {
   const onOpenContentModal = () => {
     setIsOpenModal(true);
   };
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
+
   return (
     <>
       <Header />

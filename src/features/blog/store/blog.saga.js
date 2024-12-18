@@ -23,11 +23,14 @@ const dumpBody = {
 // Worker Sagas
 export function* onGetBlog({ payload }) {
   try {
+    yield put(blogActions.actionStarted());
     const data = yield call(getBlog, payload);
+    yield put(blogActions.actionEnded());
     if (data.status) {
       yield put(blogActions.fetchOneSucceeded(data));
     }
   } catch (error) {
+    yield put(blogActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -36,9 +39,12 @@ export function* onGetBlog({ payload }) {
 
 export function* onGetBlogs({ payload }) {
   try {
+    yield put(blogActions.actionStarted());
     const data = yield call(getBlogs, payload);
+    yield put(blogActions.actionEnded());
     yield put(blogActions.fetchAllSucceeded(data));
   } catch (error) {
+    yield put(blogActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -47,9 +53,12 @@ export function* onGetBlogs({ payload }) {
 
 export function* onGetReviews({ payload }) {
   try {
+    yield put(blogActions.actionStarted());
     const data = yield call(getReviews, payload);
+    yield put(blogActions.actionEnded());
     yield put(blogActions.fetchReviewsSucceeded(data));
   } catch (error) {
+    yield put(blogActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -58,9 +67,12 @@ export function* onGetReviews({ payload }) {
 
 function* onUpdateBlog({ payload }) {
   try {
+    yield put(blogActions.actionStarted());
     yield call(updateBlog, payload);
+    yield put(blogActions.actionEnded());
     yield put(blogActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(blogActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -69,7 +81,9 @@ function* onUpdateBlog({ payload }) {
 
 function* onDeleteBlog({ payload }) {
   try {
+    yield put(blogActions.actionStarted());
     const data = yield call(deleteBlog, payload);
+    yield put(blogActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -79,6 +93,7 @@ function* onDeleteBlog({ payload }) {
     }
     yield put(blogActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(blogActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -87,7 +102,9 @@ function* onDeleteBlog({ payload }) {
 
 function* onDeleteReview({ payload }) {
   try {
+    yield put(blogActions.actionStarted());
     const data = yield call(deleteReview, payload);
+    yield put(blogActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -97,6 +114,7 @@ function* onDeleteReview({ payload }) {
     }
     yield put(blogActions.fetchReviews(dumpBody));
   } catch (error) {
+    yield put(blogActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }

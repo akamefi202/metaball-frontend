@@ -34,11 +34,19 @@ export const settingSlice = createSlice({
     fetchOneSucceeded(state, action) {
       state.selected = action.payload.data;
     },
+    actionStarted(state, action) {
+      state.loading = true;
+    },
+    actionEnded(state, action) {
+      state.loading = false;
+    },
   },
 });
 
 // Actions
 export const settingActions = {
+  actionStarted: settingSlice.actions.actionStarted,
+  actionEnded: settingSlice.actions.actionEnded,
   get: createAction(`${settingSlice.name}/get`, (id) => ({
     payload: { id },
   })),

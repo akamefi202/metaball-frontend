@@ -145,6 +145,7 @@
       "service": "Service"
     },
     "blogPage": {
+      "blog": "Blog",
       "numberOfTheme": "Number of Themes",
       "content": "Content",
       "review": "Review/Comment",

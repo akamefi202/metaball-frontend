@@ -22,11 +22,14 @@ const dumpBody = {
 // Worker Sagas
 export function* onGetMember({ payload }) {
   try {
+    yield put(memberActions.actionStarted());
     const data = yield call(getMember, payload);
+    yield put(memberActions.actionEnded());
     if (data.status) {
       yield put(memberActions.fetchOneSucceeded(data));
     }
   } catch (error) {
+    yield put(memberActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -35,9 +38,12 @@ export function* onGetMember({ payload }) {
 
 export function* onGetMembers({ payload }) {
   try {
+    yield put(memberActions.actionStarted());
     const response = yield call(getMembers, payload);
+    yield put(memberActions.actionEnded());
     yield put(memberActions.fetchAllSucceeded(response));
   } catch (error) {
+    yield put(memberActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -46,7 +52,9 @@ export function* onGetMembers({ payload }) {
 
 function* onCreateMember({ payload }) {
   try {
+    yield put(memberActions.actionStarted());
     const data = yield call(createMember, payload);
+    yield put(memberActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -56,6 +64,7 @@ function* onCreateMember({ payload }) {
     }
     yield put(memberActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(memberActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -64,7 +73,9 @@ function* onCreateMember({ payload }) {
 
 function* onUpdateMember({ payload }) {
   try {
+    yield put(memberActions.actionStarted());
     const data = yield call(updateMember, payload);
+    yield put(memberActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -74,6 +85,7 @@ function* onUpdateMember({ payload }) {
     }
     yield put(memberActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(memberActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -82,7 +94,9 @@ function* onUpdateMember({ payload }) {
 
 function* onDeleteMember({ payload }) {
   try {
+    yield put(memberActions.actionStarted());
     const data = yield call(deleteMember, payload);
+    yield put(memberActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -92,6 +106,7 @@ function* onDeleteMember({ payload }) {
     }
     yield put(memberActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(memberActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }

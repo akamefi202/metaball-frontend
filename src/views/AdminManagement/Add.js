@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Container,
   Row,
@@ -19,6 +19,8 @@ import { useTranslation } from "react-i18next";
 import { useAdminService } from "features/admin/hooks/useAdminService";
 import Header from "components/Headers/Header";
 import useAlert from "features/alert/hook/useAlert";
+import { useSelector } from "react-redux";
+import { LoadingComponent } from "components/Loading";
 
 const AdminAdd = () => {
   const navigate = useNavigate();
@@ -42,7 +44,15 @@ const AdminAdd = () => {
     createAdmin({ email: email, password: password });
   };
 
-  useEffect(() => {}, []);
+  const { loading } = useSelector((state) => state.admin);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

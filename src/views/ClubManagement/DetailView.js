@@ -20,11 +20,12 @@ import { useSelector } from "react-redux";
 import UserHeader from "components/Headers/UserHeader";
 import { API_BASE_URL } from "config";
 import useClubService from "features/club/hooks/useClubService";
+import { LoadingComponent } from "components/Loading";
 
 const ClubDetailView = () => {
   const navigate = useNavigate();
   const { getClub } = useClubService();
-  const { selected } = useSelector((state) => state.club);
+  const { selected, loading } = useSelector((state) => state.club);
   const [selectedUser, setSelectedUser] = useState({});
   const [selectedLocation, setSelectedLocation] = useState({});
   const { id } = useParams();
@@ -58,6 +59,13 @@ const ClubDetailView = () => {
     }
   }, [selected]);
 
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
   return (
     <>
       <UserHeader />

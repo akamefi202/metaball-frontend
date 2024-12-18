@@ -20,11 +20,12 @@ import { useSelector } from "react-redux";
 import UserHeader from "components/Headers/UserHeader";
 import { API_BASE_URL } from "config";
 import useRoundingService from "features/rounding/hooks/useRoundingService";
+import { LoadingComponent } from "components/Loading";
 
 const RoundingDetailView = () => {
   const navigate = useNavigate();
   const { getRounding } = useRoundingService();
-  const { selected } = useSelector((state) => state.rounding);
+  const { selected, loading } = useSelector((state) => state.rounding);
   const [selectedUser, setSelectedUser] = useState({});
   const { id } = useParams();
   // Language translation
@@ -55,6 +56,14 @@ const RoundingDetailView = () => {
       setSelectedUser(selected.user);
     }
   }, [selected]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

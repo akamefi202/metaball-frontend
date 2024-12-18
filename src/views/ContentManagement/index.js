@@ -34,6 +34,7 @@ import { API_BASE_URL } from "config";
 import { useContentService } from "features/content/hooks/useContentService";
 import { ContentDetailModal } from "./DetailView";
 import useAlert from "features/alert/hook/useAlert";
+import { LoadingComponent } from "components/Loading";
 
 const ContentManagement = () => {
   const navigate = useNavigate();
@@ -118,7 +119,11 @@ const ContentManagement = () => {
   }, [content]);
 
   if (loading) {
-    return <></>;
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
   }
 
   return (

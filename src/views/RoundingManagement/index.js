@@ -35,11 +35,12 @@ import { TABLE_PAGE_LIMIT } from "config";
 import Header from "components/Headers/Header.js";
 import useAlert from "features/alert/hook/useAlert";
 import { getFormatString } from "libs/utils";
+import { LoadingComponent } from "components/Loading";
 
 const RoundingManagement = () => {
   const navigate = useNavigate();
   const { fetchAllRoundings, deleteRounding } = useRoundingService();
-  const { rounding, count } = useSelector((state) => state.rounding);
+  const { rounding, count, loading } = useSelector((state) => state.rounding);
   const { t } = useTranslation();
   const { showErrorAlert } = useAlert();
   const [roundings, setRoundings] = useState([]);
@@ -98,6 +99,14 @@ const RoundingManagement = () => {
       setRoundings(rounding);
     }
   }, [rounding]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

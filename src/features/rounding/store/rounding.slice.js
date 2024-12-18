@@ -21,11 +21,19 @@ export const roundingSlice = createSlice({
     fetchOneSucceeded(state, action) {
       state.selected = action.payload.data;
     },
+    actionStarted(state, action) {
+      state.loading = true;
+    },
+    actionEnded(state, action) {
+      state.loading = false;
+    },
   },
 });
 
 // Actions
 export const roundingActions = {
+  actionStarted: roundingSlice.actions.actionStarted,
+  actionEnded: roundingSlice.actions.actionEnded,
   get: createAction(`${roundingSlice.name}/get`, (id) => ({
     payload: { id },
   })),

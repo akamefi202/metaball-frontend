@@ -27,11 +27,19 @@ export const blogSlice = createSlice({
       state.review = action.payload.data.reviews;
       state.reviewCount = action.payload.data.count;
     },
+    actionStarted(state, action) {
+      state.loading = true;
+    },
+    actionEnded(state, action) {
+      state.loading = false;
+    },
   },
 });
 
 // Actions
 export const blogActions = {
+  actionStarted: blogSlice.actions.actionStarted,
+  actionEnded: blogSlice.actions.actionEnded,
   get: createAction(`${blogSlice.name}/get`, (id) => ({
     payload: { id },
   })),

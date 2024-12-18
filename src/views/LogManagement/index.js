@@ -27,6 +27,7 @@ import { TABLE_PAGE_LIMIT_LARGE } from "config";
 import Header from "components/Headers/Header.js";
 import useSyslogService from "features/syslog/hooks/useSyslogService";
 import { getFormatString } from "libs/utils";
+import { LoadingComponent } from "components/Loading";
 
 const LogManagement = () => {
   // const navigate = useNavigate();
@@ -70,7 +71,11 @@ const LogManagement = () => {
   }, [syslog]);
 
   if (loading) {
-    return <></>;
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
   }
 
   return (

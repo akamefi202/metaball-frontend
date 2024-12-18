@@ -33,6 +33,7 @@ import { API_BASE_URL } from "config";
 import { ServiceDetailModal } from "./DetailView";
 import { useServiceService } from "features/service/hooks/useServiceService";
 import useAlert from "features/alert/hook/useAlert";
+import { LoadingComponent } from "components/Loading";
 
 const ContentManagement = () => {
   const navigate = useNavigate();
@@ -111,7 +112,11 @@ const ContentManagement = () => {
   }, [service]);
 
   if (loading) {
-    return <></>;
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
   }
 
   return (

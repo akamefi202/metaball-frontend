@@ -22,11 +22,19 @@ export const memberSlice = createSlice({
     fetchOneSucceeded(state, action) {
       state.selected = action.payload.data;
     },
+    actionStarted(state, action) {
+      state.loading = true;
+    },
+    actionEnded(state, action) {
+      state.loading = false;
+    },
   },
 });
 
 // Actions
 export const memberActions = {
+  actionStarted: memberSlice.actions.actionStarted,
+  actionEnded: memberSlice.actions.actionEnded,
   get: createAction(`${memberSlice.name}/get`, (id) => ({
     payload: { id },
   })),

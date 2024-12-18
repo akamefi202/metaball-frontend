@@ -23,12 +23,13 @@ import UserHeader from "components/Headers/UserHeader";
 import { API_BASE_URL } from "config";
 import useMessageService from "features/message/hooks/useMessageService";
 import { TABLE_PAGE_LIMIT } from "config";
+import { LoadingComponent } from "components/Loading";
 
 const MessageDetailView = () => {
   const navigate = useNavigate();
   const { getMember } = useMemberService();
   const { fetchUserMessage } = useMessageService();
-  const { selected } = useSelector((state) => state.member);
+  const { selected, loading } = useSelector((state) => state.member);
   const { userMessageData } = useSelector((state) => state.message);
   const { id } = useParams();
   // Language translation
@@ -60,6 +61,14 @@ const MessageDetailView = () => {
       key: keyWord,
     });
   }, [getMember, fetchUserMessage, currentPage]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

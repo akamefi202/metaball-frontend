@@ -21,11 +21,19 @@ export const clubSlice = createSlice({
     fetchOneSucceeded(state, action) {
       state.selected = action.payload.data;
     },
+    actionStarted(state, action) {
+      state.loading = true;
+    },
+    actionEnded(state, action) {
+      state.loading = false;
+    },
   },
 });
 
 // Actions
 export const clubActions = {
+  actionStarted: clubSlice.actions.actionStarted,
+  actionEnded: clubSlice.actions.actionEnded,
   get: createAction(`${clubSlice.name}/get`, (id) => ({
     payload: { id },
   })),

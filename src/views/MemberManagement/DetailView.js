@@ -20,11 +20,12 @@ import { useSelector } from "react-redux";
 import { useMemberService } from "features/member/hooks/useMemberService";
 import UserHeader from "components/Headers/UserHeader";
 import { API_BASE_URL } from "config";
+import { LoadingComponent } from "components/Loading";
 
 const MemberDetailView = () => {
   const navigate = useNavigate();
   const { getMember } = useMemberService();
-  const { selected } = useSelector((state) => state.member);
+  const { selected, loading } = useSelector((state) => state.member);
   const { id } = useParams();
   // Language translation
   const { t } = useTranslation();
@@ -36,6 +37,14 @@ const MemberDetailView = () => {
   useEffect(() => {
     getMember({ id });
   }, [getMember]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

@@ -41,7 +41,6 @@ const RedirectToLastVisitedPage = () => {
     // Get the last visited route from localStorage
     const lastVisitedRoute = localStorage.getItem("lastVisitedRoute");
     if (lastVisitedRoute) {
-      console.info({ lastVisitedRoute });
       navigate(lastVisitedRoute, { replace: true }); // Navigate to the last visited route
     }
   }, [navigate]);
@@ -58,6 +57,7 @@ const Admin = (props) => {
   const { loading, error, data } = useSelector((state) => state.auth);
   const { verifyToken } = useAuthService();
   const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChangeCurrentLocation = (location) => {
     setCurrentLocation(location.pathname);
@@ -79,6 +79,10 @@ const Admin = (props) => {
       setIsLogin(false);
     }
   }, [verifyToken]);
+
+  useEffect(() => {
+    setIsLoading(loading);
+  }, [loading]);
 
   const getRoutes = useCallback(
     (routes) => {
@@ -111,21 +115,27 @@ const Admin = (props) => {
     [isLogin, currentLocation]
   );
 
-  console.info(currentLocation);
-
   // useEffect(() => {
   //   document.documentElement.scrollTop = 0;
   //   document.scrollingElement.scrollTop = 0;
   //   mainContent.current.scrollTop = 0;
   // }, [location]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <>
         <LoadingComponent />
       </>
     );
   }
+  //     <>
+  //       <LoadingComponent />
+  //     </>
+  // if (loadingAdmin) {
+  //   return (
+
+  //   );
+  // }
 
   const getBrandText = (location) => {
     for (let i = 0; i < routes.length; i++) {
@@ -138,34 +148,41 @@ const Admin = (props) => {
 
   return (
     <>
-      <BrowserRouter>
-        <RouteChangeTracker
-          onChangeBrandText={getBrandText}
-          onChangeCurrentLocation={onChangeCurrentLocation}
-        />
-        {/* <RedirectToLastVisitedPage /> */}
-        {/* {!isLogin && <Navigate to={"/login"} />} */}
-        {isLogin && (
-          <Sidebar
-            {...props}
-            routes={routes}
-            logo={{
-              innerLink: "/admin/index",
-              imgSrc: require("../assets/img/ic_launcher.png"),
-              imgAlt: "...",
-            }}
+      {!isLoading ? (
+        <BrowserRouter>
+          <RouteChangeTracker
+            onChangeBrandText={getBrandText}
+            onChangeCurrentLocation={onChangeCurrentLocation}
           />
-        )}
-        <div className="main-content" ref={mainContent}>
-          {isLogin && <AdminNavbar {...props} brandText={brandText} />}
-          <Routes>
-            {getRoutes(routes)}
-            <Route path="/login" element={<Login />} />
-            <Route path="*" element={<Navigate to="/admin/index" replace />} />
-          </Routes>
-          <Container fluid>{/* <AdminFooter /> */}</Container>
-        </div>
-      </BrowserRouter>
+          {/* <RedirectToLastVisitedPage /> */}
+          {/* {!isLogin && <Navigate to={"/login"} />} */}
+          {isLogin && (
+            <Sidebar
+              {...props}
+              routes={routes}
+              logo={{
+                innerLink: "/admin/index",
+                imgSrc: require("../assets/img/ic_launcher.png"),
+                imgAlt: "...",
+              }}
+            />
+          )}
+          <div className="main-content" ref={mainContent}>
+            {isLogin && <AdminNavbar {...props} brandText={brandText} />}
+            <Routes>
+              {getRoutes(routes)}
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="*"
+                element={<Navigate to="/admin/index" replace />}
+              />
+            </Routes>
+            <Container fluid>{/* <AdminFooter /> */}</Container>
+          </div>
+        </BrowserRouter>
+      ) : (
+        <LoadingComponent />
+      )}
     </>
   );
 };

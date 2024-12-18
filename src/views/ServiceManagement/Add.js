@@ -20,6 +20,8 @@ import Header from "components/Headers/Header";
 import { ServiceDetailModal } from "./DetailView";
 import { useNavigate, useParams } from "react-router-dom";
 import { useServiceService } from "features/service/hooks/useServiceService";
+import { useSelector } from "react-redux";
+import { LoadingComponent } from "components/Loading";
 const SerivceAdd = () => {
   const [contentTitle, setContentTitle] = useState("");
   const [subType, setSubType] = useState("");
@@ -29,6 +31,7 @@ const SerivceAdd = () => {
   const [contentData, setContentData] = useState("");
   const { createService } = useServiceService();
   const { contentType } = useParams();
+  const { loading } = useSelector((state) => state.service);
   const navigate = useNavigate();
   // Language translation
   const { t } = useTranslation();
@@ -60,6 +63,15 @@ const SerivceAdd = () => {
   const onOpenContentModal = () => {
     setIsOpenModal(true);
   };
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
+
   return (
     <>
       <Header />

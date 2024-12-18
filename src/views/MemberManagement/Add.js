@@ -18,13 +18,15 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMemberService } from "features/member/hooks/useMemberService";
 import Header from "components/Headers/Header";
+import { useSelector } from "react-redux";
+import { LoadingComponent } from "components/Loading";
 
 const MemberAdd = () => {
   const navigate = useNavigate();
   const { createMember } = useMemberService();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const { loading } = useSelector((state) => state.member);
   // Language translation
   const { t } = useTranslation();
 
@@ -36,7 +38,13 @@ const MemberAdd = () => {
     createMember({ email: email, password: password });
   };
 
-  useEffect(() => {}, []);
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

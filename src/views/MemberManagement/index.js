@@ -33,11 +33,12 @@ import { TABLE_PAGE_LIMIT } from "config";
 // core components
 import Header from "components/Headers/Header.js";
 import useAlert from "features/alert/hook/useAlert";
+import { LoadingComponent } from "components/Loading";
 
 const MemberManagement = () => {
   const navigate = useNavigate();
   const { fetchAllMembers, deleteMember } = useMemberService();
-  const { member, count } = useSelector((state) => state.member);
+  const { member, count, loading } = useSelector((state) => state.member);
   const { t } = useTranslation();
   const { showErrorAlert } = useAlert();
   const [members, setMembers] = useState([]);
@@ -91,6 +92,14 @@ const MemberManagement = () => {
       setMembers(member);
     }
   }, [member]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

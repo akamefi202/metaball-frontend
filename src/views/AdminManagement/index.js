@@ -33,6 +33,7 @@ import { useAdminService } from "features/admin/hooks/useAdminService";
 import { TABLE_PAGE_LIMIT } from "config";
 import Header from "components/Headers/Header.js";
 import useAlert from "features/alert/hook/useAlert";
+import { LoadingComponent } from "components/Loading";
 
 const AdminManagement = () => {
   const navigate = useNavigate();
@@ -107,7 +108,11 @@ const AdminManagement = () => {
   }, [admin]);
 
   if (loading) {
-    return <></>;
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
   }
 
   return (

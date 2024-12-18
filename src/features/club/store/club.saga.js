@@ -22,11 +22,14 @@ const dumpBody = {
 // Worker Sagas
 export function* onGetClub({ payload }) {
   try {
+    yield put(clubActions.actionStarted());
     const data = yield call(getClub, payload);
+    yield put(clubActions.actionEnded());
     if (data.status) {
       yield put(clubActions.fetchOneSucceeded(data));
     }
   } catch (error) {
+    yield put(clubActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -35,9 +38,12 @@ export function* onGetClub({ payload }) {
 
 export function* onGetClubs({ payload }) {
   try {
+    yield put(clubActions.actionStarted());
     const data = yield call(getClubs, payload);
+    yield put(clubActions.actionEnded());
     yield put(clubActions.fetchAllSucceeded(data));
   } catch (error) {
+    yield put(clubActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -46,9 +52,12 @@ export function* onGetClubs({ payload }) {
 
 function* onCreateClub({ payload }) {
   try {
+    yield put(clubActions.actionStarted());
     yield call(createClub, payload);
+    yield put(clubActions.actionEnded());
     yield put(clubActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(clubActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -57,9 +66,12 @@ function* onCreateClub({ payload }) {
 
 function* onUpdateClub({ payload }) {
   try {
+    yield put(clubActions.actionStarted());
     yield call(updateClub, payload);
+    yield put(clubActions.actionEnded());
     yield put(clubActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(clubActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -68,7 +80,9 @@ function* onUpdateClub({ payload }) {
 
 function* onDeleteClub({ payload }) {
   try {
+    yield put(clubActions.actionStarted());
     const data = yield call(deleteClub, payload);
+    yield put(clubActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -78,6 +92,7 @@ function* onDeleteClub({ payload }) {
     }
     yield put(clubActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(clubActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }

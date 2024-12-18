@@ -22,6 +22,7 @@ import { ContentDetailModal } from "./DetailView";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { API_BASE_URL } from "config";
+import { LoadingComponent } from "components/Loading";
 
 const ContentUpdate = () => {
   const [contentTitle, setContentTitle] = useState("");
@@ -32,7 +33,9 @@ const ContentUpdate = () => {
   const [picturesUri, setPicturesURI] = useState([]);
   const [contentData, setContentData] = useState("");
   const { get: getContent, updateContent } = useContentService();
-  const { selected: selectedContent } = useSelector((state) => state.content);
+  const { selected: selectedContent, loading } = useSelector(
+    (state) => state.content
+  );
   const { contentType, id } = useParams();
   const navigate = useNavigate();
   // Language translation
@@ -76,6 +79,14 @@ const ContentUpdate = () => {
       setContentData(selectedContent.html);
     }
   }, [selectedContent]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>
