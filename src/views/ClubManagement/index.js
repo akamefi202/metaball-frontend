@@ -34,11 +34,12 @@ import { TABLE_PAGE_LIMIT } from "config";
 // core components
 import Header from "components/Headers/Header.js";
 import useAlert from "features/alert/hook/useAlert";
+import { LoadingComponent } from "components/Loading";
 
 const ClubManagement = () => {
   const navigate = useNavigate();
   const { fetchAllClubs, deleteClub } = useClubService();
-  const { club, count } = useSelector((state) => state.club);
+  const { club, count, loading } = useSelector((state) => state.club);
   const { t } = useTranslation();
   const { showErrorAlert } = useAlert();
   const [clubs, setClubs] = useState([]);
@@ -93,6 +94,14 @@ const ClubManagement = () => {
       setClubs(club);
     }
   }, [club]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

@@ -22,11 +22,19 @@ export const adminSlice = createSlice({
     fetchOneSucceeded(state, action) {
       state.selected = action.payload.data;
     },
+    actionStarted(state, action) {
+      state.loading = true;
+    },
+    actionEnded(state, action) {
+      state.loading = false;
+    },
   },
 });
 
 // Actions
 export const adminActions = {
+  actionStarted: adminSlice.actions.actionStarted,
+  actionEnded: adminSlice.actions.actionEnded,
   get: createAction(`${adminSlice.name}/get`, (id) => ({
     payload: { id },
   })),

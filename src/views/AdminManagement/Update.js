@@ -20,11 +20,12 @@ import { useSelector } from "react-redux";
 import { useAdminService } from "features/admin/hooks/useAdminService";
 import Header from "components/Headers/Header";
 import useAlert from "features/alert/hook/useAlert";
+import { LoadingComponent } from "components/Loading";
 
 const AdminUpdate = () => {
   const navigate = useNavigate();
   const { updateAdmin, getAdmin } = useAdminService();
-  const { selected } = useSelector((state) => state.admin);
+  const { selected, loading } = useSelector((state) => state.admin);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -52,6 +53,14 @@ const AdminUpdate = () => {
   useEffect(() => {
     setEmail(selected.email);
   }, [selected]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

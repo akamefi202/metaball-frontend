@@ -2,11 +2,21 @@ import { call, put, takeEvery } from "redux-saga/effects";
 
 import { getSyslog } from "features/syslog/api";
 import { syslogActions } from "features/syslog/store/syslog.slice";
+import { authActions } from "features/auth/store/auth.slice";
 
 // Worker Sagas
 export function* onGetSyslogs({ payload }) {
-  const data = yield call(getSyslog, payload);
-  yield put(syslogActions.fetchAllSyslogs(data));
+  try {
+    yield put(syslogActions.actionStarted());
+    const data = yield call(getSyslog, payload);
+    yield put(syslogActions.actionEnded());
+    yield put(syslogActions.fetchAllSyslogs(data));
+  } catch (error) {
+    yield put(syslogActions.actionEnded());
+    if (error.status === 401) {
+      yield put(authActions.logout(error));
+    }
+  }
 }
 
 // Watcher Saga

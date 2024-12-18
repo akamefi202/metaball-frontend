@@ -35,11 +35,12 @@ import Header from "components/Headers/Header.js";
 import useBlogService from "features/blog/hooks/useBlogService";
 import { API_BASE_URL } from "config";
 import useAlert from "features/alert/hook/useAlert";
+import { LoadingComponent } from "components/Loading";
 
 const BlogManagement = () => {
   const navigate = useNavigate();
   const { fetchAllBlogs, deleteBlog } = useBlogService();
-  const { blog, count } = useSelector((state) => state.blog);
+  const { blog, count, loading } = useSelector((state) => state.blog);
   const { t } = useTranslation();
   const { showErrorAlert } = useAlert();
   const [blogs, setBlogs] = useState([]);
@@ -95,6 +96,14 @@ const BlogManagement = () => {
     }
   }, [blog]);
 
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
+
   return (
     <>
       <Header />
@@ -105,7 +114,7 @@ const BlogManagement = () => {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0 d-flex justify-content-between align-items-center">
-                <h3 className="mb-0">{t("memberPage.user")}</h3>
+                <h3 className="mb-0">{t("blogPage.blog")}</h3>
                 <div className="d-flex align-items-center">
                   <FormGroup className="mb-0 mr-2">
                     <InputGroup className="input-group-alternative">

@@ -22,6 +22,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { API_BASE_URL } from "config";
 import { useServiceService } from "features/service/hooks/useServiceService";
+import { LoadingComponent } from "components/Loading";
 
 const ServiceUpdate = () => {
   const [contentTitle, setContentTitle] = useState("");
@@ -32,7 +33,9 @@ const ServiceUpdate = () => {
   const [picturesUri, setPicturesURI] = useState([]);
   const [contentData, setContentData] = useState("");
   const { get: getService, updateService } = useServiceService();
-  const { selected: selectedContent } = useSelector((state) => state.service);
+  const { selected: selectedContent, loading } = useSelector(
+    (state) => state.service
+  );
   const { contentType, id } = useParams();
   const navigate = useNavigate();
   // Language translation
@@ -76,6 +79,14 @@ const ServiceUpdate = () => {
       setContentData(selectedContent.html);
     }
   }, [selectedContent]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>
@@ -155,7 +166,7 @@ const ServiceUpdate = () => {
             </Row>
             <Row className="justify-content-end mt-4">
               <Button color="primary" type="button" onClick={() => onUpdate()}>
-                {t("common.add")}
+                {t("common.edit")}
               </Button>
               <Button
                 color="secondary"

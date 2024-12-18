@@ -22,11 +22,12 @@ import UserHeader from "components/Headers/UserHeader";
 import useClubService from "features/club/hooks/useClubService";
 import useMessageService from "features/message/hooks/useMessageService";
 import { TABLE_PAGE_LIMIT } from "config";
+import { LoadingComponent } from "components/Loading";
 const MessageDetailView = () => {
   const navigate = useNavigate();
   const { getClub } = useClubService();
   const { fetchClubMessage } = useMessageService();
-  const { selected } = useSelector((state) => state.club);
+  const { selected, loading } = useSelector((state) => state.club);
   const { clubMessagedata } = useSelector((state) => state.message);
   const [selectedUser, setSelectedUser] = useState({});
   const [selectedLocation, setSelectedLocation] = useState({});
@@ -54,6 +55,14 @@ const MessageDetailView = () => {
       setSelectedLocation(selected.location);
     }
   }, [selected]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

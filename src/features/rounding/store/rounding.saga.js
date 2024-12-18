@@ -24,11 +24,14 @@ const dumpBody = {
 // Worker Sagas
 export function* onGetRounding({ payload }) {
   try {
+    yield put(roundingActions.actionStarted());
     const data = yield call(getRounding, payload);
+    yield put(roundingActions.actionEnded());
     if (data.status) {
       yield put(roundingActions.fetchOneSucceeded(data));
     }
   } catch (error) {
+    yield put(roundingActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -37,9 +40,12 @@ export function* onGetRounding({ payload }) {
 
 export function* onGetRoundings({ payload }) {
   try {
+    yield put(roundingActions.actionStarted());
     const data = yield call(getRoundings, payload);
+    yield put(roundingActions.actionEnded());
     yield put(roundingActions.fetchAllSucceeded(data));
   } catch (error) {
+    yield put(roundingActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -48,9 +54,12 @@ export function* onGetRoundings({ payload }) {
 
 function* onCreateRounding({ payload }) {
   try {
+    yield put(roundingActions.actionStarted());
     yield call(createRounding, payload);
+    yield put(roundingActions.actionEnded());
     yield put(roundingActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(roundingActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -59,9 +68,12 @@ function* onCreateRounding({ payload }) {
 
 function* onUpdateRounding({ payload }) {
   try {
+    yield put(roundingActions.actionStarted());
     yield call(updateRounding, payload);
+    yield put(roundingActions.actionEnded());
     yield put(roundingActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(roundingActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -70,7 +82,9 @@ function* onUpdateRounding({ payload }) {
 
 function* onDeleteRounding({ payload }) {
   try {
+    yield put(roundingActions.actionStarted());
     const data = yield call(deleteRounding, payload);
+    yield put(roundingActions.actionEnded());
     yield put(roundingActions.fetchAll(dumpBody));
     if (data.status) {
       yield put(
@@ -80,6 +94,7 @@ function* onDeleteRounding({ payload }) {
       yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
     }
   } catch (error) {
+    yield put(roundingActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }

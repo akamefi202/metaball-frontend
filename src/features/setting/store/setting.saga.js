@@ -23,12 +23,15 @@ const dumpBody = {
 // Worker Sagas
 export function* onGetSetting({ payload }) {
   try {
+    yield put(settingActions.actionStarted());
     const data = yield call(getSetting, payload);
+    yield put(settingActions.actionEnded());
     if (data.status) {
       data.type = payload.type;
       yield put(settingActions.fetchOneSucceeded(data));
     }
   } catch (error) {
+    yield put(settingActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -37,10 +40,13 @@ export function* onGetSetting({ payload }) {
 
 export function* onGetSettings({ payload }) {
   try {
+    yield put(settingActions.actionStarted());
     const response = yield call(getSettings, payload);
+    yield put(settingActions.actionEnded());
     response.type = payload.type;
     yield put(settingActions.fetchAllSucceeded(response));
   } catch (error) {
+    yield put(settingActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -49,7 +55,9 @@ export function* onGetSettings({ payload }) {
 
 function* onCreateSetting({ payload }) {
   try {
+    yield put(settingActions.actionStarted());
     const data = yield call(createSetting, payload);
+    yield put(settingActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -60,6 +68,7 @@ function* onCreateSetting({ payload }) {
     dumpBody.type = payload.type;
     yield put(settingActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(settingActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -68,7 +77,9 @@ function* onCreateSetting({ payload }) {
 
 function* onUpdateSetting({ payload }) {
   try {
+    yield put(settingActions.actionStarted());
     const data = yield call(updateSetting, payload);
+    yield put(settingActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -79,6 +90,7 @@ function* onUpdateSetting({ payload }) {
     dumpBody.type = payload.type;
     yield put(settingActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(settingActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -87,7 +99,9 @@ function* onUpdateSetting({ payload }) {
 
 function* onUpdateStatus({ payload }) {
   try {
+    yield put(settingActions.actionStarted());
     const data = yield call(updateStatus, payload);
+    yield put(settingActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -98,6 +112,7 @@ function* onUpdateStatus({ payload }) {
     dumpBody.type = payload.type;
     yield put(settingActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(settingActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -106,7 +121,9 @@ function* onUpdateStatus({ payload }) {
 
 function* onDeleteSetting({ payload }) {
   try {
+    yield put(settingActions.actionStarted());
     const data = yield call(deleteSetting, payload);
+    yield put(settingActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -117,6 +134,7 @@ function* onDeleteSetting({ payload }) {
     dumpBody.type = payload.type;
     yield put(settingActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(settingActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }

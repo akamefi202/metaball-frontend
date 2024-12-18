@@ -34,6 +34,7 @@ import { useSelector } from "react-redux";
 import { API_BASE_URL } from "config";
 import useAlert from "features/alert/hook/useAlert";
 import { SettingType } from "config";
+import { LoadingComponent } from "components/Loading";
 // mode = 0// for view, 1 for add, 2 for update
 const isShowImg = (type) => {
   if (type === SettingType.LOCATION || type === SettingType.THEME) {
@@ -228,7 +229,7 @@ const SettingModal = ({
 
 const SettingManagement = () => {
   const [tabKey, setTabKey] = useState("location");
-  const { setting: settings } = useSelector((state) => state.setting);
+  const { setting: settings, loading } = useSelector((state) => state.setting);
   const [count, setCount] = useState(0);
   const [settingData, setSettingData] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -324,6 +325,14 @@ const SettingManagement = () => {
       type: tabKey,
     });
   }, [fetchAllSettings, tabKey, currentPage]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

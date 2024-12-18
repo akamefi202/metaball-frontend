@@ -25,6 +25,7 @@ import { API_BASE_URL } from "config";
 import useMessageService from "features/message/hooks/useMessageService";
 import { TABLE_PAGE_LIMIT } from "config";
 import useFollowService from "features/following/hooks/useFollowService";
+import { LoadingComponent } from "components/Loading";
 
 const FollowDetailView = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const FollowDetailView = () => {
     fetchRoundFollowing,
     fetchBlogFollowing,
   } = useFollowService();
-  const { selected } = useSelector((state) => state.member);
+  const { selected, loading } = useSelector((state) => state.member);
   const { userMessageData } = useSelector((state) => state.message);
   const { follow } = useSelector((state) => state.follow);
   const [blogFollowing, setBlogFollowing] = useState({});
@@ -122,6 +123,14 @@ const FollowDetailView = () => {
     fetchRoundFollowing,
     fetchBlogFollowing,
   ]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

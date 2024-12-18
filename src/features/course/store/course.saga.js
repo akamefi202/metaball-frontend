@@ -22,11 +22,14 @@ const dumpBody = {
 // Worker Sagas
 export function* onGetCourse({ payload }) {
   try {
+    yield put(courseActions.actionStarted());
     const data = yield call(getCourse, payload);
+    yield put(courseActions.actionEnded());
     if (data.status) {
       yield put(courseActions.fetchOneSucceeded(data));
     }
   } catch (error) {
+    yield put(courseActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -35,9 +38,12 @@ export function* onGetCourse({ payload }) {
 
 export function* onGetCourses({ payload }) {
   try {
+    yield put(courseActions.actionStarted());
     const data = yield call(getCourses, payload);
+    yield put(courseActions.actionEnded());
     yield put(courseActions.fetchAllSucceeded(data));
   } catch (error) {
+    yield put(courseActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -46,7 +52,9 @@ export function* onGetCourses({ payload }) {
 
 function* onCreateCourse({ payload }) {
   try {
+    yield put(courseActions.actionStarted());
     const data = yield call(createCourse, payload);
+    yield put(courseActions.actionEnded());
     yield put(courseActions.fetchAll(dumpBody));
     if (data.status) {
       yield put(
@@ -56,6 +64,7 @@ function* onCreateCourse({ payload }) {
       yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
     }
   } catch (error) {
+    yield put(courseActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -64,8 +73,9 @@ function* onCreateCourse({ payload }) {
 
 function* onUpdateCourse({ payload }) {
   try {
+    yield put(courseActions.actionStarted());
     const data = yield call(updateCourse, payload);
-    yield put(courseActions.fetchAll(dumpBody));
+    yield put(courseActions.actionEnded());
     yield put(courseActions.fetchAll(dumpBody));
     if (data.status) {
       yield put(
@@ -75,6 +85,7 @@ function* onUpdateCourse({ payload }) {
       yield put(showAlert({ type: "error", message: i18n.t("alert.failed") }));
     }
   } catch (error) {
+    yield put(courseActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -83,7 +94,9 @@ function* onUpdateCourse({ payload }) {
 
 function* onDeleteCourse({ payload }) {
   try {
+    yield put(courseActions.actionStarted());
     const data = yield call(deleteCourse, payload);
+    yield put(courseActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -93,6 +106,7 @@ function* onDeleteCourse({ payload }) {
     }
     yield put(courseActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(courseActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }

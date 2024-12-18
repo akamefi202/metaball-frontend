@@ -22,12 +22,15 @@ const dumpBody = {
 // Worker Sagas
 export function* onGetService({ payload }) {
   try {
+    yield put(serviceActions.actionStarted());
     const data = yield call(getService, payload);
+    yield put(serviceActions.actionEnded());
     if (data.status) {
       data.type = payload.type;
       yield put(serviceActions.fetchOneSucceeded(data));
     }
   } catch (error) {
+    yield put(serviceActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -36,10 +39,13 @@ export function* onGetService({ payload }) {
 
 export function* onGetServices({ payload }) {
   try {
+    yield put(serviceActions.actionStarted());
     const data = yield call(getServices, payload);
+    yield put(serviceActions.actionEnded());
     data.type = payload.type;
     yield put(serviceActions.fetchAllSucceeded(data));
   } catch (error) {
+    yield put(serviceActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -48,7 +54,9 @@ export function* onGetServices({ payload }) {
 
 function* onCreateService({ payload }) {
   try {
+    yield put(serviceActions.actionStarted());
     const data = yield call(createService, payload);
+    yield put(serviceActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -59,6 +67,7 @@ function* onCreateService({ payload }) {
     dumpBody.type = payload.type;
     yield put(serviceActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(serviceActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -67,7 +76,9 @@ function* onCreateService({ payload }) {
 
 function* onUpdateService({ payload }) {
   try {
+    yield put(serviceActions.actionStarted());
     const data = yield call(updateService, payload);
+    yield put(serviceActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -78,6 +89,7 @@ function* onUpdateService({ payload }) {
     dumpBody.type = payload.type;
     yield put(serviceActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(serviceActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -86,7 +98,9 @@ function* onUpdateService({ payload }) {
 
 function* onDeleteService({ payload }) {
   try {
+    yield put(serviceActions.actionStarted());
     const data = yield call(deleteService, payload);
+    yield put(serviceActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -97,6 +111,7 @@ function* onDeleteService({ payload }) {
     dumpBody.type = payload.type;
     yield put(serviceActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(serviceActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }

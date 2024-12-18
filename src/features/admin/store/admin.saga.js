@@ -22,11 +22,14 @@ const dumpBody = {
 // Worker Sagas
 export function* onGetAdmin({ payload }) {
   try {
+    yield put(adminActions.actionStarted());
     const data = yield call(getAdmin, payload);
+    yield put(adminActions.actionEnded());
     if (data.status) {
       yield put(adminActions.fetchOneSucceeded(data));
     }
   } catch (error) {
+    yield put(adminActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -35,11 +38,14 @@ export function* onGetAdmin({ payload }) {
 
 export function* onGetAdmins({ payload }) {
   try {
+    yield put(adminActions.actionStarted());
     const data = yield call(getAdmins, payload);
+    yield put(adminActions.actionEnded());
     if (data.status) {
       yield put(adminActions.fetchAllSucceeded(data));
     }
   } catch (error) {
+    yield put(adminActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -48,13 +54,16 @@ export function* onGetAdmins({ payload }) {
 
 function* onCreateAdmin({ payload }) {
   try {
+    yield put(adminActions.actionStarted());
     const data = yield call(createAdmin, payload);
+    yield put(adminActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
       );
       yield put(adminActions.fetchAll(dumpBody));
     } else {
+      yield put(adminActions.actionEnded());
       yield put(
         showAlert({ type: "error", message: i18n.t("alert.admin203") })
       );
@@ -68,7 +77,9 @@ function* onCreateAdmin({ payload }) {
 
 function* onUpdateAdmin({ payload }) {
   try {
+    yield put(adminActions.actionStarted());
     const data = yield call(updateAdmin, payload);
+    yield put(adminActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -78,6 +89,7 @@ function* onUpdateAdmin({ payload }) {
     }
     yield put(adminActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(adminActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }
@@ -86,7 +98,9 @@ function* onUpdateAdmin({ payload }) {
 
 function* onDeleteAdmin({ payload }) {
   try {
+    yield put(adminActions.actionStarted());
     const data = yield call(deleteAdmin, payload);
+    yield put(adminActions.actionEnded());
     if (data.status) {
       yield put(
         showAlert({ type: "success", message: i18n.t("alert.success") })
@@ -96,6 +110,7 @@ function* onDeleteAdmin({ payload }) {
     }
     yield put(adminActions.fetchAll(dumpBody));
   } catch (error) {
+    yield put(adminActions.actionEnded());
     if (error.status === 401) {
       yield put(authActions.logout(error));
     }

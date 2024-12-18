@@ -18,9 +18,11 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import Header from "components/Headers/Header";
 import useAdminService from "features/admin/hooks/useAdminService";
+import { LoadingComponent } from "components/Loading";
 
 const MyPage = () => {
   const { data } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.admin);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [myInfo, setMyInfo] = useState({});
@@ -38,6 +40,14 @@ const MyPage = () => {
       setEmail(data.manager.email);
     }
   }, [data]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

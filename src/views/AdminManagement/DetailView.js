@@ -16,11 +16,12 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useAdminService } from "features/admin/hooks/useAdminService";
 import Header from "components/Headers/Header";
+import { LoadingComponent } from "components/Loading";
 
 const AdminDetailView = () => {
   const navigate = useNavigate();
   const { getAdmin } = useAdminService();
-  const { selected } = useSelector((state) => state.admin);
+  const { selected, loading } = useSelector((state) => state.admin);
   const { id } = useParams();
   // Language translation
   const { t } = useTranslation();
@@ -32,6 +33,14 @@ const AdminDetailView = () => {
   useEffect(() => {
     getAdmin({ id });
   }, [getAdmin]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

@@ -21,11 +21,19 @@ export const courseSlice = createSlice({
     fetchOneSucceeded(state, action) {
       state.selected = action.payload.data;
     },
+    actionStarted(state, action) {
+      state.loading = true;
+    },
+    actionEnded(state, action) {
+      state.loading = false;
+    },
   },
 });
 
 // Actions
 export const courseActions = {
+  actionStarted: courseSlice.actions.actionStarted,
+  actionEnded: courseSlice.actions.actionEnded,
   get: createAction(`${courseSlice.name}/get`, (id) => ({
     payload: { id },
   })),

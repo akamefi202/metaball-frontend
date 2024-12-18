@@ -18,11 +18,19 @@ export const syslogSlice = createSlice({
       state.syslog = action.payload.data.syslogs;
       state.count = action.payload.data.count;
     },
+    actionStarted(state, action) {
+      state.loading = true;
+    },
+    actionEnded(state, action) {
+      state.loading = false;
+    },
   },
 });
 
 // Actions
 export const syslogActions = {
+  actionStarted: syslogSlice.actions.actionStarted,
+  actionEnded: syslogSlice.actions.actionEnded,
   fetchAll: createAction(`${syslogSlice.name}/fetchAll`),
   fetchAllSyslogs: syslogSlice.actions.fetchAllSyslogs,
 };

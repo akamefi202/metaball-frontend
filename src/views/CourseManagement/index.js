@@ -37,6 +37,7 @@ import { TABLE_PAGE_LIMIT } from "config";
 // core components
 import Header from "components/Headers/Header.js";
 import useAlert from "features/alert/hook/useAlert";
+import { LoadingComponent } from "components/Loading";
 
 // mode = 0// for view, 1 for add, 2 for update
 const CourseModal = ({ isOpen, toggle, courseItem = {}, mode = 0 }) => {
@@ -191,7 +192,7 @@ const CourseModal = ({ isOpen, toggle, courseItem = {}, mode = 0 }) => {
 
 const CourseManagement = () => {
   const { fetchAllCourses, deleteCourse } = useCourseService();
-  const { course, count } = useSelector((state) => state.course);
+  const { course, count, loading } = useSelector((state) => state.course);
   const { t } = useTranslation();
   const { showErrorAlert } = useAlert();
   const [courses, setCourses] = useState([]);
@@ -260,6 +261,14 @@ const CourseManagement = () => {
       setCourses(course);
     }
   }, [course]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>

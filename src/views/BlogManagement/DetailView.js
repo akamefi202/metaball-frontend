@@ -27,12 +27,15 @@ import { API_BASE_URL } from "config";
 import useBlogService from "features/blog/hooks/useBlogService";
 import { TABLE_PAGE_LIMIT } from "config";
 import { useSettingService } from "features/setting/hooks/useSettingService";
+import { LoadingComponent } from "components/Loading";
 
 const BlogDetailView = () => {
   const navigate = useNavigate();
   const { getBlog, fetchReviews, deleteReview } = useBlogService();
   const { fetchAllSettings } = useSettingService();
-  const { selected, review, reviewCount } = useSelector((state) => state.blog);
+  const { selected, review, reviewCount, loading } = useSelector(
+    (state) => state.blog
+  );
   const { setting: settings } = useSelector((state) => state.setting);
   const [selectedUser, setSelectedUser] = useState({});
   const [reviewData, setReviewData] = useState([]);
@@ -120,6 +123,14 @@ const BlogDetailView = () => {
       setThemeData(settings.data);
     }
   }, [settings]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingComponent />
+      </>
+    );
+  }
 
   return (
     <>
