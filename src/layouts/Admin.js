@@ -128,14 +128,6 @@ const Admin = (props) => {
       </>
     );
   }
-  //     <>
-  //       <LoadingComponent />
-  //     </>
-  // if (loadingAdmin) {
-  //   return (
-
-  //   );
-  // }
 
   const getBrandText = (location) => {
     for (let i = 0; i < routes.length; i++) {

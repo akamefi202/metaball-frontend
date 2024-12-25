@@ -27,7 +27,7 @@ const ClubDetailView = () => {
   const { getClub } = useClubService();
   const { selected, loading } = useSelector((state) => state.club);
   const [selectedUser, setSelectedUser] = useState({});
-  const [selectedLocation, setSelectedLocation] = useState({});
+  const [moveRange, setMoveRange] = useState("");
   const { id } = useParams();
   // Language translation
   const { t } = useTranslation();
@@ -55,17 +55,18 @@ const ClubDetailView = () => {
   useEffect(() => {
     if (selected.user) {
       setSelectedUser(selected.user);
-      setSelectedLocation(selected.location);
+      setMoveRange(selected.move_range);
     }
   }, [selected]);
 
-  if (loading) {
-    return (
-      <>
-        <LoadingComponent />
-      </>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <>
+  //       <LoadingComponent />
+  //     </>
+  //   );
+  // }
+
   return (
     <>
       <UserHeader />
@@ -125,9 +126,9 @@ const ClubDetailView = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={selected.name}
+                            defaultValue={selected.name ? selected.name : ""}
                             id="input-username"
-                            placeholder={t("common.name")}
+                            placeholder={""}
                             type="text"
                             disabled
                           />
@@ -144,8 +145,10 @@ const ClubDetailView = () => {
                           <Input
                             className="form-control-alternative"
                             id="input-email"
-                            defaultValue={selectedUser.fullname}
-                            placeholder={t("common.email")}
+                            defaultValue={
+                              selectedUser.fullname ? selectedUser.fullname : ""
+                            }
+                            placeholder={""}
                             type="text"
                             disabled
                           />
@@ -164,8 +167,12 @@ const ClubDetailView = () => {
                           <Input
                             className="form-control-alternative"
                             id="input-first-name"
-                            defaultValue={selected.qualification}
-                            placeholder={t("clubPage.qualification")}
+                            defaultValue={
+                              selected.qualification
+                                ? selected.qualification
+                                : ""
+                            }
+                            placeholder={""}
                             type="text"
                             disabled
                           />
@@ -181,9 +188,13 @@ const ClubDetailView = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={selected.member_ids?.length}
+                            defaultValue={
+                              selected.member_ids
+                                ? selected.member_ids?.length
+                                : 0
+                            }
                             id="input-last-name"
-                            placeholder={t("clubPage.members")}
+                            placeholder={""}
                             type="text"
                             disabled
                           />
@@ -200,16 +211,8 @@ const ClubDetailView = () => {
                           className="form-control-label"
                           htmlFor="input-address"
                         >
-                          {t("common.location")} : {selectedLocation?.name}
+                          {t("common.moveRange")} : {moveRange ? moveRange : ""}
                         </label>
-                      </Col>
-                      <Col md="3">
-                        <div>
-                          <img
-                            alt="#"
-                            src={`${API_BASE_URL}/${selectedLocation?.file}`}
-                          />
-                        </div>
                       </Col>
                     </Row>
                     <Row>

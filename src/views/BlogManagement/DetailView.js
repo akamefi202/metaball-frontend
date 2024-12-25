@@ -28,6 +28,7 @@ import useBlogService from "features/blog/hooks/useBlogService";
 import { TABLE_PAGE_LIMIT } from "config";
 import { useSettingService } from "features/setting/hooks/useSettingService";
 import { LoadingComponent } from "components/Loading";
+import { getFileType } from "libs/utils";
 
 const BlogDetailView = () => {
   const navigate = useNavigate();
@@ -120,17 +121,18 @@ const BlogDetailView = () => {
 
   useEffect(() => {
     if (settings && settings.data) {
+      console.info(settings.data);
       setThemeData(settings.data);
     }
   }, [settings]);
 
-  if (loading) {
-    return (
-      <>
-        <LoadingComponent />
-      </>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <>
+  //       <LoadingComponent />
+  //     </>
+  //   );
+  // }
 
   return (
     <>
@@ -271,23 +273,28 @@ const BlogDetailView = () => {
                       justifyContent: "center",
                     }}
                   >
-                    {selected?.files?.map((file, idx) => (
-                      <div
-                        key={"blog-img-" + idx}
-                        style={{
-                          display: "flex",
-                          width: "30%",
-                          height: 250,
-                          padding: "0.5%",
-                        }}
-                      >
-                        <img
-                          alt="#"
-                          src={`${API_BASE_URL}/${file}`}
-                          style={{ width: "100%", objectFit: "cover" }}
-                        />
-                      </div>
-                    ))}
+                    {selected?.files?.map((file, idx) => {
+                      if (getFileType(file) !== "image") {
+                        return null;
+                      }
+                      return (
+                        <div
+                          key={"blog-img-" + idx}
+                          style={{
+                            display: "flex",
+                            width: "30%",
+                            height: 250,
+                            padding: "0.5%",
+                          }}
+                        >
+                          <img
+                            alt="#"
+                            src={`${API_BASE_URL}/${file}`}
+                            style={{ width: "100%", objectFit: "cover" }}
+                          />
+                        </div>
+                      );
+                    })}
                   </div>
                   <hr className="my-4" />
                   {/* Description */}

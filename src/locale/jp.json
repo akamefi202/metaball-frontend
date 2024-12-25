@@ -50,6 +50,7 @@
       "age": "年齢",
       "gender": "性別",
       "location": "場所",
+      "address": "住所",
       "theme": "テーマ",
       "male": "男",
       "female": "女"
@@ -93,7 +94,8 @@
       "to": "To",
       "cancel": "キャンセル",
       "image": "イメージ",
-      "preview": "プレビュー"
+      "preview": "プレビュー",
+      "moveRange": "活動地域"
     },
     "alert": {
       "success": "成功しました。",

@@ -34,13 +34,13 @@ const AdminDetailView = () => {
     getAdmin({ id });
   }, [getAdmin]);
 
-  if (loading) {
-    return (
-      <>
-        <LoadingComponent />
-      </>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <>
+  //       <LoadingComponent />
+  //     </>
+  //   );
+  // }
 
   return (
     <>

@@ -260,6 +260,7 @@ const routes = [
     icon: "ni ni-settings-gear-65 text-yellow",
     component: <CourseManagement />,
     layout: "/admin",
+    isNotInSidebar: true,
   },
   {
     path: "/admin/course_management/detail/:id",

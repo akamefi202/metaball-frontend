@@ -54,13 +54,13 @@ const MemberUpdate = () => {
     setFormData(selected);
   }, [selected]);
 
-  if (loading) {
-    return (
-      <>
-        <LoadingComponent />
-      </>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <>
+  //       <LoadingComponent />
+  //     </>
+  //   );
+  // }
 
   return (
     <>
@@ -88,19 +88,19 @@ const MemberUpdate = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-username"
+                            htmlFor="input-first-name"
                           >
-                            {t("common.nickname")}
+                            {t("common.fullname")}
                           </label>
                           <Input
                             className="form-control-alternative"
+                            id="input-first-name"
+                            name="fullname"
                             onChange={(e) =>
                               onChangeFormData(e.target.name, e.target.value)
                             }
-                            value={formData.nickname}
-                            name="nickname"
-                            id="input-username"
-                            placeholder={t("common.nickname")}
+                            value={formData.fullname}
+                            placeholder={t("common.fullname")}
                             type="text"
                           />
                         </FormGroup>
@@ -134,18 +134,20 @@ const MemberUpdate = () => {
                             className="form-control-label"
                             htmlFor="input-first-name"
                           >
-                            {t("common.fullname")}
+                            {t("common.birthday")}
                           </label>
                           <Input
                             className="form-control-alternative"
                             id="input-first-name"
-                            name="fullname"
+                            name="birthday"
                             onChange={(e) =>
                               onChangeFormData(e.target.name, e.target.value)
                             }
-                            value={formData.fullname}
-                            placeholder={t("common.fullname")}
-                            type="text"
+                            value={moment(new Date(formData.birthday)).format(
+                              "YYYY-MM-DD"
+                            )}
+                            placeholder={t("common.birthday")}
+                            type="date"
                           />
                         </FormGroup>
                       </Col>
@@ -167,31 +169,6 @@ const MemberUpdate = () => {
                             name="occupation"
                             placeholder={t("memberPage.occupation")}
                             type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-first-name"
-                          >
-                            {t("common.birthday")}
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="input-first-name"
-                            name="birthday"
-                            onChange={(e) =>
-                              onChangeFormData(e.target.name, e.target.value)
-                            }
-                            value={moment(new Date(formData.birthday)).format(
-                              "YYYY-MM-DD"
-                            )}
-                            placeholder={t("common.birthday")}
-                            type="date"
                           />
                         </FormGroup>
                       </Col>
