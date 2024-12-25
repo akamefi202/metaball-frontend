@@ -41,13 +41,13 @@ const MyPage = () => {
     }
   }, [data]);
 
-  if (loading) {
-    return (
-      <>
-        <LoadingComponent />
-      </>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <>
+  //       <LoadingComponent />
+  //     </>
+  //   );
+  // }
 
   return (
     <>

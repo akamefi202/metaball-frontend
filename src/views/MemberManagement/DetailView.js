@@ -38,13 +38,13 @@ const MemberDetailView = () => {
     getMember({ id });
   }, [getMember]);
 
-  if (loading) {
-    return (
-      <>
-        <LoadingComponent />
-      </>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <>
+  //       <LoadingComponent />
+  //     </>
+  //   );
+  // }
 
   return (
     <>
@@ -181,24 +181,6 @@ const MemberDetailView = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-username"
-                          >
-                            {t("common.nickname")}
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue={selected.nickname}
-                            id="input-username"
-                            placeholder={t("common.nickname")}
-                            type="text"
-                            disabled
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
                             htmlFor="input-email"
                           >
                             {t("common.email")}
@@ -207,14 +189,12 @@ const MemberDetailView = () => {
                             className="form-control-alternative"
                             id="input-email"
                             defaultValue={selected.email}
-                            placeholder={t("common.email")}
+                            placeholder={""}
                             type="email"
                             disabled
                           />
                         </FormGroup>
                       </Col>
-                    </Row>
-                    <Row>
                       <Col lg="6">
                         <FormGroup>
                           <label
@@ -227,12 +207,14 @@ const MemberDetailView = () => {
                             className="form-control-alternative"
                             id="input-first-name"
                             defaultValue={selected.fullname}
-                            placeholder={t("common.fullname")}
+                            placeholder={""}
                             type="text"
                             disabled
                           />
                         </FormGroup>
                       </Col>
+                    </Row>
+                    <Row>
                       <Col lg="6">
                         <FormGroup>
                           <label
@@ -245,7 +227,7 @@ const MemberDetailView = () => {
                             className="form-control-alternative"
                             defaultValue={selected.occupation}
                             id="input-last-name"
-                            placeholder={t("memberPage.occupation")}
+                            placeholder={""}
                             type="text"
                             disabled
                           />
@@ -272,7 +254,7 @@ const MemberDetailView = () => {
                             className="form-control-alternative"
                             defaultValue={selected.address}
                             id="input-address"
-                            placeholder={t("common.address")}
+                            placeholder={""}
                             type="text"
                             disabled
                           />
@@ -292,7 +274,7 @@ const MemberDetailView = () => {
                             className="form-control-alternative"
                             defaultValue={selected.phone}
                             id="input-city"
-                            placeholder={t("common.phone")}
+                            placeholder={""}
                             type="text"
                             disabled
                           />
@@ -310,7 +292,7 @@ const MemberDetailView = () => {
                       <label></label>
                       <Input
                         className="form-control-alternative"
-                        placeholder={t("memberPage.introduction")}
+                        placeholder={""}
                         rows="4"
                         defaultValue={selected.introduction}
                         type="textarea"

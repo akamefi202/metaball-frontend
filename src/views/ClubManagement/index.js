@@ -81,6 +81,100 @@ const ClubManagement = () => {
     setCurrentPage(1);
   };
 
+  // Pagination
+
+  const [pageItem, SetPageItem] = useState({
+    start: 0,
+    end: TABLE_PAGE_LIMIT,
+  });
+
+  const onPageChangeEvent = (start, end) => {
+    SetPageItem({
+      start: start,
+      end: end,
+    });
+  };
+
+  // const OnPerPostChangeEvent = (e) => {
+  //   SetPostPerPage(e.target.value);
+  //   setCurrentPage(1);
+  // };
+
+  const numOfPages = Math.ceil(count / TABLE_PAGE_LIMIT);
+
+  const numOfButtons = [];
+  for (let i = 1; i <= numOfPages; i++) {
+    numOfButtons.push(i);
+  }
+
+  const prevPageClick = () => {
+    if (currentPage === 1) {
+      setCurrentPage(currentPage);
+    } else {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const nextPageClick = () => {
+    if (currentPage === numOfButtons.length) {
+      setCurrentPage(currentPage);
+    } else {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const [arrOfCurrButtons, setArrOfCurrButtons] = useState([]);
+
+  useEffect(() => {
+    let tempNumberOfButtons = [...arrOfCurrButtons];
+
+    let dotsInitial = "...";
+    let dotsLeft = "... ";
+    let dotsRight = " ...";
+
+    if (numOfButtons.length < 6) {
+      tempNumberOfButtons = numOfButtons;
+    } else if (currentPage >= 1 && currentPage <= 3) {
+      tempNumberOfButtons = [1, 2, 3, 4, dotsInitial, numOfButtons.length];
+    } else if (currentPage === 4) {
+      const sliced = numOfButtons.slice(0, 5);
+      tempNumberOfButtons = [...sliced, dotsInitial, numOfButtons.length];
+    } else if (currentPage > 4 && currentPage < numOfButtons.length - 2) {
+      // from 5 to 8 -> (10 - 2)
+      const sliced1 = numOfButtons.slice(currentPage - 2, currentPage);
+      // sliced1 (5-2, 5) -> [4,5]
+      const sliced2 = numOfButtons.slice(currentPage, currentPage + 1);
+      // sliced1 (5, 5+1) -> [6]
+      tempNumberOfButtons = [
+        1,
+        dotsLeft,
+        ...sliced1,
+        ...sliced2,
+        dotsRight,
+        numOfButtons.length,
+      ];
+      // [1, '...', 4, 5, 6, '...', 10]
+    } else if (currentPage > numOfButtons.length - 3) {
+      // > 7
+      const sliced = numOfButtons.slice(numOfButtons.length - 4);
+      // slice(10-4)
+      tempNumberOfButtons = [1, dotsLeft, ...sliced];
+    } else if (currentPage === dotsInitial) {
+      // [1, 2, 3, 4, "...", 10].length = 6 - 3  = 3
+      // arrOfCurrButtons[3] = 4 + 1 = 5
+      // or
+      // [1, 2, 3, 4, 5, "...", 10].length = 7 - 3 = 4
+      // [1, 2, 3, 4, 5, "...", 10][4] = 5 + 1 = 6
+      setCurrentPage(arrOfCurrButtons[arrOfCurrButtons.length - 3] + 1);
+    } else if (currentPage === dotsRight) {
+      setCurrentPage(arrOfCurrButtons[3] + 2);
+    } else if (currentPage === dotsLeft) {
+      setCurrentPage(arrOfCurrButtons[3] - 2);
+    }
+
+    setArrOfCurrButtons(tempNumberOfButtons);
+  }, [currentPage, TABLE_PAGE_LIMIT, numOfPages]);
+
   useEffect(() => {
     fetchAllClubs({
       limit: TABLE_PAGE_LIMIT,
@@ -95,13 +189,13 @@ const ClubManagement = () => {
     }
   }, [club]);
 
-  if (loading) {
-    return (
-      <>
-        <LoadingComponent />
-      </>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <>
+  //       <LoadingComponent />
+  //     </>
+  //   );
+  // }
 
   return (
     <>
@@ -246,23 +340,28 @@ const ClubManagement = () => {
                     listClassName="justify-content-end mb-0"
                   >
                     <PaginationItem disabled={currentPage === 1}>
-                      <PaginationLink
-                        onClick={() => setCurrentPage(currentPage - 1)}
-                        tabIndex="-1"
-                      >
+                      <PaginationLink onClick={prevPageClick} tabIndex="-1">
                         <i className="fas fa-angle-left" />
                         <span className="sr-only">Previous</span>
                       </PaginationLink>
                     </PaginationItem>
-                    <PaginationItem className="active">
-                      <PaginationLink>{currentPage}</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem
-                      disabled={currentPage > count / TABLE_PAGE_LIMIT}
-                    >
-                      <PaginationLink
-                        onClick={() => setCurrentPage(currentPage + 1)}
-                      >
+                    {arrOfCurrButtons.map((data, index) => {
+                      return (
+                        <PaginationItem
+                          key={index}
+                          className={currentPage === data ? "active" : ""}
+                        >
+                          <PaginationLink
+                            className="dt-link"
+                            onClick={() => setCurrentPage(data)}
+                          >
+                            {data}
+                          </PaginationLink>
+                        </PaginationItem>
+                      );
+                    })}
+                    <PaginationItem disabled={currentPage > numOfPages}>
+                      <PaginationLink onClick={nextPageClick}>
                         <i className="fas fa-angle-right" />
                         <span className="sr-only">Next</span>
                       </PaginationLink>

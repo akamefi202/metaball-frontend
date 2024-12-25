@@ -46,13 +46,13 @@ const AdminAdd = () => {
 
   const { loading } = useSelector((state) => state.admin);
 
-  if (loading) {
-    return (
-      <>
-        <LoadingComponent />
-      </>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <>
+  //       <LoadingComponent />
+  //     </>
+  //   );
+  // }
 
   return (
     <>

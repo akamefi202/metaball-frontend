@@ -58,8 +58,8 @@ const makeStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({ thunk: false, serializableCheck: false })
         .concat(sagaMiddleware)
-        .concat(routerMiddleware),
-    // .concat(logger),
+        .concat(routerMiddleware)
+        .concat(logger),
   });
 
   sagaMiddleware.run(rootSaga);

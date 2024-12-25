@@ -50,6 +50,7 @@
       "age": "Age",
       "gender": "Gender",
       "location": "Location",
+      "address": "Address",
       "theme": "Theme",
       "male": "Male",
       "female": "Female"
@@ -93,7 +94,8 @@
       "to": "To",
       "cancel": "Cancel",
       "image": "Image",
-      "preview": "Preview"
+      "preview": "Preview",
+      "moveRange": "Move Range"
     },
     "alert": {
       "success": "Success",
