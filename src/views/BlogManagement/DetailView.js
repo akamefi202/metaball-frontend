@@ -426,7 +426,7 @@ const BlogDetailView = () => {
                         style={{ width: "30%", margin: "0.5%" }}
                       >
                         <p>{tmpData?.title}</p>
-                        {tmpData.file && (
+                        {tmpData?.file && (
                           <div
                             style={{ width: 250, height: 250, display: "flex" }}
                           >
