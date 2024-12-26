@@ -247,6 +247,7 @@ const SettingManagement = () => {
   const { fetchAllSettings, deleteSetting, updateStatus } = useSettingService();
 
   const onChangeTab = (k) => {
+    setKeyword("");
     setTabKey(k);
     setCurrentPage(1);
   };
@@ -310,7 +311,22 @@ const SettingManagement = () => {
   };
 
   const onUpdateStatus = (item) => {
-    updateStatus({ _id: item._id, type: item.type, active: !item.active });
+    if (settingData && settingData.data) {
+      let numOfSelected = 0;
+      for (let i = 0; i < settingData?.data?.length; i++) {
+        if (settingData.data[i].active) {
+          numOfSelected += 1;
+        }
+      }
+      if (numOfSelected >= 2 && !item.active) {
+        showErrorAlert(
+          t("alert.titleError"),
+          t("alert.msgCantSelectMoreThan2")
+        );
+      } else {
+        updateStatus({ _id: item._id, type: item.type, active: !item.active });
+      }
+    }
   };
 
   // Pagination

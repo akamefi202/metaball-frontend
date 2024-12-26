@@ -108,7 +108,8 @@
       "titleError": "エラー",
       "msgErrorPWNotMatch": "パスワードが一致しません。",
       "msgErrorNotSelected": "アイテムは選択されていません。",
-      "msgGolfCourseNameFieldEmpty": "ゴルフコース名を入力してください"
+      "msgGolfCourseNameFieldEmpty": "ゴルフコース名を入力してください",
+      "msgCantSelectMoreThan2": "2つ以上の項目を選択することができません."
     },
     "roundingPage": {
       "address": "住所",

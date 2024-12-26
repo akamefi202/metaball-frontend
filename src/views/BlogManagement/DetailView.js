@@ -121,11 +121,9 @@ const BlogDetailView = () => {
 
   useEffect(() => {
     if (settings && settings.data) {
-      console.info(settings.data);
       setThemeData(settings.data);
     }
   }, [settings]);
-
   // if (loading) {
   //   return (
   //     <>
@@ -177,7 +175,9 @@ const BlogDetailView = () => {
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                       <div>
                         <span className="heading">
-                          {selectedUser.experience_years}
+                          {selectedUser.experience_years
+                            ? selectedUser.experience_years
+                            : 0}
                         </span>
                         <span className="description">
                           {t("memberPage.experience")}
@@ -185,7 +185,9 @@ const BlogDetailView = () => {
                       </div>
                       <div>
                         <span className="heading">
-                          {selectedUser.average_score}
+                          {selectedUser.average_score
+                            ? selectedUser.average_score
+                            : 0}
                         </span>
                         <span className="description">
                           {t("memberPage.averageScore")}
@@ -193,7 +195,9 @@ const BlogDetailView = () => {
                       </div>
                       <div>
                         <span className="heading">
-                          {selectedUser.month_average_score}
+                          {selectedUser.month_average_score
+                            ? selectedUser.month_average_score
+                            : 0}
                         </span>
                         <span className="description">
                           {t("memberPage.monthAverageScore")}
@@ -417,17 +421,22 @@ const BlogDetailView = () => {
                   {selected?.theme_ids?.map((idx, index) => {
                     const tmpData = getThemeItem(idx);
                     return (
-                      <div style={{ width: "30%", margin: "0.5%" }}>
+                      <div
+                        key={"theme-item" + index}
+                        style={{ width: "30%", margin: "0.5%" }}
+                      >
                         <p>{tmpData?.title}</p>
-                        <div
-                          style={{ width: 250, height: 250, display: "flex" }}
-                        >
-                          <img
-                            alt="#"
-                            src={`${API_BASE_URL}/${tmpData?.file}`}
-                            style={{ width: "100%", objectFit: "cover" }}
-                          />
-                        </div>
+                        {tmpData.file && (
+                          <div
+                            style={{ width: 250, height: 250, display: "flex" }}
+                          >
+                            <img
+                              alt="#"
+                              src={`${API_BASE_URL}/${tmpData?.file}`}
+                              style={{ width: "100%", objectFit: "cover" }}
+                            />
+                          </div>
+                        )}
                       </div>
                     );
                   })}

@@ -276,7 +276,6 @@ const MemberManagement = () => {
                         <th scope="col">{t("memberPage.averageScore")}</th>
                         <th scope="col">{t("memberPage.monthAverageScore")}</th>
                         <th scope="col">{t("memberPage.address")}</th>
-                        <th scope="col">{t("memberPage.theme")}</th>
                         <th scope="col" />
                       </tr>
                     </thead>
@@ -307,17 +306,14 @@ const MemberManagement = () => {
                               : ""}
                           </td>
                           <td>{item.sex ? t("memberPage." + item.sex) : ""}</td>
-                          <td>{item.experience}</td>
-                          <td>
-                            {item.average_score ? item.average_score : ""}
-                          </td>
+                          <td>{item.experience ? item.experience : 0}</td>
+                          <td>{item.average_score ? item.average_score : 0}</td>
                           <td>
                             {item.month_average_score
                               ? item.month_average_score
-                              : ""}
+                              : 0}
                           </td>
                           <td>{item.address ? item.address : ""}</td>
-                          <td>{item.theme ? item.theme.join(",") : ""}</td>
                           <td className="text-left">
                             <UncontrolledDropdown>
                               <DropdownToggle

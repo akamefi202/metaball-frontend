@@ -50,6 +50,7 @@ const ContentManagement = () => {
   const { loading, content } = useSelector((state) => state.content);
   const { showErrorAlert } = useAlert();
   const onChangeTab = (k) => {
+    setKeyword("");
     setTabKey(k);
     setCurrentPage(1);
   };
@@ -64,6 +65,7 @@ const ContentManagement = () => {
       limit: TABLE_PAGE_LIMIT,
       skip: (currentPage - 1) * TABLE_PAGE_LIMIT,
       key: keyWord,
+      type: tabKey,
     });
   };
 
@@ -278,6 +280,7 @@ const ContentManagement = () => {
                       <Input
                         placeholder={t("common.searchPlaceholder")}
                         type="text"
+                        value={keyWord}
                         onChange={(e) => setKeyword(e.target.value)}
                       />
                     </InputGroup>

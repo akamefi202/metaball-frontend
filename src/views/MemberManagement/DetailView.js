@@ -89,7 +89,9 @@ const MemberDetailView = () => {
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                       <div>
                         <span className="heading">
-                          {selected.experience_years}
+                          {selected.experience_years
+                            ? selected.experience_years
+                            : 0}
                         </span>
                         <span className="description">
                           {t("memberPage.experience")}
@@ -97,7 +99,7 @@ const MemberDetailView = () => {
                       </div>
                       <div>
                         <span className="heading">
-                          {selected.average_score}
+                          {selected.average_score ? selected.average_score : 0}
                         </span>
                         <span className="description">
                           {t("memberPage.averageScore")}
@@ -105,7 +107,9 @@ const MemberDetailView = () => {
                       </div>
                       <div>
                         <span className="heading">
-                          {selected.month_average_score}
+                          {selected.month_average_score
+                            ? selected.month_average_score
+                            : 0}
                         </span>
                         <span className="description">
                           {t("memberPage.monthAverageScore")}
