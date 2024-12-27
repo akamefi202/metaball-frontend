@@ -22,6 +22,7 @@ import { ContentDetailModal } from "./DetailView";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LoadingComponent } from "components/Loading";
+import { ContentType } from "config";
 
 const ContentAdd = () => {
   const [contentTitle, setContentTitle] = useState("");
@@ -100,22 +101,24 @@ const ContentAdd = () => {
                 </FormGroup>
               </Col>
             </Row>
-            <Row className="align-items-center mb-4">
-              <Col md="2">{t("common.type")}</Col>
-              <Col md="">
-                <FormGroup className="mb-0">
-                  <InputGroup>
-                    <Input
-                      placeholder={t("common.type")}
-                      type="text"
-                      value={subType}
-                      onChange={(e) => setSubType(e.target.value)}
-                      // required
-                    />
-                  </InputGroup>
-                </FormGroup>
-              </Col>
-            </Row>
+            {contentType === ContentType.NEWS && (
+              <Row className="align-items-center mb-4">
+                <Col md="2">{t("common.type")}</Col>
+                <Col md="">
+                  <FormGroup className="mb-0">
+                    <InputGroup>
+                      <Input
+                        placeholder={t("common.type")}
+                        type="text"
+                        value={subType}
+                        onChange={(e) => setSubType(e.target.value)}
+                        // required
+                      />
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+              </Row>
+            )}
 
             <Row className="align-items-center mb-4">
               <Col md="2">{t("common.image")}</Col>

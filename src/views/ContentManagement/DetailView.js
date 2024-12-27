@@ -54,12 +54,12 @@ export const ContentDetailModal = ({
                 {contentItem.title}
               </h3>
             </Row>
-            <Row>
+            <Row className="justify-content-center">
               <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  width: "100%",
+                  width: "80%",
                 }}
               >
                 <img src={contentItem.files} alt="#" />
