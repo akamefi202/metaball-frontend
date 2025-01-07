@@ -20,7 +20,6 @@ import {
   PaginationLink,
   Label,
   CardBody,
-  Form,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -33,27 +32,22 @@ import { useSelector } from "react-redux";
 
 import { TABLE_PAGE_LIMIT } from "config";
 import Header from "components/Headers/Header.js";
-import { ContentType } from "config";
+// import { ContentType } from "config";
 import { API_BASE_URL } from "config";
-import { useContentService } from "features/content/hooks/useContentService";
-import { ContentDetailModal } from "./DetailView";
+import { ServiceDetailModal } from "./DetailView";
+import { useSupportService } from "features/support/hooks/useSupportService";
 import useAlert from "features/alert/hook/useAlert";
 import { LoadingComponent } from "components/Loading";
 
 const ContentManagement = () => {
   const navigate = useNavigate();
-  const [tabKey, setTabKey] = useState(ContentType.NEWS);
+  const [tabKey, setTabKey] = useState("prime");
   const [selected, setSelected] = useState({});
   const [contentData, setContentData] = useState({});
-  const { fetchAllContents, deleteContent, updateStatus } = useContentService();
+  const { fetchAllSupports, deleteSupport } = useSupportService();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const { loading, content } = useSelector((state) => state.content);
+  const { loading, support } = useSelector((state) => state.support);
   const { showErrorAlert } = useAlert();
-  const onChangeTab = (k) => {
-    setKeyword("");
-    setTabKey(k);
-    setCurrentPage(1);
-  };
   // Language translation
   const { t } = useTranslation();
   // Pagination & Search
@@ -61,11 +55,10 @@ const ContentManagement = () => {
   const [keyWord, setKeyword] = useState("");
   const onSearch = () => {
     setCurrentPage(1);
-    fetchAllContents({
+    fetchAllSupports({
       limit: TABLE_PAGE_LIMIT,
       skip: (currentPage - 1) * TABLE_PAGE_LIMIT,
       key: keyWord,
-      type: tabKey,
     });
   };
 
@@ -86,25 +79,22 @@ const ContentManagement = () => {
       showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
       return;
     }
-    deleteContent({ type: tabKey, ids: selectedIds });
+    deleteSupport({ type: tabKey, ids: selectedIds });
     setCurrentPage(1);
   };
   const onDeleteOne = (id) => {
-    deleteContent({ type: tabKey, ids: [id] });
+    deleteSupport({ type: tabKey, ids: [id] });
     setCurrentPage(1);
   };
 
   const onAddContent = () => {
-    navigate(`/admin/content_management/add/${tabKey}`);
+    navigate(`/admin/support_management/add/${tabKey}`);
   };
 
   const onUpdateContent = (id) => {
-    navigate(`/admin/content_management/update/${tabKey}/${id}`);
+    navigate(`/admin/support_management/update/${tabKey}/${id}`);
   };
 
-  const onUpdateStatus = (item) => {
-    updateStatus({ _id: item._id, active: !item.active, type: item.type });
-  };
   // Preview
   const onOpenContentModal = (item) => {
     setSelected(item);
@@ -130,7 +120,7 @@ const ContentManagement = () => {
   //   setCurrentPage(1);
   // };
 
-  const numOfPages = Math.ceil(content.count / TABLE_PAGE_LIMIT);
+  const numOfPages = Math.ceil(support.count / TABLE_PAGE_LIMIT);
 
   const numOfButtons = [];
   for (let i = 1; i <= numOfPages; i++) {
@@ -206,17 +196,18 @@ const ContentManagement = () => {
   }, [currentPage, TABLE_PAGE_LIMIT, numOfPages]);
 
   useEffect(() => {
-    fetchAllContents({
+    fetchAllSupports({
       limit: TABLE_PAGE_LIMIT,
       skip: (currentPage - 1) * TABLE_PAGE_LIMIT,
       key: keyWord,
-      type: tabKey,
     });
-  }, [fetchAllContents, tabKey, currentPage]);
+  }, [fetchAllSupports, tabKey, currentPage]);
 
   useEffect(() => {
-    setContentData(content);
-  }, [content]);
+    console.info(support);
+    setContentData(support);
+    setTabKey("prime");
+  }, [support]);
 
   // if (loading) {
   //   return (
@@ -235,7 +226,7 @@ const ContentManagement = () => {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0 d-flex justify-content-between align-items-center">
-                <FormGroup className="mb-0">
+                {/* <FormGroup className="mb-0">
                   <InputGroup className="align-items-center">
                     <Label for="content_type_select" className="mb-0 mr-4">
                       {t("common.type")}
@@ -254,12 +245,6 @@ const ContentManagement = () => {
                       <option value={ContentType.NEWS}>
                         {t("contentPage.news")}
                       </option>
-                      <option value={ContentType.EVENT}>
-                        {t("contentPage.event")}
-                      </option>
-                      <option value={ContentType.ADVERTISING}>
-                        {t("contentPage.advertising")}
-                      </option>
                       <option value={ContentType.NOTIFICATION}>
                         {t("contentPage.notification")}
                       </option>
@@ -268,7 +253,8 @@ const ContentManagement = () => {
                       </option>
                     </Input>
                   </InputGroup>
-                </FormGroup>
+                </FormGroup> */}
+                <h3>{t("servicePage.support")}</h3>
                 <div className="d-flex align-items-center">
                   <FormGroup className="mb-0 mr-2">
                     <InputGroup className="input-group-alternative">
@@ -280,7 +266,6 @@ const ContentManagement = () => {
                       <Input
                         placeholder={t("common.searchPlaceholder")}
                         type="text"
-                        value={keyWord}
                         onChange={(e) => setKeyword(e.target.value)}
                       />
                     </InputGroup>
@@ -332,7 +317,6 @@ const ContentManagement = () => {
                       <th scope="col">No</th>
                       <th scope="col">{t("settingPage.image")}</th>
                       <th scope="col">{t("common.title")}</th>
-                      <th scope="col">{t("common.status")}</th>
                       <th scope="col" />
                     </tr>
                   </thead>
@@ -355,38 +339,23 @@ const ContentManagement = () => {
                           {(currentPage - 1) * TABLE_PAGE_LIMIT + idx + 1}
                         </td>
                         <td>
-                          <div
-                            style={{
-                              width: "50px",
-                              height: "50px",
-                              display: "flex",
-                            }}
-                          >
-                            {item.file && (
+                          {item.icon && (
+                            <div
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                display: "flex",
+                              }}
+                            >
                               <img
-                                alt="#"
-                                src={`${API_BASE_URL}/${item.file}`}
+                                src={`${API_BASE_URL}/${item.icon}`}
                                 style={{ width: "100%", objectFit: "cover" }}
+                                alt="#"
                               />
-                            )}
-                          </div>
+                            </div>
+                          )}
                         </td>
                         <td>{item.title}</td>
-                        <td>
-                          <Form>
-                            <div class="form-check form-switch">
-                              <input
-                                type="checkbox"
-                                class="form-check-input"
-                                checked={item.active}
-                                onClick={() => {
-                                  onUpdateStatus(item);
-                                }}
-                              />
-                              <label class="form-check-label"></label>
-                            </div>
-                          </Form>
-                        </td>
                         <td className="text-left">
                           <UncontrolledDropdown>
                             <DropdownToggle
@@ -462,7 +431,7 @@ const ContentManagement = () => {
           </div>
         </Row>
       </Container>
-      <ContentDetailModal
+      <ServiceDetailModal
         isOpen={isOpenModal}
         toggle={() => {
           setIsOpenModal(!isOpenModal);
@@ -470,8 +439,8 @@ const ContentManagement = () => {
         contentItem={{
           title: selected.title,
           html: selected.html ? selected.html : "",
-          files: `${API_BASE_URL}/${selected.file}`,
-          subType: selected.subType,
+          files: `${API_BASE_URL}/${selected.icon}`,
+          // subType: selected.subType,
         }}
         title={t("contentPage." + tabKey)}
       />

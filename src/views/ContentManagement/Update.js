@@ -18,7 +18,7 @@ import Editor from "components/Editor";
 import Header from "components/Headers/Header";
 import { useContentService } from "features/content/hooks/useContentService";
 
-import { ContentDetailModal } from "./DetailView";
+import { ContentDetailModal, RoundingSelectModal } from "./DetailView";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { API_BASE_URL } from "config";
@@ -38,19 +38,39 @@ const ContentUpdate = () => {
     (state) => state.content
   );
   const { contentType, id } = useParams();
+  const [selectedRounding, setSelectedRounding] = useState();
+  const [isOpenSelectRoundingModal, setIsOpenSelectRoundingModal] =
+    useState(false);
+
+  const onOpenSelectRoundingModal = () => {
+    setIsOpenSelectRoundingModal(true);
+  };
+
   const navigate = useNavigate();
   // Language translation
   const { t } = useTranslation();
 
   const onUpdate = () => {
-    updateContent({
-      type: contentType,
-      title: contentTitle,
-      files: pictures[0],
-      sub_type: subType,
-      html: contentData,
-      _id: id,
-    });
+    if (contentType === ContentType.EVENT) {
+      updateContent({
+        type: contentType,
+        title: contentTitle,
+        files: pictures[0],
+        sub_type: subType,
+        html: contentData,
+        rounding: selectedRounding ? selectedRounding._id : null,
+        _id: id,
+      });
+    } else {
+      updateContent({
+        type: contentType,
+        title: contentTitle,
+        files: pictures[0],
+        sub_type: subType,
+        html: contentData,
+        _id: id,
+      });
+    }
   };
 
   const onBack = () => {
@@ -78,6 +98,9 @@ const ContentUpdate = () => {
       setSubType(selectedContent.sub_type);
       setFileURI(`${API_BASE_URL}/${selectedContent.file}`);
       setContentData(selectedContent.html);
+      if (selectedContent.rounding) {
+        setSelectedRounding(selectedContent.rounding);
+      }
     }
   }, [selectedContent]);
 
@@ -133,6 +156,27 @@ const ContentUpdate = () => {
                 </Col>
               </Row>
             )}
+            {contentType === ContentType.EVENT && (
+              <Row className="align-items-center mb-4">
+                <Col md="2">
+                  <p>{t("roundingPage.rounding")}</p>
+                </Col>
+                {selectedRounding && (
+                  <Col md="">
+                    <p>{selectedRounding.title}</p>
+                  </Col>
+                )}
+                <Col md="4">
+                  <Button
+                    color="secondary"
+                    type="button"
+                    onClick={() => onOpenSelectRoundingModal()}
+                  >
+                    {t("roundingPage.selectRounding")}
+                  </Button>
+                </Col>
+              </Row>
+            )}
             <Row className="align-items-center mb-4">
               <Col md="2">{t("common.image")}</Col>
               <Col>
@@ -168,7 +212,7 @@ const ContentUpdate = () => {
             </Row>
             <Row className="justify-content-end mt-4">
               <Button color="primary" type="button" onClick={() => onUpdate()}>
-                {t("common.add")}
+                {t("common.edit")}
               </Button>
               <Button
                 color="secondary"
@@ -199,6 +243,13 @@ const ContentUpdate = () => {
         mode={0}
         title={t("contentPage." + contentType)}
         type=""
+      />
+      <RoundingSelectModal
+        isOpen={isOpenSelectRoundingModal}
+        toggle={() => {
+          setIsOpenSelectRoundingModal(!isOpenSelectRoundingModal);
+        }}
+        onSelectRounding={(item) => setSelectedRounding(item)}
       />
     </>
   );

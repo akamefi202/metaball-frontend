@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   Card,
@@ -16,74 +16,69 @@ import { useTranslation } from "react-i18next";
 import ImageUploader from "react-images-upload";
 import Editor from "components/Editor";
 import Header from "components/Headers/Header";
-import { useContentService } from "features/content/hooks/useContentService";
 
-import { ContentDetailModal, RoundingSelectModal } from "./DetailView";
+import { ServiceDetailModal } from "./DetailView";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { API_BASE_URL } from "config";
+import { useSupportService } from "features/support/hooks/useSupportService";
 import { LoadingComponent } from "components/Loading";
-import { ContentType } from "config";
 
-const ContentAdd = () => {
+const ServiceUpdate = () => {
   const [contentTitle, setContentTitle] = useState("");
   const [subType, setSubType] = useState("");
+  const [fileURI, setFileURI] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [pictures, setPictures] = useState([]);
   const [picturesUri, setPicturesURI] = useState([]);
   const [contentData, setContentData] = useState("");
-  const { createContent } = useContentService();
-  const { contentType } = useParams();
-  const { loading } = useSelector((state) => state.content);
-  const [selectedRounding, setSelectedRounding] = useState();
-  const [isOpenSelectRoundingModal, setIsOpenSelectRoundingModal] =
-    useState(false);
-
-  const onOpenSelectRoundingModal = () => {
-    setIsOpenSelectRoundingModal(true);
-  };
-
+  const { get: getSupport, updateSupport } = useSupportService();
+  const { selected: selectedContent, loading } = useSelector(
+    (state) => state.support
+  );
+  const { contentType, id } = useParams();
   const navigate = useNavigate();
   // Language translation
   const { t } = useTranslation();
 
-  const onAdd = () => {
-    if (contentType === ContentType.EVENT) {
-      createContent({
-        type: contentType,
-        title: contentTitle,
-        files: pictures[0],
-        sub_type: subType,
-        html: contentData,
-        rounding: selectedRounding ? selectedRounding._id : null,
-      });
-    } else {
-      createContent({
-        type: contentType,
-        title: contentTitle,
-        files: pictures[0],
-        sub_type: subType,
-        html: contentData,
-      });
-    }
+  const onUpdate = () => {
+    updateSupport({
+      type: contentType,
+      title: contentTitle,
+      files: pictures[0],
+      sub_type: subType,
+      html: contentData,
+      _id: id,
+    });
   };
 
   const onBack = () => {
-    navigate("/admin/content_management");
+    navigate("/admin/support_management");
   };
   // Image upload
   const onDrop = (pictureFiles, pictureDataURLs) => {
     setPictures(pictureFiles);
     setPicturesURI(pictureDataURLs);
+    setFileURI(pictureDataURLs[0]);
   };
-  // Content Change
-  // const onChangeContent = (html) => {
-  //   setContentData(html);
-  // };
 
   // Preview
   const onOpenContentModal = () => {
     setIsOpenModal(true);
   };
+
+  useEffect(() => {
+    getSupport({ id });
+  }, [id]);
+
+  useEffect(() => {
+    if (selectedContent) {
+      setContentTitle(selectedContent.title);
+      setSubType(selectedContent.sub_type);
+      setFileURI(`${API_BASE_URL}/${selectedContent.icon}`);
+      setContentData(selectedContent.html);
+    }
+  }, [selectedContent]);
 
   // if (loading) {
   //   return (
@@ -100,13 +95,11 @@ const ContentAdd = () => {
       <Container fluid>
         <Card>
           <CardHeader>
-            <h3>{t("contentPage." + contentType)}</h3>
+            <h3>{t("servicePage.support")}</h3>
           </CardHeader>
           <CardBody>
             <Row className="align-items-center mb-4">
-              <Col md="2">
-                <p>{t("common.title")}</p>
-              </Col>
+              <Col md="2">{t("common.title")}</Col>
               <Col md="">
                 <FormGroup className="mb-0">
                   <InputGroup>
@@ -121,55 +114,31 @@ const ContentAdd = () => {
                 </FormGroup>
               </Col>
             </Row>
-            {contentType === ContentType.NEWS && (
-              <Row className="align-items-center mb-4">
-                <Col md="2">{t("common.type")}</Col>
-                <Col md="">
-                  <FormGroup className="mb-0">
-                    <InputGroup>
-                      <Input
-                        placeholder={t("common.type")}
-                        type="text"
-                        value={subType}
-                        onChange={(e) => setSubType(e.target.value)}
-                        // required
-                      />
-                    </InputGroup>
-                  </FormGroup>
-                </Col>
-              </Row>
-            )}
-            {contentType === ContentType.EVENT && (
-              <Row className="align-items-center mb-4">
-                <Col md="2">
-                  <p>{t("roundingPage.rounding")}</p>
-                </Col>
-                {selectedRounding && (
-                  <Col md="">
-                    <p>{selectedRounding.title}</p>
-                  </Col>
-                )}
-                <Col md="4">
-                  <Button
-                    color="secondary"
-                    type="button"
-                    onClick={() => onOpenSelectRoundingModal()}
-                  >
-                    {t("roundingPage.selectRounding")}
-                  </Button>
-                </Col>
-              </Row>
-            )}
-            <Row className="align-items-center mb-4">
-              <Col md="2">
-                <p>{t("common.image")}</p>
+            {/* <Row className="align-items-center mb-4">
+              <Col md="2">{t("common.type")}</Col>
+              <Col md="">
+                <FormGroup className="mb-0">
+                  <InputGroup>
+                    <Input
+                      placeholder={t("common.type")}
+                      type="text"
+                      value={subType}
+                      onChange={(e) => setSubType(e.target.value)}
+                      // required
+                    />
+                  </InputGroup>
+                </FormGroup>
               </Col>
+            </Row> */}
+
+            <Row className="align-items-center mb-4">
+              <Col md="2">{t("common.image")}</Col>
               <Col>
                 <div style={{ width: 250, height: 250, display: "flex" }}>
-                  {picturesUri[0] && (
+                  {fileURI && (
                     <img
                       alt="#"
-                      src={picturesUri[0]}
+                      src={fileURI}
                       style={{ width: "100%", objectFit: "cover" }}
                     />
                   )}
@@ -196,8 +165,8 @@ const ContentAdd = () => {
               </Col>
             </Row>
             <Row className="justify-content-end mt-4">
-              <Button color="primary" type="button" onClick={() => onAdd()}>
-                {t("common.add")}
+              <Button color="primary" type="button" onClick={() => onUpdate()}>
+                {t("common.edit")}
               </Button>
               <Button
                 color="secondary"
@@ -214,7 +183,7 @@ const ContentAdd = () => {
           </CardBody>
         </Card>
       </Container>
-      <ContentDetailModal
+      <ServiceDetailModal
         isOpen={isOpenModal}
         toggle={() => {
           setIsOpenModal(!isOpenModal);
@@ -222,22 +191,15 @@ const ContentAdd = () => {
         contentItem={{
           title: contentTitle,
           html: contentData ? contentData : "",
-          files: picturesUri[0],
+          files: fileURI,
           sub_type: subType,
         }}
         mode={0}
         title={t("contentPage." + contentType)}
         type=""
       />
-      <RoundingSelectModal
-        isOpen={isOpenSelectRoundingModal}
-        toggle={() => {
-          setIsOpenSelectRoundingModal(!isOpenSelectRoundingModal);
-        }}
-        onSelectRounding={(item) => setSelectedRounding(item)}
-      />
     </>
   );
 };
 
-export default ContentAdd;
+export default ServiceUpdate;

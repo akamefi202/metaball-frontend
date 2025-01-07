@@ -25,6 +25,7 @@
       "blogManagement": "ブログ",
       "contentManagement": "コンテンツ",
       "serviceManagement": "サービス",
+      "supportManagement": "サポート",
       "mypage": "マイページ"
     },
     "dashboardPage": {
@@ -95,7 +96,9 @@
       "cancel": "キャンセル",
       "image": "イメージ",
       "preview": "プレビュー",
-      "moveRange": "活動地域"
+      "moveRange": "活動地域",
+      "ok": "OK",
+      "reset": "リセット"
     },
     "alert": {
       "success": "成功しました。",
@@ -122,7 +125,8 @@
       "both": "男女",
       "male": "男",
       "female": "女",
-      "undefined": "不明"
+      "undefined": "不明",
+      "selectRounding": "ラウンディングを選択"
     },
     "clubPage": {
       "club": "クラブ",
@@ -146,7 +150,8 @@
       "event": "イベント"
     },
     "servicePage": {
-      "service": "サービス"
+      "service": "サービス",
+      "support": "サポート"
     },
     "blogPage": {
       "blog": "ブログ",

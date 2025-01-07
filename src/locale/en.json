@@ -25,6 +25,7 @@
       "blogManagement": "Blog",
       "contentManagement": "Content",
       "serviceManagement": "Service",
+      "supportManagement": "Support",
       "mypage": "My Page"
     },
     "dashboardPage": {
@@ -95,7 +96,9 @@
       "cancel": "Cancel",
       "image": "Image",
       "preview": "Preview",
-      "moveRange": "Move Range"
+      "moveRange": "Move Range",
+      "ok": "OK",
+      "reset": "Reset"
     },
     "alert": {
       "success": "Success",
@@ -121,7 +124,8 @@
       "both": "Male or Female",
       "male": "Male",
       "female": "Female",
-      "undefined": "Undefined"
+      "undefined": "Undefined",
+      "selectRounding": "Select rounding"
     },
     "clubPage": {
       "club": "Club",
@@ -145,7 +149,8 @@
       "event": "Event"
     },
     "servicePage": {
-      "service": "Service"
+      "service": "Service",
+      "support": "Support"
     },
     "blogPage": {
       "blog": "Blog",

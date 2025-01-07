@@ -19,6 +19,9 @@ import Login from "views/Auth/Login";
 import BlogManagement from "views/BlogManagement";
 import ContentManagement from "views/ContentManagement";
 import ServiceManagement from "views/ServiceManagement";
+import SupportManagement from "views/SupportManagement";
+import SupportAdd from "views/SupportManagement/Add";
+import SupportUpdate from "views/SupportManagement/Update";
 import LogManagement from "views/LogManagement";
 import ContentAdd from "views/ContentManagement/Add";
 import ContentUpdate from "views/ContentManagement/Update";
@@ -250,6 +253,32 @@ const routes = [
     name: "sideMenu.contentManagement",
     icon: "ni ni-settings-gear-65 text-yellow",
     component: <ServiceUpdate />,
+    layout: "/admin",
+    isNotInSidebar: true,
+  },
+  {
+    path: "/admin/support_management",
+    pathName: "/admin/support_management",
+    name: "sideMenu.supportManagement",
+    icon: "ni ni-settings-gear-65 text-yellow",
+    component: <SupportManagement />,
+    layout: "/admin",
+  },
+  {
+    path: "/admin/support_management/add/:contentType",
+    pathName: "/admin/support_management/add",
+    name: "sideMenu.supportManagement",
+    icon: "ni ni-settings-gear-65 text-yellow",
+    component: <SupportAdd />,
+    layout: "/admin",
+    isNotInSidebar: true,
+  },
+  {
+    path: "/admin/support_management/update/:contentType/:id",
+    pathName: "/admin/support_management/update",
+    name: "sideMenu.supportManagement",
+    icon: "ni ni-settings-gear-65 text-yellow",
+    component: <SupportUpdate />,
     layout: "/admin",
     isNotInSidebar: true,
   },

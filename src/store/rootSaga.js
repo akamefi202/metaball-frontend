@@ -16,6 +16,7 @@ import { serviceWatcherSaga } from "features/service/store/service.saga";
 import { syslogWatcherSaga } from "features/syslog/store/syslog.saga";
 import { blogWatcherSaga } from "features/blog/store/blog.saga";
 import { courseWatcherSaga } from "features/course/store/course.saga";
+import { supportWatcherSaga } from "features/support/store/support.saga";
 
 export function* rootSaga() {
   yield all([fork(postsWatcherSaga)]);
@@ -34,6 +35,7 @@ export function* rootSaga() {
   yield all([fork(syslogWatcherSaga)]);
   yield all([fork(blogWatcherSaga)]);
   yield all([fork(courseWatcherSaga)]);
+  yield all([fork(supportWatcherSaga)]);
 }
 
 export default rootSaga;
