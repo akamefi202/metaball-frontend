@@ -339,7 +339,7 @@ const ContentManagement = () => {
                           {(currentPage - 1) * TABLE_PAGE_LIMIT + idx + 1}
                         </td>
                         <td>
-                          {item.file && (
+                          {item.icon && (
                             <div
                               style={{
                                 width: "50px",
@@ -348,7 +348,7 @@ const ContentManagement = () => {
                               }}
                             >
                               <img
-                                src={`${API_BASE_URL}/${item.file}`}
+                                src={`${API_BASE_URL}/${item.icon}`}
                                 style={{ width: "100%", objectFit: "cover" }}
                                 alt="#"
                               />

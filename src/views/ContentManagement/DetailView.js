@@ -73,15 +73,21 @@ export const ContentDetailModal = ({
               </h3>
             </Row>
             <Row className="justify-content-center">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  width: "80%",
-                }}
-              >
-                <img src={contentItem.files} alt="#" />
-              </div>
+              {contentItem.files && (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "80%",
+                  }}
+                >
+                  <img
+                    src={contentItem.files}
+                    alt="#"
+                    style={{ width: "100%" }}
+                  />
+                </div>
+              )}
             </Row>
             <div className="editor-render" id="editor-render">
               {parser(contentItem.html)}
