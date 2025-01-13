@@ -442,7 +442,7 @@ const ContentManagement = () => {
           files: `${API_BASE_URL}/${selected.file}`,
           // subType: selected.subType,
         }}
-        title={t("contentPage." + tabKey)}
+        title={t("servicePage." + tabKey)}
       />
     </>
   );

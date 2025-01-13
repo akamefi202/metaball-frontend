@@ -108,8 +108,8 @@ const RoundingDetailView = () => {
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                       <div>
                         <span className="heading">
-                          {selectedUser.experience_years
-                            ? selectedUser.experience_years
+                          {selectedUser.experience
+                            ? selectedUser.experience
                             : 0}
                         </span>
                         <span className="description">
@@ -118,9 +118,7 @@ const RoundingDetailView = () => {
                       </div>
                       <div>
                         <span className="heading">
-                          {selectedUser.average_score
-                            ? selectedUser.average_score
-                            : 0}
+                          {selectedUser.hit ? selectedUser.hit : 0}
                         </span>
                         <span className="description">
                           {t("memberPage.averageScore")}

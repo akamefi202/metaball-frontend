@@ -28,7 +28,7 @@ export const ServiceDetailModal = ({
       toggle={toggle}
     >
       <ModalHeader toggle={toggle}>
-        <h3>{title}</h3>
+        <h3>{contentItem.title}</h3>
       </ModalHeader>
       <ModalBody
         style={{ borderTop: "1px solid #eee", borderBottom: "1px solid #eee" }}
