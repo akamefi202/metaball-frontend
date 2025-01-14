@@ -41,7 +41,7 @@ const ClubManagement = () => {
   const { fetchAllClubs, deleteClub } = useClubService();
   const { club, count, loading } = useSelector((state) => state.club);
   const { t } = useTranslation();
-  const { showErrorAlert } = useAlert();
+  const { showErrorAlert, showConfirmationAlert } = useAlert();
   const [clubs, setClubs] = useState([]);
 
   // Pagination & Search
@@ -73,11 +73,23 @@ const ClubManagement = () => {
       showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
       return;
     }
-    deleteClub(selectedIds);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteClub(selectedIds)
+    );
     setCurrentPage(1);
   };
   const onDelete = (id) => {
-    deleteClub([id]);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteClub([id])
+    );
     setCurrentPage(1);
   };
 

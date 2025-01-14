@@ -43,7 +43,7 @@ const BlogManagement = () => {
   const { fetchAllBlogs, deleteBlog } = useBlogService();
   const { blog, count, loading } = useSelector((state) => state.blog);
   const { t } = useTranslation();
-  const { showErrorAlert } = useAlert();
+  const { showErrorAlert, showConfirmationAlert } = useAlert();
   const [blogs, setBlogs] = useState([]);
 
   // Pagination & Search
@@ -75,11 +75,23 @@ const BlogManagement = () => {
       showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
       return;
     }
-    deleteBlog(selectedIds);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteBlog(selectedIds)
+    );
     setCurrentPage(1);
   };
   const onDelete = (id) => {
-    deleteBlog([id]);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteBlog([id])
+    );
     setCurrentPage(1);
   };
 

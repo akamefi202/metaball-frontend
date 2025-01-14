@@ -47,7 +47,7 @@ const ContentManagement = () => {
   const { fetchAllSupports, deleteSupport } = useSupportService();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { loading, support } = useSelector((state) => state.support);
-  const { showErrorAlert } = useAlert();
+  const { showErrorAlert, showConfirmationAlert } = useAlert();
   // Language translation
   const { t } = useTranslation();
   // Pagination & Search
@@ -79,11 +79,23 @@ const ContentManagement = () => {
       showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
       return;
     }
-    deleteSupport({ type: tabKey, ids: selectedIds });
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteSupport({ type: tabKey, ids: selectedIds })
+    );
     setCurrentPage(1);
   };
   const onDeleteOne = (id) => {
-    deleteSupport({ type: tabKey, ids: [id] });
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteSupport({ type: tabKey, ids: [id] })
+    );
     setCurrentPage(1);
   };
 

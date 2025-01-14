@@ -242,7 +242,7 @@ const SettingManagement = () => {
   const [modalTitle, setModalTitle] = useState("");
 
   const { t } = useTranslation();
-  const { showErrorAlert } = useAlert();
+  const { showErrorAlert, showConfirmationAlert } = useAlert();
 
   const { fetchAllSettings, deleteSetting, updateStatus } = useSettingService();
 
@@ -302,12 +302,24 @@ const SettingManagement = () => {
       showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
       return;
     }
-    deleteSetting({ ids: selectedIds, type: tabKey });
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteSetting({ ids: selectedIds, type: tabKey })
+    );
     setCurrentPage(1);
   };
 
   const onDeleteOne = (id) => {
-    deleteSetting({ ids: [id], type: tabKey });
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteSetting({ ids: [id], type: tabKey })
+    );
   };
 
   const onUpdateStatus = (item) => {

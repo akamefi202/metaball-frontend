@@ -47,7 +47,7 @@ const ContentManagement = () => {
   const { fetchAllServices, deleteService } = useServiceService();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { loading, service } = useSelector((state) => state.service);
-  const { showErrorAlert } = useAlert();
+  const { showErrorAlert, showConfirmationAlert } = useAlert();
   // Language translation
   const { t } = useTranslation();
   // Pagination & Search
@@ -79,11 +79,23 @@ const ContentManagement = () => {
       showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
       return;
     }
-    deleteService({ type: tabKey, ids: selectedIds });
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteService({ type: tabKey, ids: selectedIds })
+    );
     setCurrentPage(1);
   };
   const onDeleteOne = (id) => {
-    deleteService({ type: tabKey, ids: [id] });
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteService({ type: tabKey, ids: [id] })
+    );
     setCurrentPage(1);
   };
 

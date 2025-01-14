@@ -112,7 +112,11 @@
       "msgErrorPWNotMatch": "Passwords do not match.",
       "msgErrorNotSelected": "No items were selected.",
       "msgGolfCourseNameFieldEmpty": "Please input golf course name",
-      "msgCantSelectMoreThan2": "Cannot select more than 2 items."
+      "msgCantSelectMoreThan2": "Cannot select more than 2 items.",
+      "delete": "Delete",
+      "deleteText": "Are you sure?",
+      "ok": "OK",
+      "cancel": "Cancel"
     },
     "roundingPage": {
       "rounding": "Rounding",

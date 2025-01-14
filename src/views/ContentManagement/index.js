@@ -48,7 +48,7 @@ const ContentManagement = () => {
   const { fetchAllContents, deleteContent, updateStatus } = useContentService();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { loading, content } = useSelector((state) => state.content);
-  const { showErrorAlert } = useAlert();
+  const { showErrorAlert, showConfirmationAlert } = useAlert();
   const onChangeTab = (k) => {
     setKeyword("");
     setTabKey(k);
@@ -86,11 +86,23 @@ const ContentManagement = () => {
       showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
       return;
     }
-    deleteContent({ type: tabKey, ids: selectedIds });
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteContent({ type: tabKey, ids: selectedIds })
+    );
     setCurrentPage(1);
   };
   const onDeleteOne = (id) => {
-    deleteContent({ type: tabKey, ids: [id] });
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteContent({ type: tabKey, ids: [id] })
+    );
     setCurrentPage(1);
   };
 

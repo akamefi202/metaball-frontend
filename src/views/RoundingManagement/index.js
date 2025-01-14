@@ -42,7 +42,7 @@ const RoundingManagement = () => {
   const { fetchAllRoundings, deleteRounding } = useRoundingService();
   const { rounding, count, loading } = useSelector((state) => state.rounding);
   const { t } = useTranslation();
-  const { showErrorAlert } = useAlert();
+  const { showErrorAlert, showConfirmationAlert } = useAlert();
   const [roundings, setRoundings] = useState([]);
 
   // Pagination & Search
@@ -76,11 +76,23 @@ const RoundingManagement = () => {
       showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
       return;
     }
-    deleteRounding(selectedIds);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteRounding(selectedIds)
+    );
     setCurrentPage(1);
   };
   const onDelete = (id) => {
-    deleteRounding([id]);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteRounding([id])
+    );
     setCurrentPage(1);
   };
 

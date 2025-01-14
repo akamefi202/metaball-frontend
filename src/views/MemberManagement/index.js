@@ -40,7 +40,7 @@ const MemberManagement = () => {
   const { fetchAllMembers, deleteMember } = useMemberService();
   const { member, count, loading } = useSelector((state) => state.member);
   const { t } = useTranslation();
-  const { showErrorAlert } = useAlert();
+  const { showErrorAlert, showConfirmationAlert } = useAlert();
   const [members, setMembers] = useState([]);
 
   // Pagination & Search
@@ -71,11 +71,23 @@ const MemberManagement = () => {
       showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
       return;
     }
-    deleteMember(selectedIds);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteMember(selectedIds)
+    );
     setCurrentPage(1);
   };
   const onDelete = (id) => {
-    deleteMember([id]);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteMember([id])
+    );
     setCurrentPage(1);
   };
 
@@ -250,7 +262,9 @@ const MemberManagement = () => {
                     className="btn-icon btn-3"
                     color="danger"
                     type="button"
-                    onClick={onDeleteArray}
+                    onClick={() => {
+                      onDeleteArray();
+                    }}
                   >
                     <span className="btn-inner--icon">
                       <i className="ni ni-fat-delete" />

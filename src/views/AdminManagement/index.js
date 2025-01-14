@@ -44,7 +44,7 @@ const AdminManagement = () => {
   // Pagination & Search
   const [currentPage, setCurrentPage] = useState(1);
   const [keyWord, setKeyword] = useState("");
-  const { showErrorAlert } = useAlert();
+  const { showErrorAlert, showConfirmationAlert } = useAlert();
 
   const onSearch = () => {
     setCurrentPage(1);
@@ -72,10 +72,24 @@ const AdminManagement = () => {
       showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
       return;
     }
-    deleteAdmin(selectedIds);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteAdmin(selectedIds)
+    );
+    setCurrentPage(1);
   };
   const onDelete = (id) => {
-    deleteAdmin([id]);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteAdmin([id])
+    );
+    setCurrentPage(1);
   };
 
   const thData = [

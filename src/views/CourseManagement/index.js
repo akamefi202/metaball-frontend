@@ -194,7 +194,7 @@ const CourseManagement = () => {
   const { fetchAllCourses, deleteCourse } = useCourseService();
   const { course, count, loading } = useSelector((state) => state.course);
   const { t } = useTranslation();
-  const { showErrorAlert } = useAlert();
+  const { showErrorAlert, showConfirmationAlert } = useAlert();
   const [courses, setCourses] = useState([]);
   // Pagination & Search
   const [currentPage, setCurrentPage] = useState(1);
@@ -240,11 +240,23 @@ const CourseManagement = () => {
       showErrorAlert(t("alert.titleError"), t("alert.msgErrorNotSelected"));
       return;
     }
-    deleteCourse(selectedIds);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteCourse(selectedIds)
+    );
     setCurrentPage(1);
   };
   const onDelete = (id) => {
-    deleteCourse([id]);
+    showConfirmationAlert(
+      t("alert.delete"),
+      t("alert.deleteText"),
+      t("alert.ok"),
+      t("alert.cancel"),
+      () => deleteCourse([id])
+    );
     setCurrentPage(1);
   };
 

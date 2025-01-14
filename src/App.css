@@ -27,3 +27,11 @@
 #editor-preview {
     max-width: 1080px !important;
 }
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
+    background-color: #7066e0 !important;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel) {
+    background-color: #6e7881 !important;
+}

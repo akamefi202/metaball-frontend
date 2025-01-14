@@ -41,7 +41,7 @@ const useAlert = () => {
 
   // Function to show a confirmation dialog
   const showConfirmationAlert = useCallback(
-    (title, text, confirmText = "Yes", cancelText = "No") => {
+    (title, text, confirmText = "OK", cancelText = "Cancel", onDelete) => {
       return Swal.fire({
         title,
         text,
@@ -49,6 +49,13 @@ const useAlert = () => {
         showCancelButton: true,
         confirmButtonText: confirmText,
         cancelButtonText: cancelText,
+      }).then((result) => {
+        console.info(result);
+        if (result.isConfirmed) {
+          if (onDelete) {
+            onDelete();
+          }
+        }
       });
     },
     []
