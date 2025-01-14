@@ -27,6 +27,7 @@ const ClubDetailView = () => {
   const { getClub } = useClubService();
   const { selected, loading } = useSelector((state) => state.club);
   const [selectedUser, setSelectedUser] = useState({});
+  const [selectedItem, setSelectedItem] = useState({});
   const [moveRange, setMoveRange] = useState("");
   const { id } = useParams();
   // Language translation
@@ -56,6 +57,7 @@ const ClubDetailView = () => {
     if (selected.user) {
       setSelectedUser(selected.user);
       setMoveRange(selected.move_range);
+      setSelectedItem(selected);
     }
   }, [selected]);
 
@@ -126,7 +128,9 @@ const ClubDetailView = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={selected.name ? selected.name : ""}
+                            defaultValue={
+                              selectedItem.name ? selectedItem.name : ""
+                            }
                             id="input-username"
                             placeholder={""}
                             type="text"
@@ -168,8 +172,8 @@ const ClubDetailView = () => {
                             className="form-control-alternative"
                             id="input-first-name"
                             defaultValue={
-                              selected.qualification
-                                ? selected.qualification
+                              selectedItem.qualification
+                                ? selectedItem.qualification
                                 : ""
                             }
                             placeholder={""}
@@ -188,11 +192,7 @@ const ClubDetailView = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={
-                              selected.member_ids
-                                ? selected.member_ids?.length
-                                : 0
-                            }
+                            defaultValue={selectedItem.member_count}
                             id="input-last-name"
                             placeholder={""}
                             type="text"
@@ -226,7 +226,7 @@ const ClubDetailView = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={selected.limit_age}
+                            defaultValue={selectedItem.limit_age}
                             id="input-city"
                             placeholder={t("roundingPage.ageOption")}
                             type="text"
@@ -248,7 +248,7 @@ const ClubDetailView = () => {
                         className="form-control-alternative"
                         placeholder={t("memberPage.introduction")}
                         rows="4"
-                        defaultValue={selected.introduction}
+                        defaultValue={selectedItem.introduction}
                         type="textarea"
                         disabled
                       />

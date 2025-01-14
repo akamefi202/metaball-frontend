@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -27,6 +27,7 @@ const MemberDetailView = () => {
   const { getMember } = useMemberService();
   const { selected, loading } = useSelector((state) => state.member);
   const { id } = useParams();
+  const [selectedItem, setSelectedItem] = useState({});
   // Language translation
   const { t } = useTranslation();
 
@@ -38,6 +39,9 @@ const MemberDetailView = () => {
     getMember({ id });
   }, [getMember]);
 
+  useEffect(() => {
+    setSelectedItem(selected);
+  }, [selected]);
   // if (loading) {
   //   return (
   //     <>
@@ -73,7 +77,7 @@ const MemberDetailView = () => {
                     >
                       <img
                         alt="..."
-                        src={`${API_BASE_URL}/${selected.logo}`}
+                        src={`${API_BASE_URL}/${selectedItem.logo}`}
                         style={{ width: "100%", objectFit: "cover" }}
                       />
                     </div>
@@ -89,7 +93,9 @@ const MemberDetailView = () => {
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                       <div>
                         <span className="heading">
-                          {selected.experience ? selected.experience : 0}
+                          {selectedItem.experience
+                            ? selectedItem.experience
+                            : 0}
                         </span>
                         <span className="description">
                           {t("memberPage.experience")}
@@ -97,7 +103,7 @@ const MemberDetailView = () => {
                       </div>
                       <div>
                         <span className="heading">
-                          {selected.hit ? selected.hit : 0}
+                          {selectedItem.hit ? selectedItem.hit : 0}
                         </span>
                         <span className="description">
                           {t("memberPage.averageScore")}
@@ -105,8 +111,8 @@ const MemberDetailView = () => {
                       </div>
                       <div>
                         <span className="heading">
-                          {selected.month_average_score
-                            ? selected.month_average_score
+                          {selectedItem.month_average_score
+                            ? selectedItem.month_average_score
                             : 0}
                         </span>
                         <span className="description">
@@ -118,12 +124,12 @@ const MemberDetailView = () => {
                 </Row>
                 <div className="text-center">
                   <h3>
-                    {selected.fullname}
+                    {selectedItem.fullname}
                     <span className="font-weight-light">
                       ,{" "}
-                      {selected.birthday
+                      {selectedItem.birthday
                         ? new Date().getFullYear() -
-                          new Date(selected.birthday).getFullYear()
+                          new Date(selectedItem.birthday).getFullYear()
                         : ""}
                     </span>
                   </h3>
@@ -190,7 +196,7 @@ const MemberDetailView = () => {
                           <Input
                             className="form-control-alternative"
                             id="input-email"
-                            defaultValue={selected.email}
+                            defaultValue={selectedItem.email}
                             placeholder={""}
                             type="email"
                             disabled
@@ -208,7 +214,7 @@ const MemberDetailView = () => {
                           <Input
                             className="form-control-alternative"
                             id="input-first-name"
-                            defaultValue={selected.fullname}
+                            defaultValue={selectedItem.fullname}
                             placeholder={""}
                             type="text"
                             disabled
@@ -227,7 +233,7 @@ const MemberDetailView = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={selected.occupation}
+                            defaultValue={selectedItem.occupation}
                             id="input-last-name"
                             placeholder={""}
                             type="text"
@@ -254,7 +260,7 @@ const MemberDetailView = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={selected.address}
+                            defaultValue={selectedItem.address}
                             id="input-address"
                             placeholder={""}
                             type="text"
@@ -274,7 +280,7 @@ const MemberDetailView = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={selected.phone}
+                            defaultValue={selectedItem.phone}
                             id="input-city"
                             placeholder={""}
                             type="text"
@@ -296,7 +302,7 @@ const MemberDetailView = () => {
                         className="form-control-alternative"
                         placeholder={""}
                         rows="4"
-                        defaultValue={selected.introduction}
+                        defaultValue={selectedItem.introduction}
                         type="textarea"
                         disabled
                       />

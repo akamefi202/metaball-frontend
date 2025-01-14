@@ -126,7 +126,8 @@
       "male": "男",
       "female": "女",
       "undefined": "不明",
-      "selectRounding": "ラウンディングを選択"
+      "selectRounding": "ラウンディングを選択",
+      "addressName": "住所名"
     },
     "clubPage": {
       "club": "クラブ",

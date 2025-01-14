@@ -125,7 +125,8 @@
       "male": "Male",
       "female": "Female",
       "undefined": "Undefined",
-      "selectRounding": "Select rounding"
+      "selectRounding": "Select rounding",
+      "addressName": "Address name"
     },
     "clubPage": {
       "club": "Club",

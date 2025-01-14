@@ -26,6 +26,7 @@ const RoundingDetailView = () => {
   const navigate = useNavigate();
   const { getRounding } = useRoundingService();
   const { selected, loading } = useSelector((state) => state.rounding);
+  const [selectedItem, setSelectedItem] = useState({});
   const [selectedUser, setSelectedUser] = useState({});
   const { id } = useParams();
   // Language translation
@@ -36,12 +37,12 @@ const RoundingDetailView = () => {
   };
 
   const getAgeRange = () => {
-    if (selected.start_age && selected.end_age) {
-      return `${selected.start_age} ~ ${selected.end_age}`;
-    } else if (selected.start_age && !selected.end_age) {
-      return `${selected.start_age} ~ `;
-    } else if (!selected.start_age && selected.end_age) {
-      return `~ ${selected.end_age}`;
+    if (selected.age_start && selected.age_end) {
+      return `${selected.age_start} ~ ${selected.age_end}`;
+    } else if (selected.age_start && !selected.age_end) {
+      return `${selected.age_start} ~ `;
+    } else if (!selected.age_start && selected.age_end) {
+      return `~ ${selected.age_end}`;
     } else {
       return "";
     }
@@ -54,6 +55,7 @@ const RoundingDetailView = () => {
   useEffect(() => {
     if (selected.user) {
       setSelectedUser(selected.user);
+      setSelectedItem(selected);
     }
   }, [selected]);
 
@@ -187,7 +189,9 @@ const RoundingDetailView = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={selected.title ? selected.title : ""}
+                            defaultValue={
+                              selectedItem.title ? selectedItem.title : ""
+                            }
                             id="input-username"
                             placeholder={""}
                             type="text"
@@ -199,15 +203,17 @@ const RoundingDetailView = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-email"
+                            htmlFor="input-first-name"
                           >
-                            {t("common.type")}
+                            {t("roundingPage.sexOption")}
                           </label>
                           <Input
                             className="form-control-alternative"
-                            id="input-email"
+                            id="input-first-name"
                             defaultValue={
-                              selected.type ? t("common." + selected.type) : ""
+                              selectedItem.sex
+                                ? t("roundingPage." + selectedItem.sex)
+                                : ""
                             }
                             placeholder={""}
                             type="text"
@@ -221,28 +227,6 @@ const RoundingDetailView = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-first-name"
-                          >
-                            {t("roundingPage.sexOption")}
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            id="input-first-name"
-                            defaultValue={
-                              selected.sex_option
-                                ? t("roundingPage." + selected.sex_option)
-                                : ""
-                            }
-                            placeholder={""}
-                            type="text"
-                            disabled
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
                             htmlFor="input-last-name"
                           >
                             {t("roundingPage.maxOption")}
@@ -250,7 +234,9 @@ const RoundingDetailView = () => {
                           <Input
                             className="form-control-alternative"
                             defaultValue={
-                              selected.max_members ? selected.max_members : ""
+                              selectedItem.max_members
+                                ? selectedItem.max_members
+                                : ""
                             }
                             id="input-last-name"
                             placeholder={""}
@@ -271,12 +257,39 @@ const RoundingDetailView = () => {
                             className="form-control-label"
                             htmlFor="input-address"
                           >
+                            {t("coursePage.golfCourse")}
+                          </label>
+                          <Input
+                            className="form-control-alternative"
+                            defaultValue={
+                              selectedItem.golf_course_name
+                                ? selectedItem.golf_course_name
+                                : ""
+                            }
+                            id="input-address"
+                            placeholder={""}
+                            type="text"
+                            disabled
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col md="12">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-address"
+                          >
                             {t("common.address")}
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue={
-                              selected.address ? selected.address.address : ""
+                              selectedItem.golf_course_address
+                                ? selectedItem.golf_course_address
+                                : ""
                             }
                             id="input-address"
                             placeholder={""}
@@ -320,7 +333,9 @@ const RoundingDetailView = () => {
                         placeholder={""}
                         rows="4"
                         defaultValue={
-                          selected.introduction ? selected.introduction : ""
+                          selectedItem.introduction
+                            ? selectedItem.introduction
+                            : ""
                         }
                         type="textarea"
                         disabled

@@ -261,6 +261,7 @@ const ClubManagement = () => {
                         <th scope="col">{t("common.user")}</th>
                         <th scope="col">{t("clubPage.ageOption")}</th>
                         <th scope="col">{t("clubPage.qualification")}</th>
+                        <th scope="col">{t("clubPage.members")}</th>
                         <th scope="col" />
                       </tr>
                     </thead>
@@ -286,6 +287,7 @@ const ClubManagement = () => {
                           <td>{item.user.fullname}</td>
                           <td>{item.limit_age}</td>
                           <td>{item.qualification}</td>
+                          <td>{item.member_count}</td>
                           <td className="text-left">
                             <UncontrolledDropdown>
                               <DropdownToggle

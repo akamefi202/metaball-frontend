@@ -265,7 +265,7 @@ const RoundingManagement = () => {
                         <th scope="col">{t("common.title")}</th>
                         <th scope="col">{t("common.user")}</th>
                         <th scope="col">{t("common.date")}</th>
-                        <th scope="col">{t("common.address")}</th>
+                        <th scope="col">{t("coursePage.golfCourse")}</th>
                         <th scope="col">{t("common.cost")}</th>
                         <th scope="col" />
                       </tr>
@@ -291,7 +291,9 @@ const RoundingManagement = () => {
                           <td>{item.title}</td>
                           <td>{item.user.fullname}</td>
                           <td>{getFormatString(item.opening_date)}</td>
-                          <td>{item.address ? item.address.address : ""}</td>
+                          <td>
+                            {item.golf_course_name ? item.golf_course_name : ""}
+                          </td>
                           <td>{item.cost}</td>
                           <td className="text-left">
                             <UncontrolledDropdown>
