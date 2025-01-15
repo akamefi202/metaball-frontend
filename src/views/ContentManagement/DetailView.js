@@ -11,14 +11,13 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
-  DropdownToggle,
-  DropdownItem,
-  DropdownMenu,
   Table,
   FormGroup,
   Input,
   Label,
-  UncontrolledDropdown,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import parser from "html-react-parser";
@@ -118,12 +117,13 @@ export const RoundingSelectModal = ({ isOpen, toggle, onSelectRounding }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [keyWord, setKeyword] = useState("");
   const onSearch = () => {
+    const currentDate = new Date();
     setCurrentPage(1);
     fetchAllRoundings({
       limit: TABLE_PAGE_LIMIT,
       skip: (currentPage - 1) * TABLE_PAGE_LIMIT,
       key: keyWord,
-      start_date: "",
+      start_date: currentDate,
       end_date: "",
     });
   };
@@ -253,11 +253,12 @@ export const RoundingSelectModal = ({ isOpen, toggle, onSelectRounding }) => {
   }, [currentPage, TABLE_PAGE_LIMIT, numOfPages]);
 
   useEffect(() => {
+    const currentDate = new Date();
     fetchAllRoundings({
       limit: TABLE_PAGE_LIMIT,
       skip: (currentPage - 1) * TABLE_PAGE_LIMIT,
       key: keyWord,
-      start_date: "",
+      start_date: currentDate,
       end_date: "",
     });
   }, [fetchAllRoundings, currentPage]);
@@ -275,9 +276,39 @@ export const RoundingSelectModal = ({ isOpen, toggle, onSelectRounding }) => {
       isOpen={isOpen}
       toggle={toggle}
     >
-      <ModalHeader toggle={toggle}>
+      <ModalHeader
+        toggle={toggle}
+        className="d-flex align-items-center justify-content-between"
+      >
         <h3>{t("roundingPage.selectRounding")}</h3>
       </ModalHeader>
+      <div className="d-flex align-items-center justify-content-center pb-2">
+        <FormGroup className="mb-0 mr-2">
+          <InputGroup className="input-group-alternative">
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>
+                <i className="fas fa-search" />
+              </InputGroupText>
+            </InputGroupAddon>
+            <Input
+              placeholder={t("common.searchPlaceholder")}
+              type="text"
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+          </InputGroup>
+        </FormGroup>
+        <Button
+          className="btn-icon btn-3"
+          color="primary"
+          type="button"
+          onClick={onSearch}
+        >
+          <span className="btn-inner--icon">
+            <i className="fas fa-search" />
+          </span>
+        </Button>
+      </div>
+
       <ModalBody
         style={{ borderTop: "1px solid #eee", borderBottom: "1px solid #eee" }}
       >
