@@ -75,7 +75,7 @@ const ServiceUpdate = () => {
     if (selectedContent) {
       setContentTitle(selectedContent.title);
       setSubType(selectedContent.sub_type);
-      setFileURI(`${API_BASE_URL}/${selectedContent.file}`);
+      setFileURI(`${API_BASE_URL}/${selectedContent.icon}`);
       setContentData(selectedContent.html);
     }
   }, [selectedContent]);
@@ -95,7 +95,7 @@ const ServiceUpdate = () => {
       <Container fluid>
         <Card>
           <CardHeader>
-            <h3>{t("contentPage." + contentType)}</h3>
+            <h3>{t("servicePage." + contentType)}</h3>
           </CardHeader>
           <CardBody>
             <Row className="align-items-center mb-4">
@@ -195,7 +195,7 @@ const ServiceUpdate = () => {
           sub_type: subType,
         }}
         mode={0}
-        title={t("contentPage." + contentType)}
+        title={t("servicePage." + contentType)}
         type=""
       />
     </>
