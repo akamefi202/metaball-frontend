@@ -1,4 +1,4 @@
-export const API_BASE_URL = "http://3.27.78.23:5000";
+export const API_BASE_URL = "http://api.golfmate.jp:5000";
 export const TEST_URL = `${API_BASE_URL}/hello`;
 export const AUTH_FAILURE_CODE = 401;
 export const TOKEN_NAME = "metaball-token-0123";
